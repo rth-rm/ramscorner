@@ -11,6 +11,8 @@
     @include('sidebar_admin')
    
 
-    @include('dashboard')
+    @component('components.dashboard')
+        
+    @endcomponent
 @endforeach
 @include('footer')

@@ -13,8 +13,8 @@
     @include('sweetalert::alert')
     <!-- header -->
     @include('sidebar_admin')
-    <p>RAMS CORNER TESTING</p>
+   
 
-    {{-- @include('dashboard') --}}
+    @include('dashboard')
 @endforeach
 @include('footer')

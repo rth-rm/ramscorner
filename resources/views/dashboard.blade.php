@@ -1,4 +1,4 @@
-<section class="home-section">
+
 
         <div class="home-contents">
           <div class="dashboard-boxes"></div>
@@ -99,4 +99,3 @@
             </div>
         </div>
 
-    </section>

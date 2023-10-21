@@ -4,7 +4,7 @@
 
 </head>
 
-<body style="background-color: rgb(255, 255, 255); ">
+<body>
 
 
 

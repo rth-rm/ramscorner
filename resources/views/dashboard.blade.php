@@ -1,4 +1,26 @@
-
+<style>
+.home-contents .dash-contents .grid-stats .items {
+  border-radius: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 21px;
+  margin: 30px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+.home-contents .dash-contents .KB {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  height: 20%;
+  background: #56aeff;
+  margin: 20px;
+  padding: 40px;
+}
+</style>
 
         <div class="home-contents">
           <div class="dashboard-boxes"></div>

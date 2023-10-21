@@ -11,6 +11,7 @@ use App\Models\Requests;
 use App\Models\StatusHistory;
 use App\Models\Reporter;
 use App\Models\Ticket;
+use App\Models\TicketMessages;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\View\View\share;
@@ -29,6 +30,7 @@ class NotificationController extends Controller
     $notifs = Notification::where('user_id', $users->u_ID)->get()->sortByDesc('created_at');
 
     $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
+
 
 
     if($users->u_role == "Admin"){
@@ -119,13 +121,14 @@ if($notification->read_at == null){
     $notification->save();
 }
 
-
+$chats = TicketMessages::where('tix_id',$tickets->t_ID)->get();
+$chatss = TicketMessages::where('tix_id',$tickets->t_ID)->get()->count();
 $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
 
     if($user->u_role == "Admin"){
-        return view('admin_open_ticket', ['last'=>$last,'notif'=>$notifCount,'tickets' => $tickets, "admin"=>$user_info, 'client'=>$client, 'status'=>$status, 'staffs'=>$staff]);
+        return view('admin_open_ticket', ['chats'=>$chats, 'chatss'=>$chatss, 'last'=>$last,'notif'=>$notifCount,'tickets' => $tickets, "admin"=>$user_info, 'client'=>$client, 'status'=>$status, 'staffs'=>$staff]);
     }else{
-        return view('staff_open_ticket', ['last'=>$last,'notif'=>$notifCount, 'tickets' => $tickets, "staff"=>$user_info, 'client'=>$client, 'status'=>$status, 'staffs'=>$staff]);
+        return view('staff_open_ticket', ['chats'=>$chats, 'chatss'=>$chatss, 'last'=>$last,'notif'=>$notifCount, 'tickets' => $tickets, "staff"=>$user_info, 'client'=>$client, 'status'=>$status, 'staffs'=>$staff]);
     }
    }
 
@@ -160,15 +163,18 @@ $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
         $notif->read_at = now();
         $notif->save();
     }
+
+    $chats = TicketMessages::where('tix_id',$tickets->t_ID)->get();
+$chatss = TicketMessages::where('tix_id',$tickets->t_ID)->get()->count();
     $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
     if($client->u_role =="Admin"){
-        return view('admin_personal_tickets', ['last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers,'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
+        return view('admin_personal_tickets', ['chats'=>$chats, 'chatss'=>$chatss,'last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers,'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
 
     }elseif($client->u_role =="Staff"){
-        return view('staff_personal_tickets', ['last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
+        return view('staff_personal_tickets', ['chats'=>$chats, 'chatss'=>$chatss, 'last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
 
     }else{
-        return view('client_open_ticket', ['last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
+        return view('client_open_ticket', ['chats'=>$chats, 'chatss'=>$chatss, 'last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
 
     }
    }

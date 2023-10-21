@@ -3,11 +3,7 @@
     <title>ADMIN - DASHBOARD</title>
 
 </head>
-
 <body>
-
-
-
 
 @foreach ($admin as $user)
     @include('sweetalert::alert')

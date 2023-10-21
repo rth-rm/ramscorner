@@ -105,6 +105,133 @@ body {
   width: 100%;
   transition: all 0.5ms ease;
 }
+
+/* dashboard */
+.home-section {
+  /* z-index: 2; */
+  background: #f6f7fb;
+  position: relative;
+  min-height: 100vh;
+  width: calc(100% - 100px);
+  left: 100px;
+  transition: all 0.4s ease;
+}
+
+.sidebar.active ~ .home-section {
+  width: calc(100% - 300px);
+  left: 300px;
+}
+.home-section nav {
+  height: 80px;
+  border-bottom: 2px solid #ffffff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-section nav .sidebar-button {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.home-section nav .sidebar-button i {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.home-section nav .profile-details {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 30px;
+}
+
+.home-section nav .profile-details i {
+  margin: 15px;
+}
+
+.home-contents {
+  margin: 30px;
+  /* border: #05e0e9 1px solid; */
+}
+
+.home-contents .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.home-contents .title h1{
+  font-weight: 700;
+}
+.home-contents .title i{
+  /* font-weight: 900; */
+  font-size: 20px;
+}
+
+/* edit dashboard contents here */
+.dash-contents {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* text-align: center; */
+}
+
+.home-contents .dash-contents .charts {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.home-contents .dash-contents .grid-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .dash-contents {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .home-contents .dash-contents .grid-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .home-section {
+    min-height: 200vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-contents .dash-contents .grid-stats {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .home-section {
+    min-height: 350vh;
+  }
+}
+
+.home-contents .dash-contents .grid-stats .items {
+  border-radius: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 21px;
+  margin: 30px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+.home-contents .dash-contents .KB {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  height: 20%;
+  background: #56aeff;
+  margin: 20px;
+  padding: 40px;
+}
+
 </style>
 
 <div class="sidebar">
@@ -182,3 +309,4 @@ body {
                     </div>
             </div>
         </nav>
+    </section>

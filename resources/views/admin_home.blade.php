@@ -6,7 +6,7 @@
 
 <body style="background-color: rgb(255, 255, 255); ">
 
-@section('title', 'Administrator')
+
 
 
 @foreach ($admin as $user)
@@ -15,6 +15,6 @@
     @include('sidebar_admin')
     <p>RAMS CORNER TESTING</p>
 
-    @include('dashboard')
+    {{-- @include('dashboard') --}}
 @endforeach
 @include('footer')

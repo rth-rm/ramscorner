@@ -302,7 +302,7 @@ body {
                   </div>
 
                   <div class="dropdown2">
-                    <i img src="{{ url('userProfile/' . $user->u_profile) }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <img src="{{ url('userProfile/' . $user->u_profile) }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></img>
                     
                       <ul class="dropdown-menu" style="">
                         <li><a class="dropdown-item" href="{{ url('/signout') }}">Sign out</a></li>

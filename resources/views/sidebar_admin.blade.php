@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="stylesheets/dashboard3.css">
+
 <div class="sidebar">
       <div class="logo-details">
         <center class="profile">

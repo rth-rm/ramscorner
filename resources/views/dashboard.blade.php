@@ -1,7 +1,54 @@
 <style>
+
+/* dashboard */
+.home-section {
+  /* z-index: 2; */
+  background: #f6f7fb;
+  position: relative;
+  min-height: 100vh;
+  width: calc(100% - 100px);
+  left: 100px;
+  transition: all 0.4s ease;
+}
+
+.sidebar.active ~ .home-section {
+  width: calc(100% - 300px);
+  left: 300px;
+}
+.home-section nav {
+  height: 80px;
+  border-bottom: 2px solid #ffffff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-section nav .sidebar-button {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.home-section nav .sidebar-button i {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.home-section nav .profile-details {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 30px;
+}
+
+.home-section nav .profile-details i {
+  margin: 15px;
+}
+
 .home-contents {
   margin: 30px;
-  position:relative;
   /* border: #05e0e9 1px solid; */
 }
 

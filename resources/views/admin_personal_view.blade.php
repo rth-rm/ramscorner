@@ -1,5 +1,12 @@
 @include('header')
 
+
+    <title>TICKETS</title>
+
+</head>
+
+<body style="background-color: rgb(255, 255, 255); ">
+
 @include('sweetalert::alert')
 @foreach ($client as $clients)
     @foreach ($client as $user)

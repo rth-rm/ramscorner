@@ -1,4 +1,12 @@
 @include('header')
+
+
+    <title>ADMIN - KNOWLEDGE BASE</title>
+
+</head>
+
+<body style="background-color: rgb(255, 255, 255); ">
+
 @foreach ($admin as $user)
     @include('sidebar_admin')
     @include('sweetalert::alert')

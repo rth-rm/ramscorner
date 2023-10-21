@@ -1,4 +1,11 @@
 @include('header')
+
+
+    <title>ADMIN - ALL TICKETS</title>
+
+</head>
+
+<body style="background-color: rgb(255, 255, 255); ">
 @section('title', 'All Tickets')
 
 @include('sweetalert::alert')

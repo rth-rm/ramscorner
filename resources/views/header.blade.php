@@ -18,8 +18,12 @@
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    
+    
+{{--     
     <title>Rams Corner</title>
 
 </head>
 
-<body style="background-color: rgb(255, 255, 255); font-family:Arial Rounded MT">
+<body style="background-color: rgb(255, 255, 255); "> --}}

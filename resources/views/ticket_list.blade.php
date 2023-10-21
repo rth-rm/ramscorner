@@ -1,5 +1,10 @@
 @include('header')
 
+    <title>TICKETS</title>
+
+</head>
+
+<body style="background-color: rgb(255, 255, 255); ">
 
 
 @foreach ($client as $clients)

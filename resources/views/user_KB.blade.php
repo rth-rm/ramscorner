@@ -2,6 +2,11 @@
 
 
 
+    <title>KNOWLEDGE BASE</title>
+
+</head>
+
+<body style="background-color: rgb(255, 255, 255); ">
 @foreach ($client as $clients)
     @include('sidebar_client')
 

@@ -8,10 +8,9 @@
 @foreach ($admin as $user)
     @include('sweetalert::alert')
     <!-- header -->
-    @include('dashboard')
     @include('sidebar_admin')
    
 
-    
+    @include('dashboard')
 @endforeach
 @include('footer')

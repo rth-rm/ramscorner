@@ -238,7 +238,7 @@ body {
     <div class="sidebar">
       <div class="logo-details">
         <center class="profile">
-          <img src="/resources/APCLogo.png" alt="">
+          <img src="{{ asset('images/APCLogo.png') }}" alt="">
           <!-- <p>Nacor Industries</p> -->
         </center>
       </div>

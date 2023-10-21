@@ -120,7 +120,7 @@ body {
 .sidebar.active ~ .home-section {
   width: calc(100% - 300px);
   left: 300px;
-{{-- }
+}
 .home-section nav {
   height: 80px;
   border-bottom: 2px solid #ffffff;
@@ -152,63 +152,6 @@ body {
 .home-section nav .profile-details i {
   margin: 15px;
 }
-
-.home-contents {
-  margin: 30px;
-  /* border: #05e0e9 1px solid; */
-}
-
-.home-contents .title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.home-contents .title h1{
-  font-weight: 700;
-}
-.home-contents .title i{
-  /* font-weight: 900; */
-  font-size: 20px;
-}
-
-/* edit dashboard contents here */
-.dash-contents {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* text-align: center; */
-}
-
-.home-contents .dash-contents .charts {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-}
-
-.home-contents .dash-contents .grid-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 1000px) {
-  .dash-contents {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .home-contents .dash-contents .grid-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .home-section {
-    min-height: 200vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .home-contents .dash-contents .grid-stats {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .home-section {
-    min-height: 350vh;
-  }
-} --}}
 
 
 

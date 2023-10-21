@@ -1,38 +1,4 @@
 <style>
-
-
-.home-section nav {
-  height: 80px;
-  border-bottom: 2px solid #ffffff;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.home-section nav .sidebar-button {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  font-weight: 500;
-}
-
-.home-section nav .sidebar-button i {
-  font-size: 30px;
-  margin-right: 10px;
-}
-
-.home-section nav .profile-details {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  font-size: 30px;
-}
-
-.home-section nav .profile-details i {
-  margin: 15px;
-}
-
 .home-contents {
   margin: 30px;
   /* border: #05e0e9 1px solid; */
@@ -88,6 +54,28 @@
   .home-section {
     min-height: 350vh;
   }
+}
+
+.home-contents .dash-contents .grid-stats .items {
+  border-radius: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 21px;
+  margin: 30px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+.home-contents .dash-contents .KB {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  height: 20%;
+  background: #56aeff;
+  margin: 20px;
+  padding: 40px;
 }
 
 </style>

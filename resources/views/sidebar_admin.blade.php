@@ -244,31 +244,31 @@ body {
       </div>
       <ul class="nav-links" style="padding: 0;">
         <li>
-          <a href="dashboard3.html">
+          <a href="{{ url('/adminHome') }}">
             <i class="bi bi-columns-gap"></i>
             <span class="link_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="ticketcenter.html">
+          <a href="{{ url('viewAllTickets') }}">
             <i class="bi bi-ticket-perforated"></i>
             <span class="link_name">Tickets</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ url('admin_KB') }}">
             <i class="bi bi-lightbulb"></i>
             <span class="link_name">Knowledge Base</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ url('generateReport') }}">
             <i class="bi bi-bar-chart"></i>
             <span class="link_name">Reports</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ url('viewTags') }}">
             <i class="bi bi-tags"></i>
             <span class="link_name">Tags</span>
           </a>
@@ -276,7 +276,7 @@ body {
         <li>
           <a href="#">
             <i class="bi bi-pc-display"></i>
-            <span class="link_name">Personal Tickets</span>
+            <span class="link_name">Devices</span>
           </a>
         </li>
       </ul>
@@ -302,10 +302,10 @@ body {
                   </div>
 
                   <div class="dropdown2">
-                    <i class="bi bi-person-circle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <i class="bi bi-person-circle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">img src="{{ url('userProfile/' . $user->u_profile) }}"</i>
                     
                       <ul class="dropdown-menu" style="">
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/signout') }}">Sign out</a></li>
                       </ul>
                     </div>
             </div>

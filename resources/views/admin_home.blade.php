@@ -9,10 +9,6 @@
     @include('sweetalert::alert')
     <!-- header -->
     @include('sidebar_admin')
-   
-
-    @component('components.dashboard')
-        
-    @endcomponent
+    @include('dashboard')
 @endforeach
 @include('footer')

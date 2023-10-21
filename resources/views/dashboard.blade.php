@@ -1,6 +1,7 @@
 <style>
 .home-contents {
   margin: 30px;
+  position:relative;
   /* border: #05e0e9 1px solid; */
 }
 

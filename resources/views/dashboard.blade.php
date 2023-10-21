@@ -1,26 +1,62 @@
 <style>
 
-.home-contents .dash-contents .grid-stats .items {
-  border-radius: 10%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 21px;
+.home-contents {
   margin: 30px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 30px;
+  /* border: #05e0e9 1px solid; */
 }
-.home-contents .dash-contents .KB {
-  color: white;
+
+.home-contents .title {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 50px;
-  height: 20%;
-  background: #56aeff;
-  margin: 20px;
-  padding: 40px;
+  justify-content: space-between;
 }
+.home-contents .title h1{
+  font-weight: 700;
+}
+.home-contents .title i{
+  /* font-weight: 900; */
+  font-size: 20px;
+}
+
+/* edit dashboard contents here */
+.dash-contents {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* text-align: center; */
+}
+
+.home-contents .dash-contents .charts {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.home-contents .dash-contents .grid-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .dash-contents {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .home-contents .dash-contents .grid-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .home-section {
+    min-height: 200vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-contents .dash-contents .grid-stats {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .home-section {
+    min-height: 350vh;
+  }
+}
+
 </style>
 
         <div class="home-contents">

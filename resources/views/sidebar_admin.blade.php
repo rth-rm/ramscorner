@@ -311,7 +311,7 @@ body {
             </div>
         </nav>
 
-        <div class="home-contents">
+        {{-- <div class="home-contents">
           <div class="dashboard-boxes"></div>
             <div class="title mb-5">
               <h1>Admin Dashboard</h1>
@@ -407,7 +407,7 @@ body {
                   chart.draw(data, options);
                 }
               </script>
-            </div>
+            </div> --}}
         </div>
 
     </section>

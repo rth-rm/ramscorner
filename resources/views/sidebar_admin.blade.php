@@ -152,7 +152,7 @@ body {
           </a>
         </li>
         <li>
-          <a href="{{ url('add_devices') }}">
+          <a href="{{ route('add_devices') }}">
             <i class="bi bi-pc-display"></i>
             <span class="link_name">Devices</span>
           </a>

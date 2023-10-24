@@ -152,7 +152,7 @@ body {
           </a>
         </li>
         <li>
-          <a href="{{ view('add_device') }}">
+          <a href="#">
             <i class="bi bi-pc-display"></i>
             <span class="link_name">Devices</span>
           </a>

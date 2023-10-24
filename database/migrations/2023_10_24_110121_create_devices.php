@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->timestamp('d_purchase_date');
             $table->string('d_type');
             $table->string('d_assignment');
-            $table->boolean('d_approve')->default("false");
+            $table->boolean('d_approve')->default(0);
             $table->string('d_submittedby');
 
             $table->timestamps();

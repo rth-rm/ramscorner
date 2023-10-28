@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-use App\Models\StatusHistory;
-use App\Models\Ticket;
 use App\Models\Reporter;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\TicketUpdatedNotification;
@@ -114,7 +112,7 @@ class DevicesController extends Controller
             return redirect()->route('loginPage');
         }
 
-
+        dd($user_ID->u_name);
 
 
         $dev_count = Devices::get()->count();

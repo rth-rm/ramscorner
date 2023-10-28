@@ -161,7 +161,7 @@ class DevicesController extends Controller
 
         Alert::success("Success!", "The added device is successfully sent for approval.");
         if ($user_ID->u_role == "Admin") {
-            return redirect()->route('devices');
+            return redirect()->route('devices_list');
         } elseif ($user_ID->u_role == "Staff") {
             return redirect()->route('devices');
         } else {

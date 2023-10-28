@@ -36,8 +36,9 @@ class DevicesController extends Controller
 
         $random = rand(000000000, 999999999);
 
-        $latest_dev_id = Devices::get()->last();
-        dd($latest_dev_id);
+        // $latest_dev_id = Devices::get()->last();
+        // dd($latest_dev_id);
+
 
         return view('add_device');
     }

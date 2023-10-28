@@ -1,4 +1,4 @@
-<title>Add Devices | RAMS Corner</title>
+  <title>Add Devices | RAMS Corner</title>
     <!-- <link rel="stylesheet" href="style.css" /> -->
         <!---internal CSS--->
 <style>
@@ -16,7 +16,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: #817e9d;
+  background: #f6f7FB;
 }
 .container {
   position: relative;
@@ -96,6 +96,7 @@ body {
   align-items: center;
   column-gap: 50px;
   flex-wrap: wrap;
+  margin-top: 5px;
 }
 .form .device {
   column-gap: 5px;
@@ -120,25 +121,50 @@ body {
   color: #707070;
   font-size: 1rem;
 }
-.form button {
+/*buttons*/
+.form .buttons {
+  display: flex;
+  column-gap: 5px;
+  margin-top: 40px;
+}
+.add-btn{
   height: 55px;
-  width: 100%;
+  width: 50%;
   color: #fff;
   font-size: 1rem;
   font-weight: 400;
-  margin-top: 30px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.2s ease;
   background: #6644a8;
+  right: 0%;
 }
-.form button:hover {
+.add-btn:hover {
   background: #05e0e9;
+}
+.cancel-btn{
+  height: 55px;
+  width: 50%;
+  right: 0%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #e2e4e9;
+}
+.cancel-btn:hover {
+  background: #817e9d;
 }
 /*Responsive*/
 @media screen and (max-width: 500px) {
   .form .column {
+    flex-wrap: wrap;
+  }
+  .form .buttons {
     flex-wrap: wrap;
   }
   .form :where(.device-option, .device) {
@@ -157,7 +183,7 @@ body {
       <form action="#" class="form">
         <div class="input-box">
           <label>Device ID</label>
-          <input type="text" placeholder="Enter Device ID" required />
+          <input type="text" placeholder="ITRO-DEV-ID" required maxlength="15" style="text-transform:uppercase"/> 
         </div>
 
         <div class="input-box">
@@ -168,7 +194,7 @@ body {
         <div class="column">
           <div class="input-box">
             <label>Inventory Number</label>
-            <input type="number" placeholder="Enter Inventory number" required />
+            <input type="number" placeholder="Enter Inventory number" required maxlength="4"/>
           </div>
           <div class="input-box">
             <label>Purchase Date</label>
@@ -219,6 +245,9 @@ body {
             <input type="number" placeholder="Room Number" required />
           </div>
         </div>
-        <button>Submit</button>
+          <div class="buttons">
+            <button class="button cancel-btn">Cancel</button>
+            <button class="button add-btn">Submit</button>
+        </div>
       </form>
     </section>

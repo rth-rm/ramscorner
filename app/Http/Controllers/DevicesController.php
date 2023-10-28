@@ -113,7 +113,7 @@ class DevicesController extends Controller
         }
 
 
-        dd($request->dpurchased, $request->device);
+
 
         $dev_count = Devices::get()->count();
 
@@ -142,22 +142,22 @@ class DevicesController extends Controller
             "d_name" => strtoupper($request->dname),
             "d_inventorynum" => $request->dinvnum,
             "d_purchase_date" => $request->dpurchased,
-            "d_type" => $request->device,
+            "d_typ  e" => $request->device,
             "d_assignment" => $request->dfloor . $request->droom,
             "d_approve" => false,
             "d_submittedby" => $user_ID->u_name
         ]);
 
-        dd(
-            $dev_id,
-            strtoupper($request->dname),
-            $request->dinvnum,
-            $request->dpurchase,
-            $request->content,
-            $request->dfloor . $request->droom,
-            false,
-            $user_ID->u_name
-        );
+        // dd(
+        //     $dev_id,
+        //     strtoupper($request->dname),
+        //     $request->dinvnum,
+        //     $request->dpurchased,
+        //     $request->device,
+        //     $request->dfloor . $request->droom,
+        //     false,
+        //     $user_ID->u_name
+        // );
 
         Alert::success("Success!", "The added device is successfully sent for approval.");
         if ($user_ID->u_role == "Admin") {

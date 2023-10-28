@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Devices;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 
 use App\Models\StatusHistory;
 use App\Models\Ticket;
@@ -23,6 +23,24 @@ use Illuminate\Support\Facades\Validator;
 
 class DevicesController extends Controller
 {
+
+    public function addDevicePage()
+    {
+        $user_ID = Auth::user();
+
+        if ($user_ID == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+
+
+        $random = rand(000000000, 999999999);
+
+        $latest_dev_id = Devices::get()->last();
+        dd($latest_dev_id);
+
+        return view('add_device');
+    }
     public function addDevices(Request $request)
     {
 
@@ -35,11 +53,17 @@ class DevicesController extends Controller
         }
 
 
-        if ($request->file('profile')) {
-            $file = $request->file('profile');
+        $random = rand(000000000, 999999999);
+
+        $latest_dev_id = Devices::get()->last();
+        dd($latest_dev_id);
+        // $dev_id = 
+
+        if ($request->file('dev_image')) {
+            $file = $request->file('dev_image');
             #filename -> isesave sa database
-            $filename = $user_ID->u_name[0] . 'tix_file.' . now()->toDateString() . now()->minute . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/ticketImages'), $filename);
+            $filename = $random . $file->getClientOriginalExtension();
+            $file->move(public_path('/deviceImages'), $filename);
         } else {
             $filename = "";
         }
@@ -47,7 +71,7 @@ class DevicesController extends Controller
 
 
         Devices::create([
-            "u_ID" => $user_ID->u_ID,
+            "d_ID" => $user_ID->u_ID,
             // "t_urgency"=>$request->urgency,
             // "t_impact"=>$request->impact,
             // "t_priority"=>$priority,

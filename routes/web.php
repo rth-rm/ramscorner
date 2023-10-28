@@ -104,8 +104,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/summary', [ReportController::class, 'summaryReport'])->name('summary');
 
     //DEVICES
+    Route::get('/devices', [DevicesController::class, 'devices'])->name('devices');
     Route::get('/addDevicePage', [DevicesController::class, 'addDevicePage'])->name('addDevicePage');
-    Route::get('/addDevices', [DevicesController::class, 'addDevices'])->name('addDevices');
+    Route::post('/addDevices', [DevicesController::class, 'addDevices'])->name('addDevices');
 
 
     //chatbox

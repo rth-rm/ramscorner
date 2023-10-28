@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //DEVICES
     Route::get('/addDevicePage', [DevicesController::class, 'addDevicePage'])->name('addDevicePage');
+    Route::get('/addDevices', [DevicesController::class, 'addDevices'])->name('addDevices');
 
 
     //chatbox

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Validator;
 class DevicesController extends Controller
 {
 
+    //DEVICES PAGE
     public function addDevicePage()
     {
         $user_ID = Auth::user();
@@ -35,13 +36,17 @@ class DevicesController extends Controller
 
 
         $random = rand(000000000, 999999999);
+        $latest = Devices::get()->count();
 
-        // $latest_dev_id = Devices::get()->last();
-        // dd($latest_dev_id);
-
-
+        dd($latest);
         return view('add_device');
     }
+
+
+
+
+
+    // POST METHOD ADD DEVICES
     public function addDevices(Request $request)
     {
 

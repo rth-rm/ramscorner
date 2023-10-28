@@ -142,7 +142,7 @@ class DevicesController extends Controller
             "d_name" => strtoupper($request->dname),
             "d_inventorynum" => $request->dinvnum,
             "d_purchase_date" => $request->dpurchased,
-            "d_typ  e" => $request->device,
+            "d_type" => $request->device,
             "d_assignment" => $request->dfloor . $request->droom,
             "d_approve" => false,
             "d_submittedby" => $user_ID->u_name

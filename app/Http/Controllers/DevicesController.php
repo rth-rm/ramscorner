@@ -113,6 +113,7 @@ class DevicesController extends Controller
         }
 
 
+        dd($request->dpurchased, $request->device);
 
         $dev_count = Devices::get()->count();
 

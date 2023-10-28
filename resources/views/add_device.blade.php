@@ -180,7 +180,7 @@ body {
   <body>
     <section class="container">
       <div class="title">Add Devices</div>
-      <form action="POST" enctype="multipart/form-data" action="{{ url('addDevices') }}" class="form">
+      <form method="POST" enctype="multipart/form-data" action="{{ url('addDevices') }}" class="form">
         @csrf
         <div class="input-box">
           <label>Device ID</label>

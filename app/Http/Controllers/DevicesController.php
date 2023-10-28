@@ -112,7 +112,6 @@ class DevicesController extends Controller
             return redirect()->route('loginPage');
         }
 
-        dd($user_ID->u_name);
 
 
         $dev_count = Devices::get()->count();
@@ -148,7 +147,16 @@ class DevicesController extends Controller
             "d_submittedby" => $user_ID->u_name
         ]);
 
-
+        dd(
+            $dev_id,
+            strtoupper($request->dname),
+            $request->dinvnum,
+            $request->dpurchase,
+            $request->content,
+            $request->dfloor . $request->droom,
+            false,
+            $user_ID->u_name
+        );
 
         Alert::success("Success!", "The added device is successfully sent for approval.");
         if ($user_ID->u_role == "Admin") {
@@ -159,16 +167,7 @@ class DevicesController extends Controller
             return redirect()->route('clientHome');
         }
 
-        // dd(
-        //     $dev_id,
-        //     strtoupper($request->dname),
-        //     $request->dinvnum,
-        //     $request->dpurchase,
-        //     $request->content,
-        //     $request->dfloor . $request->droom,
-        //     false,
-        //     $user_ID->u_name
-        // );
+
 
     }
 

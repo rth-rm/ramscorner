@@ -153,24 +153,24 @@ class DevicesController extends Controller
 
 
         Alert::success("Success!", "The added device is successfully sent for approval.");
-        // if ($user_ID->u_role == "Admin") {
-        //     return redirect()->route('devices');
-        // } elseif ($user_ID->u_role == "Staff") {
-        //     return redirect()->route('devices');
-        // } else {
-        //     return redirect()->route('clientHome');
-        // }
+        if ($user_ID->u_role == "Admin") {
+            return redirect()->route('devices');
+        } elseif ($user_ID->u_role == "Staff") {
+            return redirect()->route('devices');
+        } else {
+            return redirect()->route('clientHome');
+        }
 
-        dd(
-            $dev_id,
-            strtoupper($request->dname),
-            $request->dinvnum,
-            $request->dpurchase,
-            $request->content,
-            $request->dfloor . $request->droom,
-            false,
-            $user_ID->u_name
-        );
+        // dd(
+        //     $dev_id,
+        //     strtoupper($request->dname),
+        //     $request->dinvnum,
+        //     $request->dpurchase,
+        //     $request->content,
+        //     $request->dfloor . $request->droom,
+        //     false,
+        //     $user_ID->u_name
+        // );
 
     }
 

@@ -11,10 +11,7 @@
   transition: all 0.4s ease;
 }
 
-.sidebar.active ~ .home-section {
-  width: calc(100% - 300px);
-  left: 300px;
-}
+
 .home-section nav {
   height: 80px;
   border-bottom: 2px solid #ffffff;

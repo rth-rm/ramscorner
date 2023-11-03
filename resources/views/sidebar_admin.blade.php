@@ -105,7 +105,10 @@ body {
   width: 100%;
   transition: all 0.5ms ease;
 }
-
+.sidebar.active ~ .home-section {
+  width: calc(100% - 300px);
+  left: 300px;
+}
     
 </style>
     <!-- sidebar -->

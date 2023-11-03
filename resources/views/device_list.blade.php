@@ -12,7 +12,7 @@
 @foreach ($user as $users)
     @include('sweetalert::alert')
     
-    @if($users->u_role == 'Admin')
+    @if($users->u_role = "Admin")
       @include('sidebar_admin')
     @endif
     

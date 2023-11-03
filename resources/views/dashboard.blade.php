@@ -4,7 +4,7 @@
 .home-section {
   /* z-index: 2; */
   background: #f6f7fb;
-  position: relative;
+  position: fixed;
   min-height: 100vh;
   width: calc(100% - 100px);
   left: 100px;

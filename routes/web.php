@@ -24,7 +24,7 @@ use App\Http\Controllers\NotificationController;
 |
 */
 
-Route::head('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 

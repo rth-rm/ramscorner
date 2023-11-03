@@ -52,7 +52,7 @@ class DevicesController extends Controller
             }
         }
 
-        dd($user_ID->u_role);
+
         return view('device_list', ["user" => $user_ID]);
 
     }

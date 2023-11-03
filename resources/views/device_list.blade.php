@@ -9,10 +9,10 @@
 
   <body>
 
-@foreach ($user as $user)
+@foreach ($user as $users)
     @include('sweetalert::alert')
     
-    @if($user->u_role == 'Admin')
+    @if($users->u_role == 'Admin')
       @include('sidebar_admin')
     @endif
     

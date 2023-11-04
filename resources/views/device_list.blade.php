@@ -19,9 +19,9 @@
     @foreach ($user_loggedin as $userloggedin)
         @include('sweetalert::alert')
 
-        {{-- @if ($userloggedin->u_role == 'Admin')
+        @if ($userloggedin->u_role == 'Admin')
             @include('sidebar_admin')
-        @endif --}}
+        @endif
 
 
 
@@ -163,7 +163,7 @@
         </section>
 
 
-        <!-- sidebar button script -->
+        {{-- <!-- sidebar button script -->
         <script>
             let sidebar = document.querySelector(".sidebar");
             let sidebarBtn = document.querySelector(".sidebarBtn");
@@ -171,17 +171,6 @@
             sidebarBtn.onclick = function() {
                 sidebar.classList.toggle("active");
             }
-        </script>
-
-</body>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-</script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
-</script> -->
-
-</html>
-@endforeach
-@include('footer')
+        </script> --}}
+    @endforeach
+    @include('footer')

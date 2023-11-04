@@ -20,8 +20,7 @@
         @include('sweetalert::alert')
 
         @if ($userloggedin->u_role == 'Admin')
-            @component('sidebar_admin')
-            @endcomponent
+            @include('sidebar_admin')
         @endif
 
 

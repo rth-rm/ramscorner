@@ -8,9 +8,6 @@ body {
     flex-direction: row;
 }
 
-.main-content {
-    flex: 1;
-}
 .sidebar {
     position: fixed;
     height: 100%;

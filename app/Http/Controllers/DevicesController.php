@@ -52,8 +52,8 @@ class DevicesController extends Controller
             }
         }
 
-
-        return view('device_list', ["user_loggedin" => $user_loggedin]);
+        $user_info = Reporter::where('u_ID', $user_loggedin->u_ID)->get();
+        return view('device_list', ["user_loggedin" => $user_info]);
 
     }
 

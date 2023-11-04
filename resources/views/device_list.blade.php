@@ -26,8 +26,8 @@
 
 
 
-
-
+        <!-- header/contents -->
+        @include('heading')
 
         <div class="home-contents">
             <!-- <div class="dashboard-boxes"></div> -->
@@ -131,5 +131,7 @@
                     </div>
                 </div>
             </div>
+
+            </section>
     @endforeach
     @include('footer')

@@ -25,26 +25,26 @@ class DevicesController extends Controller
     //DEVICE_LIST
     public function devices()
     {
-        $user_ID = Auth::user();
+        $user_loggedin = Auth::user();
 
-        if ($user_ID == null) {
+        if ($$user_loggedin == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
         }
 
-        if ($user_ID->u_role == "Admin") {
-            if ($user_ID->u_role != "Admin") {
+        if ($$user_loggedin->u_role == "Admin") {
+            if ($$user_loggedin->u_role != "Admin") {
                 Alert::warning('Warning!!!', 'Unauthorized Access!');
-                if ($user_ID->u_role == "Staff") {
+                if ($$user_loggedin->u_role == "Staff") {
                     return redirect()->route('staffHome');
                 } else {
                     return redirect()->route('clientHome');
                 }
             }
-        } else if ($user_ID->u_role == "Staff") {
-            if ($user_ID->u_role != "Staff") {
+        } else if ($$user_loggedin->u_role == "Staff") {
+            if ($$user_loggedin->u_role != "Staff") {
                 Alert::warning('Warning!!!', 'Unauthorized Access!');
-                if ($user_ID->u_role == "Admin") {
+                if ($$user_loggedin->u_role == "Admin") {
                     return redirect()->route('adminHome');
                 } else {
                     return redirect()->route('clientHome');
@@ -53,7 +53,7 @@ class DevicesController extends Controller
         }
 
 
-        return view('device_list', ["user" => $user_ID]);
+        return view('device_list', ["user_loggedin" => $$user_loggedin]);
 
     }
 

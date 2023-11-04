@@ -56,7 +56,11 @@
         <div class="profile-details">
 
             <div class="dropdown1">
-                <i class="bi bi-bell" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-bell"></i>
+                </button>
+                {{-- <i class="bi bi-bell" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i> --}}
                 <ul class="dropdown-menu" style="">
                     <li><span class="dropdown-item-text">Notifications</span></li>
                     <li>

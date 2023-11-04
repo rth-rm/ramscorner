@@ -160,17 +160,18 @@
 
                 </section>
 
-
             </div>
 
+        </div>
 
 
 
 
 
-            <!-- header/contents -->
 
-            {{-- <!-- sidebar button script -->
+        <!-- header/contents -->
+
+        {{-- <!-- sidebar button script -->
         <script>
             let sidebar = document.querySelector(".sidebar");
             let sidebarBtn = document.querySelector(".sidebarBtn");

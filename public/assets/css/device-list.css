@@ -162,9 +162,9 @@ body {
 }
 
 /* edit dashboard contents here */
-.dash-contents {
+/* .dash-contents {
     /* text-align: center; */
-}
+/* } */
 
 .dash-contents .dash-container {
     display: grid;

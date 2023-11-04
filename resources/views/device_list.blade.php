@@ -28,10 +28,10 @@
 
         <!-- header/contents -->
         <section class="home-section">
-            <nav>
-                {{-- <div class="sidebar-button">
+            {{-- <nav>
+                <div class="sidebar-button">
                     <i class="bi bi-list sidebarBtn"></i>
-                </div> --}}
+                </div>
                 <div class="profile-details">
 
                     <div class="dropdown1">
@@ -56,7 +56,7 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> --}}
 
             <div class="home-contents">
                 <!-- <div class="dashboard-boxes"></div> -->

@@ -57,7 +57,7 @@ class DevicesController extends Controller
 
     }
 
-    //DEVICES PAGE
+    //ADD DEVICES PAGE
     public function addDevicePage()
     {
         $user_ID = Auth::user();

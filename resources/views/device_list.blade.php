@@ -20,7 +20,7 @@
         @include('sweetalert::alert')
 
         @if ($userloggedin->u_role == 'Admin')
-            @include('sidebar_admin')
+            @extends('sidebar_admin')
         @endif
 
 
@@ -28,9 +28,9 @@
         <!-- header/contents -->
         <section class="home-section">
             <nav>
-                <div class="sidebar-button">
+                {{-- <div class="sidebar-button">
                     <i class="bi bi-list sidebarBtn"></i>
-                </div>
+                </div> --}}
                 <div class="profile-details">
 
                     <div class="dropdown1">

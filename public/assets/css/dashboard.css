@@ -1,8 +1,3 @@
-body {
-    min-height: 100vh;
-    width: 100%;
-}
-
 .sidebar {
     position: fixed;
     height: 100%;
@@ -95,17 +90,23 @@ body {
     bottom: -15px;
     width: 100%;
     transition: all 0.5ms ease;
-} /* dashboard */
+}
+
+/* dashboard */
 .home-section {
     /* z-index: 2; */
     background: #f6f7fb;
-    position: absolute;
+    position: relative;
     /* min-height: 100vh; */
     width: calc(100% - 100px);
     left: 100px;
     transition: all 0.4s ease;
 }
 
+.sidebar.active ~ .home-section {
+    width: calc(100% - 300px);
+    left: 300px;
+}
 .home-section nav {
     height: 80px;
     border-bottom: 2px solid #ffffff;
@@ -165,7 +166,7 @@ body {
 
 .home-contents .dash-contents .charts {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 25px;
 }
 
 .home-contents .dash-contents .grid-stats {
@@ -196,7 +197,7 @@ body {
 }
 
 .home-contents .dash-contents .grid-stats .items {
-    border-radius: 10%;
+    border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 21px;
     margin: 30px;
@@ -210,7 +211,7 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 50px;
+    border-radius: 25px;
     height: 20%;
     background: #56aeff;
     margin: 20px;

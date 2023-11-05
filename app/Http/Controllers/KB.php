@@ -37,23 +37,28 @@ class KB extends Controller
         $kb_info = k_b_s::get();
 
 
-        $unapproved = k_b_s::where('kb_approved', 0)->get();
-        $unapproved_count = $unapproved->count();
+        $pending = k_b_s::where('kb_status', "PENDING")->get();
+        $pending_count = $pending->count();
 
-        $approved = k_b_s::where('kb_approved', 1)->get();
+        $approved = k_b_s::where('kb_status', "APPROVED")->get();
         $approved_count = $approved->count();
 
-        $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        $rejected = k_b_s::where('kb_status', "REJECTED")->get();
+        $rejected_count = $rejected->count();
 
+        $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        dd($kb_info);
 
         return view('admin_KB', [
             'notif' => $notifCount,
             'kb_info' => $kb_info,
-            'admin' => $user_info,
+            'user_loggedin' => $user_info,
             'app_count' => $approved_count,
-            'unapp_count' => $unapproved_count,
             'approved' => $approved,
-            'unapproved' => $unapproved
+            'pending_count' => $pending_count,
+            'pending' => $pending,
+            'rejected_count' => $rejected_count,
+            'rejected' => $rejected
         ]);
     }
 
@@ -77,7 +82,7 @@ class KB extends Controller
             }
         }
         $user_info = Reporter::where('u_ID', $client->u_ID)->get();
-        $kb_info = k_b_s::where('kb_approved', 1)
+        $kb_info = k_b_s::where('kb_status', 1)
             ->where('kb_view', 1)
             ->get();
         $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();
@@ -103,7 +108,7 @@ class KB extends Controller
             }
         }
         $user_info = Reporter::where('u_ID', $staff->u_ID)->get();
-        $kb_info = k_b_s::where('kb_approved', 1)->get();
+        $kb_info = k_b_s::where('kb_status', 1)->get();
         $notifCount = Notification::where('user_id', $staff->u_ID)->where('read_at', null)->get()->count();
         return view('staff_KB', ['notif' => $notifCount, 'kb_info' => $kb_info, 'staff' => $user_info]);
     }
@@ -179,7 +184,7 @@ class KB extends Controller
         $kb_info = k_b_s::where('kb_ID', $kid)->get()->first();
 
 
-        if ($kb_info->kb_approved == 1) {
+        if ($kb_info->kb_status == 1) {
             k_b_s::where('kb_ID', $kid)->update([
                 'kb_watch' => ($kb_info->kb_watch) + 1
             ]);
@@ -214,7 +219,7 @@ class KB extends Controller
         }
         $user_info = Reporter::where('u_ID', $staff->u_ID)->get();
         $kb_info = k_b_s::where('kb_ID', $id)->get()->first();
-        if ($kb_info->kb_approved == 1) {
+        if ($kb_info->kb_status == 1) {
             k_b_s::where('kb_ID', $id)->update([
                 'kb_watch' => ($kb_info->kb_watch) + 1
             ]);
@@ -245,7 +250,7 @@ class KB extends Controller
         }
         $user_info = Reporter::where('u_ID', $client->u_ID)->get();
         $kb_info = k_b_s::where('kb_ID', $id)->get()->first();
-        if ($kb_info->kb_approved == 1) {
+        if ($kb_info->kb_status == 1) {
             k_b_s::where('kb_ID', $id)->update([
                 'kb_watch' => ($kb_info->kb_watch) + 1
             ]);
@@ -268,7 +273,7 @@ class KB extends Controller
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
         $approval = k_b_s::where('kb_ID', $request->id)->get()->first();
-        if ($approval->kb_approved == 0) {
+        if ($approval->kb_status == 0) {
             k_b_s::where('kb_ID', $request->id)->update(
                 [
                     'kb_title' => $request->title,
@@ -276,7 +281,7 @@ class KB extends Controller
                     'kb_resolution' => $request->resolution,
                     'kb_category' => $request->category,
                     'kb_modify' => $user->u_name,
-                    'kb_approved' => 1
+                    'kb_status' => 1
                 ]
 
             );
@@ -288,7 +293,7 @@ class KB extends Controller
                     'kb_resolution' => $request->resolution,
                     'kb_category' => $request->category,
                     'kb_modify' => $user->u_name,
-                    'kb_approved' => 0
+                    'kb_status' => 0
                 ]
 
             );

@@ -104,13 +104,6 @@
                 chart.draw(data, options);
             }
         </script>
-        <script>
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".sidebarBtn");
 
-            sidebarBtn.onclick = function() {
-                sidebar.classList.toggle("active");
-            }
-        </script>
     </div>
 </div>

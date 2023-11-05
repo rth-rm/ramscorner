@@ -129,20 +129,21 @@
                             </script>
                         </div>
                     </div>
-
                 </div>
+            </div>
+        </div>
 
-                </section>
+        </section>
 
 
-                <!-- sidebar button script -->
-                <script>
-                    let sidebar = document.querySelector(".sidebar");
-                    let sidebarBtn = document.querySelector(".sidebarBtn");
+        <!-- sidebar button script -->
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
 
-                    sidebarBtn.onclick = function() {
-                        sidebar.classList.toggle("active");
-                    }
-                </script>
+            sidebarBtn.onclick = function() {
+                sidebar.classList.toggle("active");
+            }
+        </script>
     @endforeach
     @include('footer')

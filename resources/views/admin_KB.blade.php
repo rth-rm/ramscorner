@@ -1,5 +1,6 @@
 @include('header')
-<title>Ticket Center | Ram's Corner</title>
+<title>Knowledge Base - Admin| RAMS CORNER</title>
+<link rel="stylesheet" href="{{ asset('assets/css/kb.css') }}" type = "text/css">
 <!-- data tables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <!-- bootstrap link -->

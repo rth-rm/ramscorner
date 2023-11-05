@@ -54,7 +54,7 @@ class AdminController extends Controller
         //add to staff
 
         $mostViewTicket = DB::table('tickets')->orderBy('t_views', 'desc')->get();
-        $mostViewKBS = DB::table('k_b_s')->orderBy('kb_watch', 'desc')->where('kb_approved', 1)->get();
+        $mostViewKBS = DB::table('k_b_s')->orderBy('kb_watch', 'desc')->where('kb_status', "APPROVED")->get();
 
 
 

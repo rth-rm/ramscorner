@@ -89,13 +89,13 @@ class AdminController extends Controller
         $escalated = $escalatedTickets;
         if (
             $mostViewKbs == 0 || $mostViewKB = DB::table('k_b_s')->orderBy('kb_watch', 'desc')
-                ->where('kb_approved', 1)->get()->first()->kb_watch == 0
+                ->where('kb_status', "APPROVED")->get()->first()->kb_watch == 0
         ) {
             $mostViewKB = "--";
             $watch = 0;
         } else {
             $mostViewKBss = DB::table('k_b_s')->orderBy('kb_watch', 'desc')
-                ->where('kb_approved', 1)->get()->first();
+                ->where('kb_status', "APPROVED")->get()->first();
             $mostViewKB = $mostViewKBss->kb_ID;
             $watch = $mostViewKBss->kb_watch;
         }

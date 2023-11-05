@@ -62,7 +62,7 @@
                                                     </td>
                                                     <td>{{ $kb_article->kb_ID }}</td>
                                                     <td>{{ $kb_article->kb_title }}</td>
-                                                    <td>{{ \Illuminate\Support\Str::limit($kb_info->kb_content, 100) }}
+                                                    <td>{{ \Illuminate\Support\Str::limit($kb_article->kb_content, 100) }}
                                                     </td>
                                                     <td>{{ $kb_article->dateModified }}</td>
                                                 </tr>

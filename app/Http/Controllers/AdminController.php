@@ -268,7 +268,7 @@ class AdminController extends Controller
         $ticketsssss = $ticketssss->where('breaches', true)->count();
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
-        return view('admin_view_ticket', [
+        return view('view_all_tickets', [
             "notif" => $notifCount,
             "tickets" => $alltickets,
             "users" => $allUsers,

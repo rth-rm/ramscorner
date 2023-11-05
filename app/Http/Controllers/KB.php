@@ -44,7 +44,7 @@ class KB extends Controller
         $approved_count = $approved->count();
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
-        dd($kb_info);
+
 
         return view('admin_KB', [
             'notif' => $notifCount,

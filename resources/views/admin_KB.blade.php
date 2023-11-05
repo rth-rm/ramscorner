@@ -37,24 +37,35 @@
                                 <table id="example" class="hover" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th><i class="bi bi-exclamation-circle"></i></th>
+                                            <th>KBID#</th>
+                                            <th>Title</th>
+                                            <th>Content</th>
+                                            <th>Date Modified</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011-04-25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                        @foreach ($kb_info as $kb_article)
 
+
+                                            <tr>
+                                                <td>
+
+                                                    @if ($kb_article->kb_status == 'APPROVED')
+                                                        <i class="bi bi-circle-fill" style="color:#05E0E9"></i>
+                                                    @elseif($kb_article->kb_status == 'PENDING')
+                                                        <i class="bi bi-circle-fill" style="color:#EBDDD7"></i>
+                                                    @else
+                                                        <i class="bi bi-circle-fill" style="color:red"></i>
+                                                    @endif
+                                                </td>
+                                                <td>{{ $kb_article->kb_ID }}</td>
+                                                <td>{{ $kb_article->kb_title }}</td>
+                                                <td>{{ \Illuminate\Support\Str::limit($kb_info->kb_content, 100) }}</td>
+                                                <td>{{ $kb_article->dateModified }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -103,7 +114,7 @@
 
 
     {{-- first draft --}}
-    @include('header')
+    {{-- @include('header')
     <title>ADMIN - KNOWLEDGE BASE</title>
 
     </head>
@@ -138,7 +149,7 @@
                                 {{-- @if ($app_count != 0)
                             <span class="badge"
                                 style=" position: absolute; top: 5px; right: 5px;display: flex; justify-content: center;align-items: center; width: 25px; height: 25px; background-color: #ff0000; color: #ffffff; border-radius: 50%; font-size: 14px; box-shadow: 0 0 0 1px #f44336;">{{ $app_count }}</span>
-                        @endif --}}
+                        @endif 
                             </div>
                         </div>
                     </div>
@@ -369,7 +380,7 @@
                             </div>
                             <input placeholder="Include account information?" class="form-control"
                                 aria-label="Text input with checkbox" readonly="true">
-                        </div> --}}
+                        </div> 
 
 
                             </div>
@@ -413,4 +424,9 @@
                 })()
             </script>
         @endforeach
-        @include('footer')
+        @include('footer') 
+
+
+
+
+        --}}

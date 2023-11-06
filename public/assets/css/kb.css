@@ -177,7 +177,6 @@ body {
     border-radius: 25px;
     max-height: 80vh;
     text-align: center;
-    background-color: #ffffff;
 }
 .dash-contents .dash-container .kb-categories .kbtitle h3 {
     font-size: 30px;
@@ -203,7 +202,7 @@ body {
     grid-column: span 4;
 }
 .dash-contents .dash-container .kb-list .lists {
-    margin-top: 10px;
+    margin: 10px;
     overflow-y: auto;
     max-height: 70vh;
 }

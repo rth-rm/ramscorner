@@ -1,11 +1,8 @@
 @include('header')
 <title>Knowledge Base - Admin| RAMS CORNER</title>
 <link rel="stylesheet" href="{{ asset('assets/css/kb.css') }}" type = "text/css">
-<!-- <link rel="stylesheet" href="kb.css"> -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <!-- data tables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<!-- bootstrap link -->
 </head>
 
 <body>
@@ -153,7 +150,7 @@
                                 {{-- @if ($app_count != 0)
                             <span class="badge"
                                 style=" position: absolute; top: 5px; right: 5px;display: flex; justify-content: center;align-items: center; width: 25px; height: 25px; background-color: #ff0000; color: #ffffff; border-radius: 50%; font-size: 14px; box-shadow: 0 0 0 1px #f44336;">{{ $app_count }}</span>
-                        @endif 
+                        @endif
                             </div>
                         </div>
                     </div>
@@ -384,7 +381,7 @@
                             </div>
                             <input placeholder="Include account information?" class="form-control"
                                 aria-label="Text input with checkbox" readonly="true">
-                        </div> 
+                        </div>
 
 
                             </div>
@@ -428,7 +425,7 @@
                 })()
             </script>
         @endforeach
-        @include('footer') 
+        @include('footer')
 
 
 

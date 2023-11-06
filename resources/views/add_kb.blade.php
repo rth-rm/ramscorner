@@ -39,19 +39,8 @@
                     style="resize:vertical; margin-bottom: 1rem; width:100%; border-radius:25px; padding:.5rem; font-size:1rem; color: #817e9d; border: 1px solid  #ddd; height: 18vh; margin-top: 10px;""></textarea>
             </div>
 
-            <!-- <div class="categories">
-          <span>Available for Client View?</span>
-          <div class="options">
-            <div class="type">
-              <input type="radio" name="types" value="No" checked> <span style="color:#707070; margin-bottom: 5px; margin-right: 35px;">Yes</span>
-            </div>
-            <div class="type">
-              <input type="radio" name="types" value="No" /> <span style="color:#707070;">No</span>
-            </div>
-          </div>
-        </div> -->
+
             <div class="article">
-                <!-- <label for="title" style="font-weight: bolder; color: #817e9d; margin-right: 2rem;">Client Visibility: </label> -->
                 <label for="title" style="margin-right: 2rem;">Client Visibility</label>
                 <label class="switch">
                     <input type="checkbox" value="1" name="userview" checked>

@@ -120,7 +120,12 @@
                             </script>
                         </div>
                     </div>
-
+                    <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
+                        <a href = "{{ url('addDevicePage') }}">
+                            <button type="button" class="btn btn-primary btn-lg me-5 m-3 "
+                                style="border-radius: 25px;">Add a Device</button>
+                        </a>
+                    </div>
                     </section>
 
 

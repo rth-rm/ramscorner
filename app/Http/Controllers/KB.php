@@ -73,21 +73,11 @@ class KB extends Controller
 
 
 
-        if ($user->u_role != "Admin") {
+        if ($user->u_role == "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($user->u_role == "Staff") {
-                return redirect()->route('staffHome');
-            } else {
-                return redirect()->route('adminHome');
-            }
-        } else if ($user->u_role != "Staff") {
-            Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($user->u_role == "Admin") {
-                return redirect()->route('adminHome');
-            } else {
-                return redirect()->route('clientHome');
-            }
+            return redirect()->route('clientHome');
         }
+
 
         return view('add_kb');
 

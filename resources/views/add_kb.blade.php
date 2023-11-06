@@ -1,3 +1,4 @@
+@include('header')
 <title>Create KB | RAMS Corner</title>
 <link rel="stylesheet" href="{{ asset('assets/css/add_kb.css') }}" type = "text/css">
 </head>

@@ -6,7 +6,7 @@
 <body>
     <section class="container">
         <div class="title">Add New KB Entry</div>
-        <form method = "post" action="{{ url('/createKB') }}" class="form">
+        <form method = "post" action="{{ url('/createKB') }}" enctype="multipart/form-data" class="form">
             @csrf
             <div class="article">
                 <label for="title">KB Article Title</label>

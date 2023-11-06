@@ -62,13 +62,44 @@ class KB extends Controller
         ]);
     }
 
+
+    public function add_kb()
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+
+
+
+        if ($user->u_role != "Admin") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            if ($user->u_role == "Staff") {
+                return redirect()->route('staffHome');
+            } else {
+                return redirect()->route('adminHome');
+            }
+        } else if ($user->u_role != "Staff") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            if ($user->u_role == "Admin") {
+                return redirect()->route('adminHome');
+            } else {
+                return redirect()->route('clientHome');
+            }
+        }
+
+        return view('add_kb');
+
+
+    }
+
     public function user_KB()
     {
         $client = Auth::user();
         if ($client == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
 
         }
 

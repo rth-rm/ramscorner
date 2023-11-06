@@ -81,7 +81,7 @@
                             </div>
                             <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
                                 <button type="button" class="btn btn-primary btn-lg me-5 m-3 "
-                                    style="border-radius: 25px;">Create KB Article</button>
+                                    href = "{{ url(add_kb) }}" style="border-radius: 25px;">Create KB Article</button>
                             </div>
                         </div>
                     </div>

@@ -8,7 +8,7 @@
     </div>
     <ul class="nav-links" style="padding: 0;">
         <li>
-            <a href="{{ url('/adminHome') }}">
+            <a href="{{ url('adminHome') }}">
                 <i class="bi bi-columns-gap"></i>
                 <span class="link_name">Dashboard</span>
             </a>

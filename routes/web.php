@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // KB
     Route::get('/admin_KB', [KB::class, 'admin_KB'])->name('admin_KB');
     Route::get('/staff_KB', [KB::class, 'staff_KB'])->name('staff_KB');
+    Route::get('/add_kb', [KB::class, 'add_kb']);
     Route::post('/createKB', [KB::class, 'createkb']);
     Route::get('/user_KB', [KB::class, 'user_KB'])->name('user_KB');
     Route::get('/adminkbView/{id}', [KB::class, 'adminkbView'])->name('adminkbView');

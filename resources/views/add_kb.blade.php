@@ -60,7 +60,7 @@
 
 
             <div class="buttons">
-                <button class="button cancel-btn" type="clear">Cancel</button>
+                <button class="button cancel-btn" type="reset">Cancel</button>
                 <button class="button add-btn" type="submit">Submit</button>
         </form>
     </section>

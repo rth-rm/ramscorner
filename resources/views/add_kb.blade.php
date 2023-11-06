@@ -54,7 +54,7 @@
                 <!-- <label for="title" style="font-weight: bolder; color: #817e9d; margin-right: 2rem;">Client Visibility: </label> -->
                 <label for="title" style="margin-right: 2rem;">Client Visibility</label>
                 <label class="switch">
-                    <input type="checkbox" value="1" name="userview">
+                    <input type="checkbox" value="1" name="userview" checked>
                     <span class="slider round"></span>
                 </label>
             </div>

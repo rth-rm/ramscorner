@@ -210,6 +210,7 @@ body {
     border-radius: 25px;
     max-height: 80vh;
     grid-column: span 3;
+    background-color: #ffffff;
 }
 .dash-contents .dash-container .device-lists .lists {
     margin: 10px;

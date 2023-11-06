@@ -177,6 +177,7 @@ body {
     border-radius: 25px;
     max-height: 80vh;
     text-align: center;
+    background-color: #ffffff;
 }
 .dash-contents .dash-container .kb-categories .kbtitle h3 {
     font-size: 30px;

@@ -101,7 +101,7 @@
                                 <tbody>
                                     @foreach ($device_list as $devices)
                                         <tr>
-                                            <td>{{ $devices->d_id }}</td>
+                                            <td>{{ $devices->d_ID }}</td>
                                             <td>{{ $devices->d_name }}</td>
                                             <td>{{ $devices->d_type }}</td>
                                             <td>Floor {{ \Illuminate\Support\Str::before($devices->d_assignment, '-') }}

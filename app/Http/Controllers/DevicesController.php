@@ -54,13 +54,13 @@ class DevicesController extends Controller
 
         $user_info = Reporter::where('u_ID', $user_loggedin->u_ID)->get();
 
-        $device_list = Devices::where('d_code', '*')->get();
+        $device_list = Devices::get();
 
 
-        // foreach ($device_list as $dev) {
-        //     dd($dev);
+        foreach ($device_list as $dev) {
+            dd($dev->d_code);
 
-        // }
+        }
 
 
 

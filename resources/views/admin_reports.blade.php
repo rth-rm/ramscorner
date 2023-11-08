@@ -2,10 +2,10 @@
 
 
 <title>REPORTS</title>
-
+<link rel="stylesheet" href="{{ asset('assets/css/reports.css') }}" type = "text/css">
 </head>
 
-<body style="background-color: rgb(255, 255, 255); ">
+<body>
 
     @include('sweetalert::alert')
     @foreach ($admin as $user)

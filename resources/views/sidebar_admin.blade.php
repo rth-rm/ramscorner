@@ -68,7 +68,7 @@
             </div>
 
             <div class="dropdown2">
-                <img src="{{ url('userProfile/' . $user->u_profile) }}" href="#" role="button"
+                <img src="{{ url('userProfile/' . $userloggedin->u_profile) }}" href="#" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
 
                 <ul class="dropdown-menu" style="">

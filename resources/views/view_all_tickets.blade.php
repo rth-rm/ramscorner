@@ -17,7 +17,6 @@
 
 
         <div class="home-contents">
-            <!-- <div class="dashboard-boxes"></div> -->
             <div class="title mb-5">
                 <h1>Ticket Center</h1>
                 <div style="display: grid; grid-template-columns: 1fr 1fr">

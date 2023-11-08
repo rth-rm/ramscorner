@@ -348,9 +348,9 @@ class AdminController extends Controller
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
 
         if ($admin->u_role == "Admin") {
-            return view('admin_open_ticket', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
+            return view('admin_open_ticket', ['ticket_id' => $t_id, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
         } else {
-            return view('staff_open_ticket', ['last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "staff" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
+            return view('staff_open_ticket', ['ticket_id' => $t_id, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "staff" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
         }
     }
 

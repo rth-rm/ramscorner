@@ -54,7 +54,7 @@ class DevicesController extends Controller
 
         $user_info = Reporter::where('u_ID', $user_loggedin->u_ID)->get();
 
-        $device_list = Devices::get()->all();
+        $device_list = Devices::get();
 
 
         foreach ($device_list as $dev) {

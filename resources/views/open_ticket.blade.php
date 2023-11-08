@@ -18,14 +18,13 @@
                         <div class="status-display" style="overflow-y: auto; max-height: 55vh;">
                             <ul style="list-style: none; padding: 10px;">
                                 @foreach ($status as $status_tracking)
+                                    <li style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;">
+                                        <h5 style="font-weight: 600; color: #6644a8">
+                                            {{ $status_tracking->sh_Status }}</h5>
+                                        <h5>{{ $status_tracking->sh_datetime }}</h5>
+                                        <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
+                                    </li>
                                 @endforeach
-                                <li style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;">
-                                    <h5 style="font-weight: 600; color: #6644a8">
-                                        {{ $status_tracking->sh_Status }}</h5>
-                                    <h5>{{ $status_tracking->sh_datetime }}</h5>
-                                    <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
-                                </li>
-
                             </ul>
                         </div>
                     </div>

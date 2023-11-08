@@ -13,6 +13,18 @@
             @include('sidebar_admin')
         @endif
         @include('open_ticket')
+        </section>
+
+
+        <!-- sidebar button script -->
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
+
+            sidebarBtn.onclick = function() {
+                sidebar.classList.toggle("active");
+            }
+        </script>
     @endforeach
     <script type="text/javascript">
         function refreshPage() {

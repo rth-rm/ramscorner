@@ -1,6 +1,5 @@
 @include('header')
 <title>LOGIN | RAMS CORNER</title>
-<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}" type = "text/css">
 
 <style>
     .wrapper {
@@ -86,7 +85,7 @@
         color: #9a9ca1;
     }
 
-    .form-control {
+    .form {
         height: 45px;
         width: 100%;
         background: transparent;

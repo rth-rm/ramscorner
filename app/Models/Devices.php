@@ -14,6 +14,6 @@ class Devices extends Model
     protected $guarded = [
     ];
 
-    protected $primaryKey = 'd_ID';
+    protected $primaryKey = 'd_code';
 
 }

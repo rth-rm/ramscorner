@@ -155,7 +155,7 @@ class DevicesController extends Controller
 
 
         Devices::create([
-            "d_ID" => $dev_id,
+            "d_code" => $dev_id,
             "d_name" => strtoupper($request->dname),
             "d_inventorynum" => $request->dinvnum,
             "d_purchase_date" => $request->dpurchased,

@@ -1,17 +1,20 @@
 @include('header')
 
 
-<title>TICKET</title>
+<title>INC#{{ $ticket_id }} | Ram's Corner</title>
 
 </head>
+<link rel="stylesheet" href="{{ asset('assets/css/opened_sent_ticket.css') }}" type = "text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<!-- bootstrap link -->
+</head>
 
-<body style="background-color: rgb(255, 255, 255); ">
-    @section('title', 'All Tickets')
-
-    @include('sweetalert::alert')
+<body>
     @foreach ($admin as $userloggedin)
-        @include('sidebar_admin')
-
+        @include('sweetalert::alert')
+        @if ($userloggedin->u_role == 'Admin')
+            @include('sidebar_admin')
+        @endif
         @include('open_ticket')
     @endforeach
     <script type="text/javascript">

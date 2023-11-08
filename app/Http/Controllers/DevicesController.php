@@ -142,7 +142,7 @@ class DevicesController extends Controller
             $last_div_ID = $last_dev_digit + 1;
         }
 
-        dd($last_div_ID);
+
 
 
         $dev_id = "ITRO-" . $request->device . "-" . $request->dfloor . '-' . $request->droom . "-" . $last_div_ID;

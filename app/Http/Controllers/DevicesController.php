@@ -133,7 +133,7 @@ class DevicesController extends Controller
             $last_dev_digit = (int) substr($latest_dev_id, -5);
             $last_div_ID = $last_dev_digit + 1;
         }
-        $dev_id = "ITRO-" . $request->device . "-" . $request->dfloor . $request->droom . "-" . $last_div_ID;
+        $dev_id = "ITRO-" . $request->device . "-" . $request->dfloor . '-' . $request->droom . "-" . $last_div_ID;
 
         if ($request->file('dev_image')) {
             $file = $request->file('dev_image');

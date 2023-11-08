@@ -91,23 +91,22 @@
                             <table id="example" class="hover" style="width: 100%">
                                 <thead>
                                     <tr>
+                                        <th>Device Code</th>
                                         <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>Type</th>
+                                        <th>Assignment</th>
+                                        <th>Date Modified</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($device_list as $devices)
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011-04-25</td>
-                                            <td>$320,800</td>
+                                            <td>{{ $devices->d_ID }}</td>
+                                            <td>{{ $devices->d_name }}</td>
+                                            <td>{{ $devices->d_type }}</td>
+                                            <td>{{ \Illuminate\Support\Str::before($devices->d_assignment, '-') }}
+                                            </td>
+                                            <td>{{ $devices->updated_at }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

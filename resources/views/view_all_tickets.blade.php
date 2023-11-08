@@ -20,8 +20,13 @@
             <div class="title mb-5">
                 <h1>Ticket Center</h1>
                 <div style="display: grid; grid-template-columns: 1fr 1fr">
-                    <button type="button" class="btn btn-primary"
-                        style="border-radius: 25px; background-color: #6644A8 ;">View My Tickets</button>
+                    <select class="form-select" aria-label="Default select example" style="border-radius: 25px;">
+                        <option selected disabled>View My Ticket</option>
+                        <option value="1">Recieved Tickets</option>
+                        <option value="2">Sent Tickets</option>
+                        <option value="3">Tagged Tickets</option>
+                    </select>
+
                     <i class="bi bi-arrows-expand ms-5"></i>
                 </div>
             </div>

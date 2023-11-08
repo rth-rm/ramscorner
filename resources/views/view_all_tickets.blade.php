@@ -163,7 +163,7 @@
             </div>
         </div>
 
-        </section>
+
         <script>
             function openDiv(divId) {
 

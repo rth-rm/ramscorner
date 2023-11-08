@@ -68,8 +68,8 @@
             </div>
 
             <div class="dropdown2">
-                <i class="bi bi-person-circle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false"></i>
+                <img src="{{ url('userProfile/' . $user->u_profile) }}" alt="My Icon" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
 
                 <ul class="dropdown-menu" style="">
                     <li><a class="dropdown-item" href="{{ url('/signout') }}">Sign out</a></li>

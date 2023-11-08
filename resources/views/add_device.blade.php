@@ -58,18 +58,18 @@
                       <div class="select-box">
                           <select name = "dfloor">
                               <option hidden>Floor</option>
-                              <option value= "10">1st floor</option>
-                              <option value= "20">2nd floor</option>
-                              <option value= "30">3rd floor</option>
-                              <option value= "40">4th floor</option>
-                              <option value= "50">5th floor</option>
-                              <option value= "60">6th floor</option>
-                              <option value= "70">7th floor</option>
-                              <option value= "80">8th floor</option>
-                              <option value= "90">9th floor</option>
-                              <option value= "100">10th floor</option>
-                              <option value= "110">11th floor</option>
-                              <option value= "120">12th floor</option>
+                              <option value= "1">1st floor</option>
+                              <option value= "2">2nd floor</option>
+                              <option value= "3">3rd floor</option>
+                              <option value= "4">4th floor</option>
+                              <option value= "5">5th floor</option>
+                              <option value= "6">6th floor</option>
+                              <option value= "7">7th floor</option>
+                              <option value= "8">8th floor</option>
+                              <option value= "9">9th floor</option>
+                              <option value= "10">10th floor</option>
+                              <option value= "11">11th floor</option>
+                              <option value= "12">12th floor</option>
                           </select>
                       </div>
                       <input type="number" placeholder="Room Number" name="droom" required />

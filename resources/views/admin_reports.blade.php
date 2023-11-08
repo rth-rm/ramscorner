@@ -8,7 +8,7 @@
 <body>
 
     @include('sweetalert::alert')
-    @foreach ($admin as $user)
+    @foreach ($admin as $userloggedin)
         @include('sidebar_admin')
 
         @include('reports')

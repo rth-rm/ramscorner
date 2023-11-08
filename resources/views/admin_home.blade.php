@@ -6,7 +6,7 @@
 
 <body>
 
-    @foreach ($admin as $user)
+    @foreach ($admin as $userloggedin)
         @include('sweetalert::alert')
 
         @include('sidebar_admin')

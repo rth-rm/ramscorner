@@ -138,7 +138,7 @@ class DevicesController extends Controller
             $last_div_ID = 100001;
         } else {
             $latest_dev_id = Devices::get("d_code")->last();
-            $last_dev_digit = (int) substr($latest_dev_id, -6);
+            $last_dev_digit = (int) substr($latest_dev_id, -5);
             $last_div_ID = $last_dev_digit + 1;
         }
 

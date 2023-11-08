@@ -58,7 +58,7 @@ class DevicesController extends Controller
 
 
         foreach ($device_list as $dev) {
-            dd($dev);
+            dd($dev->d_code);
 
         }
 

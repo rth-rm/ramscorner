@@ -147,7 +147,6 @@ body {
 .home-section nav .profile-details img {
     height: 50px;
     width: 50px;
-    border-radius: 50px;
 }
 .home-contents {
     margin: 30px;
@@ -167,11 +166,6 @@ body {
 .home-contents .title i {
     font-weight: 900;
     font-size: 30px;
-}
-
-/* edit dashboard contents here */
-.dash-contents {
-    /* text-align: center; */
 }
 
 .dash-contents .dash-container {

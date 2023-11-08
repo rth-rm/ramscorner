@@ -167,11 +167,6 @@ body {
     font-size: 30px;
 }
 
-/* edit dashboard contents here */
-.dash-contents {
-    /* text-align: center; */
-}
-
 .dash-contents .dash-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

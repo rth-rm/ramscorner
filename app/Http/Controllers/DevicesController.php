@@ -54,11 +54,9 @@ class DevicesController extends Controller
 
         $user_info = Reporter::where('u_ID', $user_loggedin->u_ID)->get();
 
-        // if (Devices::get()->count() == 0) {
-        // } else {
-
-        // }
         $device_list = Devices::get()->all();
+
+        dd($device_list->d_ID);
 
 
 

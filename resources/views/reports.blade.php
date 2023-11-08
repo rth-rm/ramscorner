@@ -1,14 +1,6 @@
 <div>
 
-    <div class="overflow-auto"
-        style="border-radius: 4px;
-                        border: 1px solid #ffffff7c;
-                        position: absolute;
-                        background-color: rgb(255, 255, 255);
-                        top: 10%;
-                        height: 89%;
-                        width: 93%;
-                        left: 6.5%;">
+    <div>
         <form method="POST" enctype="multipart/form-data" action="{{ url('generate') }}">
             @csrf
             <div class="row p-4" style="background-color: #f7f7f7; border-bottom: 1px solid #ccc;">

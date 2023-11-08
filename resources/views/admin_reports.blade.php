@@ -22,5 +22,6 @@
                 sidebar.classList.toggle("active");
             }
         </script>
+        </section>
     @endforeach
     @include('footer')

@@ -53,7 +53,15 @@ class DevicesController extends Controller
         }
 
         $user_info = Reporter::where('u_ID', $user_loggedin->u_ID)->get();
-        return view('device_list', ["user_loggedin" => $user_info]);
+        $device_list = Devices::get();
+
+
+
+
+        return view('device_list', [
+            "user_loggedin" => $user_info,
+            "device_list" => $device_list
+        ]);
 
     }
 
@@ -119,7 +127,7 @@ class DevicesController extends Controller
         $dev_count = Devices::get()->count();
 
         if ($dev_count == 0) {
-            $last_div_ID = 000000;
+            $last_div_ID = 100000;
         } else {
             $latest_dev_id = Devices::get()->last();
             $last_dev_digit = (int) substr($latest_dev_id, -5);

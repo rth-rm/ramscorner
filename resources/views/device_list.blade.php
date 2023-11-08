@@ -100,15 +100,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-
+                                    @if ($device_list == null)
+                                        <tr>
+                                            No available device record
+                                        </tr>
+                                    @else
+                                        @foreach ($device_list as $devices)
+                                            <tr>
+                                                <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011-04-25</td>
+                                                <td>$320,800</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                             <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

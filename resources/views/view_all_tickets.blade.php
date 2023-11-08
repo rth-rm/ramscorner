@@ -130,67 +130,66 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($tickets as $ticket)
-                                        <tr onclick="openDiv({{ $ticket->t_ID }}>
+                                        <tr onclick="openDiv({{ $ticket->t_ID }})">
                                             <td>INC{{ $ticket->t_ID }}</td>
                                             <td>{{ $ticket->t_title }}</td>
                                             <td>{{ $ticket->t_datetime }}</td>
                                             <td>{{ $ticket->t_due }}</td>
                                             <td>
                                                 @if ($ticket->breaches == true)
-<i class="bi
-                                            bi-circle-fill" style="color:red"></i>
-                                        @else
-                                            <i class="bi bi-circle-fill" style="color:green"></i>
-                                    @endif
-                                    </td>
+                                                    <i class="bi-bi-circle-fill" style="color:red"></i>
+                                                @else
+                                                    <i class="bi bi-circle-fill" style="color:green"></i>
+                                                @endif
+                                            </td>
 
-                                    </tr>
-    @endforeach
-    </tbody>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
-    </div>
-    <footer>
-        <hr>
-    </footer>
-    </div>
-    </div>
-    </div>
-    </div>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#example').DataTable();
+                                });
+                            </script>
+                        </div>
+                        <footer>
+                            <hr>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </section>
-    <script>
-        function openDiv(divId) {
-
-
-            var url = "{{ route('openTicket', '') }}" + "/" + divId;
-
-            window.location = url;
-        }
-    </script>
+        </section>
+        <script>
+            function openDiv(divId) {
 
 
-    <!-- sidebar button script -->
-    <script>
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
+                var url = "{{ route('openTicket', '') }}" + "/" + divId;
 
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-    </script>
-    <script>
-        function openDiv(divId) {
-            var url = "{{ route('openTicket', '') }}" + "/" + divId;
-            window.location = url;
-        }
-    </script>
+                window.location = url;
+            }
+        </script>
+
+
+        <!-- sidebar button script -->
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
+
+            sidebarBtn.onclick = function() {
+                sidebar.classList.toggle("active");
+            }
+        </script>
+        <script>
+            function openDiv(divId) {
+                var url = "{{ route('openTicket', '') }}" + "/" + divId;
+                window.location = url;
+            }
+        </script>
     @endforeach
     @include('footer')
 

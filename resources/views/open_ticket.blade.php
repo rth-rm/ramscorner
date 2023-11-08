@@ -12,10 +12,11 @@
                 <div class="card-body" style="padding: 5px;   display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
 
                     <!-- ticket status -->
-                    <div class="ticket-status me-2" style="">
+                    <div class="ticket-status me-2">
                         <h4 style="color: #817e9d; font-size: 21px; font-weight: 700;" class="pt-4 ps-4 pb-3 fw-bold">
                             Status Tracking</h4>
-                        <div class="status-display" style="overflow-y: auto; max-height: 55vh;">
+                        <div class="status-display"
+                            style="overflow-y: auto; max-height: 55vh; border: right 5px solid #F6F7FB;">
                             <ul style="list-style: none; padding: 10px;">
                                 @foreach ($status as $status_tracking)
                                     <li style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;">

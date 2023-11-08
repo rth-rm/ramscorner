@@ -57,10 +57,10 @@ class DevicesController extends Controller
         $device_list = Devices::get();
 
 
-        foreach ($device_list as $dev) {
-            dd($dev);
+        // foreach ($device_list as $dev) {
+        //     dd($dev);
 
-        }
+        // }
 
 
 

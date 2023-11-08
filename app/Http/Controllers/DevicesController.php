@@ -58,7 +58,7 @@ class DevicesController extends Controller
         // } else {
 
         // }
-        $device_list = Devices::all();
+        $device_list = Devices::get()->all();
 
 
 

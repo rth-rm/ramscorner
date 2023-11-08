@@ -56,7 +56,7 @@ class DevicesController extends Controller
         $device_list = Devices::get();
 
 
-
+        dd($device_list->d_ID);
 
         return view('device_list', [
             "user_loggedin" => $user_info,
@@ -127,7 +127,7 @@ class DevicesController extends Controller
         $dev_count = Devices::get()->count();
 
         if ($dev_count == 0) {
-            $last_div_ID = 100000;
+            $last_div_ID = 100001;
         } else {
             $latest_dev_id = Devices::get()->last();
             $last_dev_digit = (int) substr($latest_dev_id, -5);

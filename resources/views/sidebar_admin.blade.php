@@ -69,7 +69,7 @@
 
             <div class="dropdown2">
                 <img src="{{ url('userProfile/' . $userloggedin->u_profile) }}" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-expanded="true">
 
                 <ul class="dropdown-menu" style="">
                     <li><a class="dropdown-item" href="{{ url('/signout') }}">Sign out</a></li>

@@ -37,7 +37,7 @@
                                 <h5>Assigned to: {{ $tickets->t_assignedTo }}</h5>
                             </div>
                             <div class="tic-id">
-                                @if ($tickets->t_category == 'HARDWARE')
+                                @if ($tickets->t_category == 'INFRASTRUCTURE')
                                     <h6>Hardware ID: ITRO-P12345</h6>
                                     <h6><a href="#">View Repair History</a></h6>
                                 @endif

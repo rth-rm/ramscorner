@@ -56,7 +56,12 @@ class DevicesController extends Controller
 
         $device_list = Devices::get()->all();
 
-        dd($device_list->d_ID);
+
+        foreach ($device_list as $dev) {
+            dd($dev->d_ID);
+
+        }
+
 
 
 

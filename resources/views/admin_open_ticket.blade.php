@@ -1,9 +1,6 @@
 @include('header')
 
-
 <title>INC#{{ $ticket_id }} | Ram's Corner</title>
-
-</head>
 <link rel="stylesheet" href="{{ asset('assets/css/opened_sent_ticket.css') }}" type = "text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <!-- bootstrap link -->

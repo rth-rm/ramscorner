@@ -34,12 +34,14 @@
                         <div class="header p-5" style="display: flex; justify-content: space-between; ">
                             <div class="tic-header deets fw-semibold">
                                 <h5>Sent by: {{ $client->u_name }}</h5>
-                                <h5>Place: Rm 304</h5>
                                 <h5>Assigned to: {{ $tickets->t_assignedTo }}</h5>
                             </div>
                             <div class="tic-id">
-                                <h6>Hardware ID: ITRO-P12345</h6>
-                                <h6><a href="url">View Repair History</a></h6>
+                                @if ($tickets->t_category == 'HARDWARE')
+                                    <h6>Hardware ID: ITRO-P12345</h6>
+                                    <h6><a href="#">View Repair History</a></h6>
+                                @endif
+
                             </div>
                         </div>
                         <div class="tic-description p-5">

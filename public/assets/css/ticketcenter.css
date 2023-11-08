@@ -144,13 +144,13 @@ body {
     margin: 15px;
 }
 
-.home-section nav .profile-details img {
+.home-section nav .dropdown2 .profile-details img {
     height: 50px;
     width: 50px;
+    border-radius: 50px;
 }
 .home-contents {
     margin: 30px;
-    /* border: #05e0e9 1px solid; */
 }
 
 .home-contents .title {

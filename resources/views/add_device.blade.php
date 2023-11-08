@@ -9,11 +9,6 @@
           <div class="title">Add Devices</div>
           <form method="POST" enctype="multipart/form-data" action="{{ url('addDevices') }}" class="form">
               @csrf
-              <div class="input-box">
-                  <label>Device ID</label>
-                  <input type="text" placeholder="ITRO-DEV-ID" required maxlength="15"
-                      style="text-transform:uppercase" />
-              </div>
 
               <div class="input-box">
                   <label>Device Name</label>

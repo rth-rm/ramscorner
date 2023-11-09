@@ -20,7 +20,7 @@
                 <div class="dash-container">
                     <div class="card card-contents">
                         <div class="cardheader mt-4 ms-5">
-                            <a href="{{ url()->previous() }}"><i class="bi bi-arrow-left"></i></a>
+                            <i class="bi bi-exclamation-circle me-5" href="{{ url()->previous() }}"></i>
                             <span class="me-5">ID</span>
                             <span>{{ $kb_info->kb_title }}</span>
                         </div>

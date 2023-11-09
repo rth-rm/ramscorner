@@ -49,23 +49,25 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($kb_info as $kb_article)
-                                                <tr>
-                                                    <td>
+                                                <a href="adminkbView/{{ $kb_info->kb_ID }}">
+                                                    <tr>
+                                                        <td>
 
-                                                        @if ($kb_article->kb_status == 'APPROVED')
-                                                            <i class="bi bi-circle-fill" style="color:#05E0E9"></i>
-                                                        @elseif($kb_article->kb_status == 'PENDING')
-                                                            <i class="bi bi-circle-fill" style="color:#EBDDD7"></i>
-                                                        @else
-                                                            <i class="bi bi-circle-fill" style="color:red"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $kb_article->kb_ID }}</td>
-                                                    <td>{{ $kb_article->kb_title }}</td>
-                                                    <td>{{ \Illuminate\Support\Str::limit($kb_article->kb_content, 100) }}
-                                                    </td>
-                                                    <td>{{ $kb_article->dateModified }}</td>
-                                                </tr>
+                                                            @if ($kb_article->kb_status == 'APPROVED')
+                                                                <i class="bi bi-circle-fill" style="color:#05E0E9"></i>
+                                                            @elseif($kb_article->kb_status == 'PENDING')
+                                                                <i class="bi bi-circle-fill" style="color:#EBDDD7"></i>
+                                                            @else
+                                                                <i class="bi bi-circle-fill" style="color:red"></i>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $kb_article->kb_ID }}</td>
+                                                        <td>{{ $kb_article->kb_title }}</td>
+                                                        <td>{{ \Illuminate\Support\Str::limit($kb_article->kb_content, 100) }}
+                                                        </td>
+                                                        <td>{{ $kb_article->dateModified }}</td>
+                                                    </tr>
+                                                </a>
                                             @endforeach
                                         </tbody>
                                     </table>

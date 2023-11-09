@@ -216,7 +216,14 @@ class KB extends Controller
 
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
-        return view('adminkbView', ['notif' => $notifCount, 'kb_info' => $kb_info, 'admin' => $user_info]);
+        return view(
+            'adminkbView',
+            [
+                'notif' => $notifCount,
+                'kb_info' => $kb_info,
+                'admin' => $user_info
+            ]
+        );
     }
 
     public function staffkbView($id)

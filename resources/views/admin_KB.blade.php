@@ -49,24 +49,23 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($kb_info as $kb_article)
-                                                <a href="adminkbView/{{ $kb_article->kb_ID }}">
-                                                    <tr>
-                                                        <td>
+                                                <tr onclick="openDiv({{ $kb_article->kb_ID }})">
+                                                    <td>
 
-                                                            @if ($kb_article->kb_status == 'APPROVED')
-                                                                <i class="bi bi-circle-fill" style="color:#05E0E9"></i>
-                                                            @elseif($kb_article->kb_status == 'PENDING')
-                                                                <i class="bi bi-circle-fill" style="color:#EBDDD7"></i>
-                                                            @else
-                                                                <i class="bi bi-circle-fill" style="color:red"></i>
-                                                            @endif
-                                                        </td>
-                                                        <td>{{ $kb_article->kb_ID }}</td>
-                                                        <td>{{ $kb_article->kb_title }}</td>
-                                                        <td>{{ \Illuminate\Support\Str::limit($kb_article->kb_content, 100) }}
-                                                        </td>
-                                                        <td>{{ $kb_article->dateModified }}</td>
-                                                    </tr>
+                                                        @if ($kb_article->kb_status == 'APPROVED')
+                                                            <i class="bi bi-circle-fill" style="color:#05E0E9"></i>
+                                                        @elseif($kb_article->kb_status == 'PENDING')
+                                                            <i class="bi bi-circle-fill" style="color:#EBDDD7"></i>
+                                                        @else
+                                                            <i class="bi bi-circle-fill" style="color:red"></i>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $kb_article->kb_ID }}</td>
+                                                    <td>{{ $kb_article->kb_title }}</td>
+                                                    <td>{{ \Illuminate\Support\Str::limit($kb_article->kb_content, 100) }}
+                                                    </td>
+                                                    <td>{{ $kb_article->dateModified }}</td>
+                                                </tr>
                                                 </a>
                                             @endforeach
                                         </tbody>
@@ -106,6 +105,15 @@
                 sidebar.classList.toggle("active");
             }
         </script>
+
+
+        <script>
+            function openDiv(divId) {
+                var url = "{{ route('adminkbView', '') }}" + "/" + divId;
+                window.location = url;
+            }
+        </script>
+
         <!-- kb category btn color change script -->
     @endforeach
     @include('footer')

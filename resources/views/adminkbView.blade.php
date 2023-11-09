@@ -27,7 +27,7 @@
                         <hr>
                         <div class="card-body p-0 kb-contents ms-5 pe-5">
                             <i class="bi bi-exclamation-circle me-5"></i>
-                            <span class="me-5">{{ kb_info->kb_ID }}</span>
+                            <span class="me-5">{{ $kb_info->kb_ID }}</span>
                             <div class="kb-details">
                                 <h3 class="mb-4">{{ $kb_info->kb_category }}</h3>
                                 <h3>Modified by: {{ $kb_info->kb_modify }}</h3>

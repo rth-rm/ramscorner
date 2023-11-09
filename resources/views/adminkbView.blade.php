@@ -1,6 +1,6 @@
 @include('header')
 <title>KBid # {{ $kb_info->kb_ID }} </title>
-<link rel="stylesheet" href="clicked_kb.css">
+<link rel="stylesheet" href="{{ asset('assets/css/kb_clicked_admin.css') }}" type = "text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 </head>

@@ -49,7 +49,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($kb_info as $kb_article)
-                                                <a href="adminkbView/{{ $kb_info->kb_ID }}">
+                                                <a href="adminkbView/{{ $kb_article->kb_ID }}">
                                                     <tr>
                                                         <td>
 

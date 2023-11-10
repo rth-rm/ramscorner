@@ -64,7 +64,7 @@
             <div class="KB" type="button">
                 <div>
                     <p>Create KB Article</p>
-                    <p>Let the users know about shit that matters at ipakita mo kung sino ka</p>
+                    <p>Let the users know about the most common issues and their solutions!</p>
                 </div>
                 <div style="font-size: 60px; margin-right: 10%;">
                     <i class="bi bi-lightbulb"></i>

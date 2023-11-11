@@ -15,12 +15,18 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
 use App\Models\TicketMessages;
 use App\Http\Controllers\TicketController;
+use App\Models\RepairHistory;
 
 class AdminController extends Controller
 {
 
 
+    protected $device;
 
+    public function __construct(DevicesController $device)
+    {
+        $this->device = $device;
+    }
     public function adminHome()
     {
 
@@ -384,35 +390,11 @@ class AdminController extends Controller
         $staff = Reporter::whereNotIn('u_role', ['Client'])->get();
 
 
-
-
-
-        //     if($tickets->t_status == "NEW"){
-
-
-        //     StatusHistory::create( [
-        //         "t_ID"=>$tickets->t_ID,
-        //         "sh_Status" => 'OPENED',
-        //         "sh_doneBy" => $admin->u_name
-
-        //     ]);
-
-
-
-
-
-        //     if($tickets->t_priority == 1){
-        //         $dues = now()->addHours(4);
-        //     }else if($tickets->t_priority == 2){
-        //         $dues = now()->addHours(72);
-        //     }else{
-        //         $dues = now()->addHours(168);
-        //     }
-
-        //     $tickets->t_status = 'OPENED';
-        //     $tickets->t_due = $dues;
-        //     $tickets->save();
-        // }
+        if ($tickets->t_category == "INFRASTRUCTURE") {
+            $dev = $this->device->viewDeviceDetail($tickets->dev_code);
+            $device_detail = $dev['device_detail'];
+            $repair_history = $dev['repair_history'];
+        }
 
 
         $tickets->t_views = ($tickets->t_views) + 1;
@@ -437,6 +419,8 @@ class AdminController extends Controller
             return view(
                 'admin_open_ticket',
                 [
+                    'device' => $device_detail,
+                    'repair' => $repair_history,
                     'ticket_id' => $t_id,
                     'chats' => $chats,
                     'chatss' => $chatss,

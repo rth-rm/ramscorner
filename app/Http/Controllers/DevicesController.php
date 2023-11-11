@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Devices;
 use App\Http\Controllers\Controller;
+use App\Models\RepairHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -72,6 +73,10 @@ class DevicesController extends Controller
         ]);
 
     }
+
+
+
+
 
     //ADD DEVICES PAGE
     public function addDevicePage()
@@ -188,9 +193,19 @@ class DevicesController extends Controller
         } else {
             return redirect()->route('clientHome');
         }
+    }
 
 
+    public function viewDeviceDetail($dcode)
+    {
+
+        $device_detail = Devices::where('d_code', $dcode)->get()->first();
+        $repair_history = RepairHistory::where('dcode', $dcode)->get();
+
+        return ['device_detail' => $device_detail, 'repair_history' => $repair_history];
 
     }
+
+
 
 }

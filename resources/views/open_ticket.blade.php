@@ -39,7 +39,9 @@
                             <div class="tic-id">
                                 @if ($tickets->t_category == 'INFRASTRUCTURE')
                                     <h6>Hardware ID: ITRO-P12345</h6>
-                                    <h6><a href="#">View Repair History</a></h6>
+                                    <h6><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View
+                                            Repair History</a></h6>
+                                    @include('view_device_details')
                                 @endif
 
                             </div>

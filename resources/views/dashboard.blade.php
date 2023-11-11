@@ -224,10 +224,12 @@
                         },
                     },
                 },
-                legend: {
-                    labels: {
-                        usePointStyle: true,
-                        boxWidth: 6
+                plugins: {
+                    legend: {
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 6,
+                        }
                     }
                 }
             };

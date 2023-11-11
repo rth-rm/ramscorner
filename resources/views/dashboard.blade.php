@@ -224,7 +224,21 @@
                         },
                     },
                 },
-                // Other chart options here
+                legend: {
+                    display: false,
+                },
+                legendCallback: function(chart) {
+                    var text = [];
+                    text.push('<ul class="legend-list">');
+                    chart.data.datasets.forEach(function(dataset, index) {
+                        text.push('<li><span style="background-color:' + dataset.backgroundColor +
+                            ';"></span>');
+                        text.push(dataset.label);
+                        text.push('</li>');
+                    });
+                    text.push('</ul>');
+                    return text.join('');
+                },
             };
 
             document.addEventListener('DOMContentLoaded', function() {
@@ -237,3 +251,27 @@
         </script>
     </div>
 </div>
+<style>
+    .legend-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .legend-list li {
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .legend-list li span {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+</style>

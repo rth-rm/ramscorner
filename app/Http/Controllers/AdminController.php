@@ -390,6 +390,9 @@ class AdminController extends Controller
         $staff = Reporter::whereNotIn('u_role', ['Client'])->get();
 
 
+        $device_detail = null;
+        $repair_history = null;
+
         if ($tickets->t_category == "INFRASTRUCTURE") {
             $dev = $this->device->viewDeviceDetail($tickets->dev_code);
             $device_detail = $dev['device_detail'];

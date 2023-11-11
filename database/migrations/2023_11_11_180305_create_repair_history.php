@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('repair_history', function (Blueprint $table) {
+        Schema::create('repair_histories', function (Blueprint $table) {
             $table->unsignedBigInteger('rh_id')->autoIncrement();
             $table->string('dcode');
             $table->string('rh_problem');

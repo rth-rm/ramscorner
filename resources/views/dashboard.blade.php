@@ -224,21 +224,12 @@
                         },
                     },
                 },
-                legendCallback: function(chartData) {
-                    var text = [];
-                    text.push(
-                        '<ul class="legend-list" style="list-style-type: none; padding: 0; display: flex; justify-content: center; align-items: center; margin-top: 20px;">'
-                    );
-                    chart.data.datasets.forEach(function(dataset, index) {
-                        text.push('<li style="margin: 0 10px; display: flex; align-items: center;">');
-                        text.push(
-                            '<span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 5px; background-color:' +
-                            dataset.backgroundColor + ';"></span>');
-                        text.push('<span style="white-space: nowrap;">' + dataset.label + '</span></li>');
-                    });
-                    text.push('</ul>');
-                    return text.join('');
-                },
+                legend: {
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 6
+                    }
+                }
             };
 
             document.addEventListener('DOMContentLoaded', function() {

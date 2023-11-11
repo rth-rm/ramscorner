@@ -30,14 +30,12 @@
                 </div>
                 <p class="card-text">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+                    <div id="chart" style="width: 100%; height: 500px; padding:10px; background-color: #ffffff">
+                        <canvas id="chart_div"></canvas>
+                    </div>
                 </div>
                 </p>
-                <div class="text-center">
-                    <i href="#" class="card-link">Software</i>
-                    <i href="#" class="card-link">Hardware</i>
-                    <i href="#" class="card-link">Resolved</i>
-                </div>
+
             </div>
         </div>
         <div class="">
@@ -71,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             google.charts.load('current', {
                 'packages': ['corechart']
@@ -103,7 +101,139 @@
                 var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
             }
-        </script>
+        </script> --}}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById('chart_div').getContext('2d');
 
+            var statusCounts = @json($statusmonth);
+            var softwareCounts = @json($softwaremonth);
+            var hardwareCounts = @json($hardwaremonth);
+            var keys = Object.keys(statusCounts);
+
+
+            var openedData = keys.map(function(key) {
+                return statusCounts[key].opened;
+            });
+
+            var ongoingData = keys.map(function(key) {
+                return statusCounts[key].ongoing;
+            });
+
+            var pendingData = keys.map(function(key) {
+                return statusCounts[key].pending;
+            });
+            var resolvedData = keys.map(function(key) {
+                return statusCounts[key].resolved;
+            });
+            var closedData = keys.map(function(key) {
+                return statusCounts[key].closed;
+            });
+
+            var softwareData = keys.map(function(key) {
+                return softwareCounts[key] || 0;
+            });
+
+            var hardwareData = keys.map(function(key) {
+                return hardwareCounts[key] || 0;
+            });
+
+            var chartData = {
+                labels: keys,
+                datasets: [{
+                        label: 'Opened',
+                        data: openedData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    },
+                    {
+                        label: 'Ongoing',
+                        data: ongoingData,
+                        backgroundColor: 'rgba(45, 99, 132, 0.7)',
+                    },
+                    {
+                        label: 'Pending',
+                        data: pendingData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    },
+                    {
+                        label: 'Resolved',
+                        data: resolvedData,
+                        backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                    },
+                    {
+                        label: 'Closed',
+                        data: closedData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                    },
+                    {
+                        label: 'Software Tickets',
+                        data: softwareData,
+                        fill: true,
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        type: 'line',
+                        yAxis: 'y-axis-1',
+                        tension: 0.5,
+                    },
+                    {
+                        label: 'Hardware Tickets',
+                        data: hardwareData,
+                        fill: true,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        type: 'line',
+                        yAxis: 'y-axis-2',
+                        tension: 0.5,
+                    },
+                ],
+            };
+
+            var chartOptions = {
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                    },
+                    yAxes: [{
+                            id: 'y-axis-1',
+                            type: 'linear',
+                            position: 'left',
+                            grid: {
+                                display: false,
+                            },
+                        },
+                        {
+                            id: 'y-axis-2',
+                            type: 'linear',
+                            position: 'right',
+                            grid: {
+                                display: false,
+                            },
+                        },
+                    ],
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+                            return datasetLabel + ': ' + value;
+                        },
+                    },
+                },
+                // Other chart options here
+            };
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: chartOptions,
+                });
+            });
+        </script>
     </div>
 </div>

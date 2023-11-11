@@ -14,6 +14,7 @@ use Illuminate\View\View\share;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
 use App\Models\TicketMessages;
+use App\Http\Controllers\TicketController;
 
 class AdminController extends Controller
 {
@@ -204,7 +205,12 @@ class AdminController extends Controller
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
 
+        list($statusCounts, $softwareCounts, $hardwareCounts) = $this->dashboard();
+
         return view('admin_home', [
+            "statusmonth" => $statusCounts,
+            "softwaremonth" => $softwareCounts,
+            "hardwaremonth" => $hardwareCounts,
             "notif" => $notifCount,
             "admin" => $user_info,
             'all' => $all,
@@ -237,6 +243,85 @@ class AdminController extends Controller
 
         ], );
     }
+
+
+    public function dashboard()
+    {
+
+        $tickets = Ticket::all();
+
+        // Initialize an array to store the aggregated status counts per month
+        $statusCountsPerMonth = [];
+        $softwareCountsPerMonth = [];
+        $hardwareCountsPerMonth = [];
+
+        foreach ($tickets as $ticket) {
+            $month = date('Y-m', strtotime($ticket->t_datetime)); // Adjust based on your actual timestamp column
+
+            // Initialize the status counts array for the month if it doesn't exist
+            if (!isset($statusCountsPerMonth[$month])) {
+                $statusCountsPerMonth[$month] = [
+                    'opened' => 0,
+                    'ongoing' => 0,
+                    'pending' => 0,
+                    'resolved' => 0,
+                    'closed' => 0,
+                    // Add other status types as needed
+                ];
+            }
+
+            // Retrieve the status history for the ticket
+            $statusHistory = StatusHistory::where('t_ID', $ticket->t_ID)->pluck('sh_Status')->toArray();
+
+            // Loop through the status history and update the counts
+            foreach ($statusHistory as $status) {
+                switch ($status) {
+                    case 'OPENED':
+                        $statusCountsPerMonth[$month]['opened']++;
+                        break;
+                    case 'ONGOING':
+                        $statusCountsPerMonth[$month]['ongoing']++;
+                        break;
+                    case 'PENDING':
+                        $statusCountsPerMonth[$month]['pending']++;
+                        break;
+                    case 'RESOLVED':
+                        $statusCountsPerMonth[$month]['resolved']++;
+                        break;
+                    case 'CLOSED':
+                        $statusCountsPerMonth[$month]['closed']++;
+                        break;
+                }
+            }
+
+            if ($ticket->t_category === 'SOFTWARE') {
+                $softwareCountsPerMonth[$month] = ($softwareCountsPerMonth[$month] ?? 0) + 1;
+            } elseif ($ticket->t_category === 'INFRASTRUCTURE') {
+                $hardwareCountsPerMonth[$month] = ($hardwareCountsPerMonth[$month] ?? 0) + 1;
+            }
+        }
+
+        // Use a single variable to pass data to the view
+        $statusCounts = collect($statusCountsPerMonth);
+        $softwareCounts = collect($softwareCountsPerMonth);
+        $hardwareCounts = collect($hardwareCountsPerMonth);
+
+
+        return ([$statusCounts, $softwareCounts, $hardwareCounts]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function viewAllTickets()
     {

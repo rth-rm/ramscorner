@@ -193,6 +193,7 @@
                     },
                     y: {
                         stacked: true,
+                        beginAtZero: true,
                     },
                     yAxes: [{
                             id: 'y-axis-1',

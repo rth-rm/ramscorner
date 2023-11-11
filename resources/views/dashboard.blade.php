@@ -229,7 +229,6 @@
                         labels: {
                             usePointStyle: true,
                             boxWidth: 6,
-                            padding: 5 px,
                         }
                     }
                 }

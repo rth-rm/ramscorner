@@ -173,6 +173,7 @@
                         type: 'line',
                         yAxis: 'y-axis-1',
                         tension: 0.5,
+                        beginAtZero: true,
                     },
                     {
                         label: 'Hardware Tickets',
@@ -181,6 +182,7 @@
                         borderColor: 'rgba(75, 192, 192, 1)',
                         type: 'line',
                         yAxis: 'y-axis-2',
+                        beginAtZero: true,
                         tension: 0.5,
                     },
                 ],
@@ -193,7 +195,6 @@
                     },
                     y: {
                         stacked: true,
-                        beginAtZero: true,
                     },
                     yAxes: [{
                             id: 'y-axis-1',

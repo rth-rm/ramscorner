@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\TicketMessages;
 use App\Models\Ticket;
 use App\Models\Reporter;
@@ -17,24 +18,25 @@ class ChatsController extends Controller
 
         $user_ID = Auth::user();
 
-        if($user_ID == null){
+        if ($user_ID == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
         }
 
 
-        // $request->validate([
-        //     'message' => 'required|string',
-        // ]);
+        $request->validate([
+            'message' => 'required|string',
+        ]);
 
 
         $uid = $user_ID->u_ID;
 
         // dd(auth()->id());
         $message = new TicketMessages([
-            'us_id' => auth()->id(), // Assuming you have user authentication
+            'us_id' => auth()->id(),
+            // Assuming you have user authentication
             'm_content' => $request->input('message'),
-            'tix_id' =>$tid
+            'tix_id' => $tid
         ]);
         $message->save();
 

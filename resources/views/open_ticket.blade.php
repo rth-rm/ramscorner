@@ -70,7 +70,8 @@
                     style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
 
                     <!-- CHAT BUTTON -->
-                    <div class="dropdown">
+                    @include('chat')
+                    {{-- <div class="dropdown">
                         <div class="icon-container me-3" type="button" data-bs-toggle="dropdown"
                             data-bs-auto-close="false" aria-expanded="false"
                             style="display: flex; justify-content: center; align-items: center; height: 40px; width: 40px; background: turquoise; border-radius: 50%;">
@@ -89,7 +90,7 @@
                                 </div>
                             </div>
                         </ul>
-                    </div>
+                    </div> --}}
 
                     <!-- update dropup -->
                     <div class="dropdown">

@@ -222,11 +222,9 @@ class DevicesController extends Controller
         $message = "Device " . $request->dcode . " has been successfully updated";
         Alert::success($message);
 
-        if ($user->u_role == "Admin") {
-            return redirect()->route('devices');
-        } else {
-            return redirect()->route('deices');
-        }
+
+        return redirect()->route('devices');
+
 
     }
 

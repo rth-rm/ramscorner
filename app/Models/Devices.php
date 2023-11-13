@@ -10,7 +10,7 @@ class Devices extends Model
 {
     use HasFactory;
 
-
+    protected $primaryKey = 'd_code';
     protected $guarded = [
     ];
 

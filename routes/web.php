@@ -107,7 +107,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //DEVICES
     Route::get('/devices', [DevicesController::class, 'devices'])->name('devices');
     Route::get('/addDevicePage', [DevicesController::class, 'addDevicePage'])->name('addDevicePage');
+    Route::get('/viewDeviceDetail/{dcode}', [DevicesController::class, 'viewDeviceDetail'])->name('viewDeviceDetail');
+    Route::get('/editDeviceDetail/{dcode}', [DevicesController::class, 'editDeviceDetail'])->name('editDeviceDetail');
     Route::post('/addDevices', [DevicesController::class, 'addDevices'])->name('addDevices');
+    Route::post('/editDevices', [DevicesController::class, 'editDevices'])->name('editDevices');
+    Route::get('/archiveDevice/{dcode}', [DevicesController::class, 'archiveDevice'])->name('archiveDevice');
+
 
 
     //chatbox

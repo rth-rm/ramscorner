@@ -204,6 +204,80 @@ class DevicesController extends Controller
         return ['device_detail' => $device_detail, 'repair_history' => $repair_history];
 
     }
+    public function editDeviceDetail($dcode)
+    {
+
+        $device_detail = Devices::where('d_code', $dcode)->get()->first();
+        $repair_history = RepairHistory::where('dcode', $dcode)->get();
+
+        if ($repair_history->count() == 0) {
+            $repair_history = "No Repair History Yet";
+        }
+
+        return view('edit_device', ['device_detail' => $device_detail, 'repair_history' => $repair_history]);
+
+    }
+
+    public function editDevices(Request $request)
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+        $user_info = Reporter::where('u_ID', $user->u_ID)->get();
+
+        Devices::where('d_code', $request->dcode)->update(
+            [
+                "d_name" => strtoupper($request->dname),
+                "d_inventorynum" => $request->dinvnum,
+                "d_purchase_date" => $request->dpurchased,
+                "d_type" => $request->device,
+                "d_assignment" => $request->dfloor . '-' . $request->droom,
+            ]
+
+        );
+
+
+        $message = "Device " . $request->dcode . " has been successfully updated";
+        Alert::success($message);
+
+        if ($user->u_role == "Admin") {
+            return redirect()->route('devices');
+        } else {
+            return redirect()->route('deices');
+        }
+
+    }
+
+    public function archiveDevice($dcode)
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+
+
+        }
+        $user_info = Reporter::where('u_ID', $user->u_ID)->get();
+
+
+
+        $device = Devices::where('d_code', $dcode)->get()->first();
+        if ($device) {
+            // Update the device status or perform any other actions
+            $device->update(['d_show' => false]);
+
+            // Optionally, you can redirect to another page after archiving
+            Alert::success("Archived", "Device {$dcode} has been archived.");
+            return back();
+        } else {
+            // Device not found, handle accordingly (e.g., show an error message)
+            return redirect()->back()->with('error', 'Device not found.');
+        }
+
+
+    }
 
 
 

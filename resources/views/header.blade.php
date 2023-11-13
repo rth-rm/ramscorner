@@ -31,7 +31,11 @@
         }
     </style>
 
-
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
     {{--     
     <title>Rams Corner</title>
 

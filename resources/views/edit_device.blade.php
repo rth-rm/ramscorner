@@ -11,13 +11,13 @@
 
             <div class="input-box" hidden>
                 <label>Device Name</label>
-                <input type="text" name = "dcode" value = "{{ $device_detail->d_code }}" readonly />
+                <input type="text" name = "dcode" value = "{{ $device_detail->d_code }}" />
 
             </div>
             <div class="input-box">
                 <label>Device Name</label>
                 <input type="text" placeholder="Enter Device Name" name = "dname"
-                    value = "{{ $device_detail->d_name }}" required readonly />
+                    value = "{{ $device_detail->d_name }}" required />
 
             </div>
 
@@ -25,7 +25,7 @@
                 <div class="input-box">
                     <label>Inventory Number</label>
                     <input type="number" placeholder="Enter Inventory number" name= "dinvnum" required maxlength="4"
-                        value={{ $device_detail->d_inventorynum }} readonly />
+                        value={{ $device_detail->d_inventorynum }} />
                 </div>
                 <div class="input-box">
                     <label>Purchase Date</label>

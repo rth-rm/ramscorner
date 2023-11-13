@@ -31,12 +31,12 @@
                 <span class="link_name">Reports</span>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ url('viewTags') }}">
                 <i class="bi bi-tags"></i>
                 <span class="link_name">Tags</span>
             </a>
-        </li>
+        </li> --}}
         <li>
             <a href="{{ url('devices') }}">
                 <i class="bi bi-pc-display"></i>

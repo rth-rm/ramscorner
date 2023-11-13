@@ -170,7 +170,6 @@ class DevicesController extends Controller
             "d_purchase_date" => $request->dpurchased,
             "d_type" => $request->device,
             "d_assignment" => $request->dfloor . '-' . $request->droom,
-            "d_approve" => false,
             "d_submittedby" => $user_ID->u_name
         ]);
 

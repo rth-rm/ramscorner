@@ -227,8 +227,15 @@ class DevicesController extends Controller
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
+
+        $last_dev_digit = (int) substr($request->dcode, -6);
+
+        $dev_id = "ITRO-" . $request->device . "-" . $request->dfloor . '-' . $request->droom . "-" . $last_dev_digit;
+
+
         Devices::where('d_code', $request->dcode)->update(
             [
+                "d_code" => $dev_id,
                 "d_name" => strtoupper($request->dname),
                 "d_inventorynum" => $request->dinvnum,
                 "d_purchase_date" => $request->dpurchased,
@@ -247,6 +254,7 @@ class DevicesController extends Controller
         } else {
             return redirect()->route('deices');
         }
+
 
     }
 

@@ -11,6 +11,11 @@ class Devices extends Model
     use HasFactory;
 
     protected $primaryKey = 'd_code';
+
+    public $incrementing = false;
+
+
+    protected $keyType = 'string';
     protected $guarded = [
     ];
 

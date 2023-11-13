@@ -8,7 +8,6 @@
 
     @foreach ($admin as $userloggedin)
         @include('sweetalert::alert')
-
         @include('sidebar_admin')
         @include('dashboard')
 

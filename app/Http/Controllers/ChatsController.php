@@ -31,11 +31,11 @@ class ChatsController extends Controller
 
         $uid = $user_ID->u_ID;
 
-        // dd(auth()->id());
+        // dd($request->message);
+
         $message = new TicketMessages([
             'us_id' => auth()->id(),
-            // Assuming you have user authentication
-            'm_content' => $request->input('message'),
+            'm_content' => $request->message,
             'tix_id' => $tid
         ]);
         $message->save();

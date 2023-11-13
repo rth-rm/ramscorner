@@ -41,13 +41,9 @@ class AdminController extends Controller
 
 
 
-        if ($admin->u_role != "Admin") {
+        if ($admin->u_role == "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($admin->u_role == "Staff") {
-                // return redirect()->route('staffHome');
-            } else {
-                return redirect()->route('clientHome');
-            }
+            return redirect()->route('clientHome');
         }
         // dd($client);
         //'client_home' -> blade
@@ -335,9 +331,14 @@ class AdminController extends Controller
         if ($admin == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
+
+        if ($admin->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
+        }
+
+
         $user_info = Reporter::where('u_ID', $admin->u_ID)->get();
         $alltickets = Ticket::select('t_ID', 't_category', 't_assignedTo', 't_title', 't_status', 't_priority', 't_datetime', 't_due', DB::raw('(CASE WHEN t_due < NOW() THEN 1 ELSE 0 END) AS breaches'))
             ->get()->sortByDesc('t_datetime');
@@ -379,9 +380,14 @@ class AdminController extends Controller
         if ($admin == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
+
+        if ($admin->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
+        }
+
+
         $user_info = Reporter::where('u_ID', $admin->u_ID)->get();
         $tickets = Ticket::where('t_id', $t_id)->get()->first();
         $client = Reporter::where('u_ID', $tickets->u_ID)->get()->first();
@@ -389,9 +395,8 @@ class AdminController extends Controller
         $status = StatusHistory::where('t_id', $tickets->t_ID)->get();
         $staff = Reporter::whereNotIn('u_role', ['Client'])->get();
 
-
-        $device_detail = null;
-        $repair_history = null;
+        $device_detail = [];
+        $repair_history = [];
 
         if ($tickets->t_category == "INFRASTRUCTURE") {
             $dev = $this->device->viewDeviceDetail($tickets->dev_code);
@@ -418,42 +423,29 @@ class AdminController extends Controller
 
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
 
-        if ($admin->u_role == "Admin") {
-            return view(
-                'admin_open_ticket',
-                [
-                    'device' => $device_detail,
-                    'repair' => $repair_history,
-                    'ticket_id' => $t_id,
-                    'chats' => $chats,
-                    'chatss' => $chatss,
-                    'last' => $last,
-                    // 'notif' => $notifCount, 
-                    'tickets' => $tickets,
-                    "admin" => $user_info,
-                    'client' => $client,
-                    'status' => $status,
-                    'staffs' => $staff
-                ]
-            );
-        } else {
-            return view(
-                'staff_open_ticket',
-                [
-                    'ticket_id' => $t_id,
-                    'last' => $last,
-                    'tickets' => $tickets,
-                    "staff" => $user_info,
-                    'client' => $client,
-                    'status' => $status,
-                    'staffs' => $staff,
-                    // 'notif' => $notifCount
-                ]
-            );
-        }
+
+        return view(
+            'admin_open_ticket',
+            [
+                'device' => $device_detail,
+                'repair' => $repair_history,
+                'ticket_id' => $t_id,
+                'chats' => $chats,
+                'chatss' => $chatss,
+                'last' => $last,
+                // 'notif' => $notifCount, 
+                'tickets' => $tickets,
+                "admin" => $user_info,
+                'client' => $client,
+                'status' => $status,
+                'staffs' => $staff
+            ]
+        );
+
     }
-
-
-
-
 }
+
+
+
+
+

@@ -90,8 +90,14 @@
                 <img src="{{ url('userProfile/' . $userloggedin->u_profile) }}" href="#" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
 
-                <ul class="dropdown-menu" style="">
-                    <li><a class="dropdown-item" href="{{ url('/signout') }}">Sign out</a></li>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item"
+                            href="#"><b>{{ $userloggedin->u_name }}</b><br><em>{{ $userloggedin->u_divRole }}</em>
+                            <hr>
+                        </a>
+                    </li>
+                    <li><a class="dropdown-item" href="{{ url('/signout') }}"><i class="bi bi-box-arrow-right"></i>Sign
+                            out</a></li>
                 </ul>
             </div>
         </div>

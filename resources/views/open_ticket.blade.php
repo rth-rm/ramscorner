@@ -69,8 +69,10 @@
                 <div class="card-footer text-body-secondary p-4"
                     style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
 
-                    <!-- CHAT BUTTON -->
+                    {{-- <!-- CHAT BUTTON --> --}}
+
                     @include('chat')
+
                     {{-- <div class="dropdown">
                         <div class="icon-container me-3" type="button" data-bs-toggle="dropdown"
                             data-bs-auto-close="false" aria-expanded="false"

@@ -34,7 +34,7 @@ class NotificationController extends Controller
 
 
 
-        if ($users->u_role == "Admin") {
+        if ($users->u_role == "Admin" || $users->u_role == "Staff") {
             return view(
                 'admin_notifs',
                 [
@@ -44,16 +44,7 @@ class NotificationController extends Controller
                     "notifs" => $notifs
                 ]
             );
-        } elseif ($users->u_role == "Staff") {
-            return view(
-                'staff_notifs',
-                [
-                    "notif" => $notifCount,
-                    "users" => $users,
-                    "staff" => $user_info,
-                    "notifs" => $notifs
-                ]
-            );
+
         } else {
             return view(
                 'client_notifs',
@@ -136,11 +127,9 @@ class NotificationController extends Controller
         $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
 
-        if ($user->u_role == "Admin") {
-            return view('admin_open_ticket', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
-        } else {
-            return view('staff_open_ticket', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "staff" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
-        }
+
+        return view('admin_open_ticket', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
+
     }
 
 
@@ -158,6 +147,8 @@ class NotificationController extends Controller
 
 
         }
+
+
 
         $notif = Notification::where('nID', $nid)->get()->first();
 
@@ -179,7 +170,7 @@ class NotificationController extends Controller
         $chats = TicketMessages::where('tix_id', $tickets->t_ID)->get();
         $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
-        if ($client->u_role == "Admin") {
+        if ($client->u_role == "Admin" || $client->u_role == "Staff") {
             return view('admin_personal_tickets', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff]);
 
         } elseif ($client->u_role == "Staff") {

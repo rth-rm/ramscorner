@@ -9,9 +9,9 @@
     @foreach ($user_loggedin as $userloggedin)
         @include('sweetalert::alert')
 
-        @if ($userloggedin->u_role == 'Admin')
-            @include('sidebar_admin')
-        @endif
+
+        @include('sidebar_admin')
+
 
 
 
@@ -129,55 +129,54 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Archive Ticket</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close" onclick = "closeModal()">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                onclick = "closeModal()">Close</button>
-                                            <button type="submit" class="btn btn-primary"
-                                                id = "confirmButton">Confirm</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
-                            <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-                            <script>
-                                $(document).ready(function() {
-                                    $('#example').DataTable();
-                                });
-                            </script>
-                        </div>
-                        <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
-                            <a href = "{{ url('addDevicePage') }}">
-                                <button type="button" class="btn btn-primary btn-lg me-5 m-3 "
-                                    style="border-radius: 25px;">Add a
-                                    Device</button>
-                            </a>
                         </div>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Archive Ticket</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                        onclick = "closeModal()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick = "closeModal()">Close</button>
+                                    <button type="submit" class="btn btn-primary" id = "confirmButton">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $('#example').DataTable();
+                        });
+                    </script>
                 </div>
+                <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
+                    <a href = "{{ url('addDevicePage') }}">
+                        <button type="button" class="btn btn-primary btn-lg me-5 m-3 " style="border-radius: 25px;">Add
+                            a
+                            Device</button>
+                    </a>
+                </div>
+
             </div>
         </div>
         </section>

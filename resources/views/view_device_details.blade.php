@@ -8,9 +8,6 @@
             </div>
             <div class="modal-body">
                 <div class="tix-details" style="display:grid; grid-template-columns: 1fr 1fr;">
-
-
-
                     <div class="leftS" style="border-right: 2px solid #E9E9E9;">
                         <div style="display: flex; align-items: center;">
                             <h6 style="margin-right: 5%; margin-bottom: 5%; color: #817E9D">Device Code:

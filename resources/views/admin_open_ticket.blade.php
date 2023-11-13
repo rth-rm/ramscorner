@@ -9,9 +9,9 @@
 <body>
     @foreach ($admin as $userloggedin)
         @include('sweetalert::alert')
-        @if ($userloggedin->u_role == 'Admin')
-            @include('sidebar_admin')
-        @endif
+
+        @include('sidebar_admin')
+
         @include('open_ticket')
         </section>
 

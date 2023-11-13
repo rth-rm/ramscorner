@@ -224,14 +224,7 @@
                         },
                     },
                 },
-                plugins: {
-                    legend: {
-                        labels: {
-                            usePointStyle: true,
-                            boxWidth: 6,
-                        }
-                    }
-                }
+                // Other chart options here
             };
 
             document.addEventListener('DOMContentLoaded', function() {

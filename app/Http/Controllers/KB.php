@@ -24,13 +24,9 @@ class KB extends Controller
 
         }
 
-        if ($admin->u_role != "Admin") {
+        if ($admin->u_role == "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($admin->u_role == "Staff") {
-                return redirect()->route('staffHome');
-            } else {
-                return redirect()->route('clientHome');
-            }
+            return redirect()->route('clientHome');
         }
 
         $user_info = Reporter::where('u_ID', $admin->u_ID)->get();
@@ -96,11 +92,7 @@ class KB extends Controller
 
         if ($client->u_role != "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($client->u_role == "Staff") {
-                return redirect()->route('staffHome');
-            } else {
-                return redirect()->route('adminHome');
-            }
+            return redirect()->route('adminHome');
         }
         $user_info = Reporter::where('u_ID', $client->u_ID)->get();
         $kb_info = k_b_s::where('kb_status', 1)
@@ -110,29 +102,29 @@ class KB extends Controller
         return view('user_KB', ['notif' => $notifCount, 'kb_info' => $kb_info, 'client' => $user_info]);
     }
 
-    public function staff_KB()
-    {
-        $staff = Auth::user();
-        if ($staff == null) {
-            Alert::warning('Warning!!!', 'You are not authorized!');
-            return redirect()->route('loginPage');
+    // public function staff_KB()
+    // {
+    //     $staff = Auth::user();
+    //     if ($staff == null) {
+    //         Alert::warning('Warning!!!', 'You are not authorized!');
+    //         return redirect()->route('loginPage');
 
 
-        }
+    //     }
 
-        if ($staff->u_role != "Staff") {
-            Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($staff->u_role == "Admin") {
-                return redirect()->route('adminHome');
-            } else {
-                return redirect()->route('clientHome');
-            }
-        }
-        $user_info = Reporter::where('u_ID', $staff->u_ID)->get();
-        $kb_info = k_b_s::where('kb_status', 1)->get();
-        $notifCount = Notification::where('user_id', $staff->u_ID)->where('read_at', null)->get()->count();
-        return view('staff_KB', ['notif' => $notifCount, 'kb_info' => $kb_info, 'staff' => $user_info]);
-    }
+    //     if ($staff->u_role != "Staff") {
+    //         Alert::warning('Warning!!!', 'Unauthorized Access!');
+    //         if ($staff->u_role == "Admin") {
+    //             return redirect()->route('adminHome');
+    //         } else {
+    //             return redirect()->route('clientHome');
+    //         }
+    //     }
+    //     $user_info = Reporter::where('u_ID', $staff->u_ID)->get();
+    //     $kb_info = k_b_s::where('kb_status', 1)->get();
+    //     $notifCount = Notification::where('user_id', $staff->u_ID)->where('read_at', null)->get()->count();
+    //     return view('staff_KB', ['notif' => $notifCount, 'kb_info' => $kb_info, 'staff' => $user_info]);
+    // }
 
     public function createKB(Request $request)
     {
@@ -141,8 +133,11 @@ class KB extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
+        }
 
-
+        if ($user->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
         // dd($request);
@@ -173,11 +168,9 @@ class KB extends Controller
         alert('KB Created', 'KB Succesfully added', 'Success')->showConfirmButton('Confirm', '#0d6efd');
 
 
-        if ($user->u_role == "Admin") {
-            return redirect()->route('admin_KB');
-        } else {
-            return redirect()->route('staff_KB');
-        }
+
+        return redirect()->route('admin_KB');
+
 
     }
 
@@ -192,13 +185,9 @@ class KB extends Controller
             return redirect()->route('loginPage');
         }
 
-        if ($admin->u_role != "Admin") {
+        if ($admin->u_role == "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($admin->u_role == "Staff") {
-                return redirect()->route('staffHome');
-            } else {
-                return redirect()->route('clientHome');
-            }
+            return redirect()->route('clientHome');
         }
 
         $user_info = Reporter::where('u_ID', $admin->u_ID)->get();
@@ -226,37 +215,37 @@ class KB extends Controller
         );
     }
 
-    public function staffkbView($id)
-    {
+    // public function staffkbView($id)
+    // {
 
-        $staff = Auth::user();
-        if ($staff == null) {
-            Alert::warning('Warning!!!', 'You are not authorized!');
-            return redirect()->route('loginPage');
-
-
-        }
-
-        if ($staff->u_role != "Staff") {
-            Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($staff->u_role == "Admin") {
-                return redirect()->route('adminHome');
-            } else {
-                return redirect()->route('clientHome');
-            }
-        }
-        $user_info = Reporter::where('u_ID', $staff->u_ID)->get();
-        $kb_info = k_b_s::where('kb_ID', $id)->get()->first();
-        if ($kb_info->kb_status == 1) {
-            k_b_s::where('kb_ID', $id)->update([
-                'kb_watch' => ($kb_info->kb_watch) + 1
-            ]);
+    //     $staff = Auth::user();
+    //     if ($staff == null) {
+    //         Alert::warning('Warning!!!', 'You are not authorized!');
+    //         return redirect()->route('loginPage');
 
 
-        }
-        $notifCount = Notification::where('user_id', $staff->u_ID)->where('read_at', null)->get()->count();
-        return view('staffkbView', ['notif' => $notifCount, 'kb_info' => $kb_info, 'staff' => $user_info]);
-    }
+    //     }
+
+    //     if ($staff->u_role != "Staff") {
+    //         Alert::warning('Warning!!!', 'Unauthorized Access!');
+    //         if ($staff->u_role == "Admin") {
+    //             return redirect()->route('adminHome');
+    //         } else {
+    //             return redirect()->route('clientHome');
+    //         }
+    //     }
+    //     $user_info = Reporter::where('u_ID', $staff->u_ID)->get();
+    //     $kb_info = k_b_s::where('kb_ID', $id)->get()->first();
+    //     if ($kb_info->kb_status == 1) {
+    //         k_b_s::where('kb_ID', $id)->update([
+    //             'kb_watch' => ($kb_info->kb_watch) + 1
+    //         ]);
+
+
+    //     }
+    //     $notifCount = Notification::where('user_id', $staff->u_ID)->where('read_at', null)->get()->count();
+    //     return view('staffkbView', ['notif' => $notifCount, 'kb_info' => $kb_info, 'staff' => $user_info]);
+    // }
 
     public function userkbView($id)
     {
@@ -269,12 +258,9 @@ class KB extends Controller
         }
 
         if ($client->u_role != "Client") {
-            Alert::warning('Warning!!!', 'Unauthorized Access!');
-            if ($client->u_role == "Staff") {
-                return redirect()->route('staffHome');
-            } else {
-                return redirect()->route('adminHome');
-            }
+
+            return redirect()->route('adminHome');
+
         }
         $user_info = Reporter::where('u_ID', $client->u_ID)->get();
         $kb_info = k_b_s::where('kb_ID', $id)->get()->first();
@@ -297,6 +283,11 @@ class KB extends Controller
             return redirect()->route('loginPage');
 
 
+        }
+
+        if ($user->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
@@ -331,11 +322,8 @@ class KB extends Controller
         $message = "Ticket # " . $request->id . " Has been successfully updated";
         Alert::success($message);
 
-        if ($user->u_role == "Admin") {
-            return redirect()->route('admin_KB');
-        } else {
-            return redirect()->route('staff_KB');
-        }
+        return redirect()->route('admin_KB');
+
     }
 
 }

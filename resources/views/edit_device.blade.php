@@ -11,7 +11,7 @@
 
             <div class="input-box" hidden>
                 <label>Device Name</label>
-                <input type="text" name = "dcode" value = "{{ $device_detail->d_code }}" />
+                <input type="text" name = "dcode" value = "{{ $device_detail->d_code }}" readonly />
 
             </div>
             <div class="input-box">
@@ -30,7 +30,7 @@
                 <div class="input-box">
                     <label>Purchase Date</label>
                     <input type="date" placeholder="Enter purchase date" value={{ $device_detail->d_purchase_date }}
-                        name = "dpurchased" required readonly />
+                        name = "dpurchased" required />
                 </div>
             </div>
             <div class="device-type">

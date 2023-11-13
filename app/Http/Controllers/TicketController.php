@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\StatusHistory;
 use App\Models\Ticket;
 use App\Models\Reporter;
@@ -29,12 +30,13 @@ class TicketController extends Controller
     //         $this->notify(new NewTicketNotification($this));
     //     }
 //Ticket Creation
-    public function createTicket(Request $request){
+    public function createTicket(Request $request)
+    {
 
 
         $user_ID = Auth::user();
 
-        if($user_ID == null){
+        if ($user_ID == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
         }
@@ -43,9 +45,9 @@ class TicketController extends Controller
         if ($request->file('profile')) {
             $file = $request->file('profile');
             #filename -> isesave sa database
-            $filename = $user_ID->u_name[0] .'tix_file.'.now()->toDateString().now()->minute.'.'. $file->getClientOriginalExtension();
+            $filename = $user_ID->u_name[0] . 'tix_file.' . now()->toDateString() . now()->minute . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('/ticketImages'), $filename);
-        }else{
+        } else {
             $filename = "";
         }
 
@@ -85,16 +87,16 @@ class TicketController extends Controller
 
 
 
-        Ticket::create( [
-            "u_ID"=>$user_ID->u_ID,
+        Ticket::create([
+            "u_ID" => $user_ID->u_ID,
             // "t_urgency"=>$request->urgency,
             // "t_impact"=>$request->impact,
             // "t_priority"=>$priority,
-            "t_category"=>strtoupper($request->category),
-            "t_cc"=>$request->cc,
-            "t_title"=>$request->title,
-            "t_description"=>$request->content,
-            "t_image"=>$filename
+            "t_category" => strtoupper($request->category),
+            "t_cc" => $request->cc,
+            "t_title" => $request->title,
+            "t_description" => $request->content,
+            "t_image" => $filename
         ]);
 
         $get_uID = $user_ID->u_ID;
@@ -102,43 +104,43 @@ class TicketController extends Controller
 
 
 
-        StatusHistory::create( [
-            "t_ID"=>$get_tID
+        StatusHistory::create([
+            "t_ID" => $get_tID
 
         ]);
 
 
-        $recipients = Reporter::wherenotIn('u_role',['Client'])->get();
+        $recipients = Reporter::wherenotIn('u_role', ['Client'])->get();
         foreach ($recipients as $recipient) {
-        Notification::create([
-            "user_id"=> $recipient->u_ID,
-            "ticket_id" => $get_tID,
-            "n_message" => 'A new ticket is awaiting for your response!'
+            Notification::create([
+                "user_id" => $recipient->u_ID,
+                "ticket_id" => $get_tID,
+                "n_message" => 'A new ticket is awaiting for your response!'
 
-        ]);
-    }
+            ]);
+        }
 
-    $allStaff = Reporter::whereNotIn('u_role', ['Client'])->get();
-
-
-    foreach($allStaff as $staffs){
-    $mail = new PHPMailer(true);     // Passing true enables exceptions
-    //email to
-    $emailSendTo = Reporter::where('u_ID', $staffs->u_ID)->first();
-    // Email server settings
-    $mail->SMTPDebug = 0;
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';             //  smtp host
-    $mail->SMTPAuth = true;
-    $mail->Username = 'rthrmorallos@gmail.com';   //  sender username
-    $mail->Password = 'huydgcioffkgmcld';       // sender password
-    $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
-    $mail->Port = 587;                          // port - 587/465
-    $mail->setFrom($mail->Username, 'RAMs CORNER - ITRO TICKETING SERVICE');
+        $allStaff = Reporter::whereNotIn('u_role', ['Client'])->get();
 
 
-    $mail->addAddress($emailSendTo->email); //from line 275
-    $message  = '<html lang="en">
+        foreach ($allStaff as $staffs) {
+            $mail = new PHPMailer(true); // Passing true enables exceptions
+            //email to
+            $emailSendTo = Reporter::where('u_ID', $staffs->u_ID)->first();
+            // Email server settings
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; //  smtp host
+            $mail->SMTPAuth = true;
+            $mail->Username = 'rthrmorallos@gmail.com'; //  sender username
+            $mail->Password = 'huydgcioffkgmcld'; // sender password
+            $mail->SMTPSecure = 'tls'; // encryption - ssl/tls
+            $mail->Port = 587; // port - 587/465
+            $mail->setFrom($mail->Username, 'RAMs CORNER - ITRO TICKETING SERVICE');
+
+
+            $mail->addAddress($emailSendTo->email); //from line 275
+            $message = '<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -158,9 +160,9 @@ class TicketController extends Controller
         <h2 class="mb-0">ONLINE TICKET UPDATE</h2>
         <p>Hi <strong>' . $emailSendTo->u_name . '</strong><br>,
 <br> This email is to inform you that there is a new ticket awaiting for your response. Please check out the details below.<br><hr>
-        <p>Ticket Short Description: ' . $request->title    . '</p>
+        <p>Ticket Short Description: ' . $request->title . '</p>
 
-<p>Ticket #: <strong>INC'.$get_tID.' </strong></p>
+<p>Ticket #: <strong>INC' . $get_tID . ' </strong></p>
         <p>Status:  <strong>NEW</strong></p>
         </p>
 <hr>
@@ -191,23 +193,23 @@ class TicketController extends Controller
     </body>
     </html>';
 
-            $mail->isHTML(true);                // Set email content format to HTML
+            $mail->isHTML(true); // Set email content format to HTML
             $mail->Subject = "New Ticket";
-            $mail->Body    = $message;
-                // $mail->AltBody = plain text version of email body;
-                if (!$mail->send()) {
-                    return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
-                }
-    }
+            $mail->Body = $message;
+            // $mail->AltBody = plain text version of email body;
+            if (!$mail->send()) {
+                return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
+            }
+        }
 
 
 
         Alert::success("Success!", "Your ticket was sent successfully. Please wait for the notification of status updates of your ticket.");
-        if($user_ID->u_role == "Admin"){
+        if ($user_ID->u_role == "Admin") {
             return redirect()->route('adminHome');
-        }elseif($user_ID->u_role == "Staff"){
+        } elseif ($user_ID->u_role == "Staff") {
             return redirect()->route('staffHome');
-        }else{
+        } else {
             return redirect()->route('clientHome');
         }
 
@@ -217,12 +219,13 @@ class TicketController extends Controller
     //reopen
 
 
-    public function reopenTicket(Request $request, $tid){
+    public function reopenTicket(Request $request, $tid)
+    {
 
 
         $user_ID = Auth::user();
 
-        if($user_ID == null){
+        if ($user_ID == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
         }
@@ -231,41 +234,41 @@ class TicketController extends Controller
         if ($request->file('profile')) {
             $file = $request->file('profile');
             #filename -> isesave sa database
-            $filename = $user_ID->u_name[0] .'tix_file.'.now()->toDateString().now()->minute.'.'. $file->getClientOriginalExtension();
+            $filename = $user_ID->u_name[0] . 'tix_file.' . now()->toDateString() . now()->minute . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('/ticketImages'), $filename);
-        }else{
+        } else {
             $filename = "";
         }
 
 
-        if($request->urgency == 1 && $request->impact ==1){
+        if ($request->urgency == 1 && $request->impact == 1) {
             $priority = 1;
 
-        }else if($request->urgency == 1 && $request->impact ==2){
+        } else if ($request->urgency == 1 && $request->impact == 2) {
             $priority = 2;
 
-        }else if($request->urgency == 1 && $request->impact ==3){
+        } else if ($request->urgency == 1 && $request->impact == 3) {
             $priority = 2;
 
-        }else  if($request->urgency == 2 && $request->impact ==1){
+        } else if ($request->urgency == 2 && $request->impact == 1) {
             $priority = 1;
 
-        }else if($request->urgency == 2 && $request->impact ==2){
+        } else if ($request->urgency == 2 && $request->impact == 2) {
             $priority = 2;
 
-        }else if($request->urgency == 2 && $request->impact ==3){
+        } else if ($request->urgency == 2 && $request->impact == 3) {
             $priority = 3;
 
-        }else if($request->urgency == 3 && $request->impact ==1){
+        } else if ($request->urgency == 3 && $request->impact == 1) {
             $priority = 2;
 
-        }else if($request->urgency == 3 && $request->impact ==2){
+        } else if ($request->urgency == 3 && $request->impact == 2) {
             $priority = 2;
 
-        }else if($request->urgency == 3 && $request->impact ==3){
+        } else if ($request->urgency == 3 && $request->impact == 3) {
             $priority = 3;
 
-        }else{
+        } else {
             $priority = 3;
 
         }
@@ -273,23 +276,24 @@ class TicketController extends Controller
 
 
 
-        Ticket::create( [
-            "u_ID"=>$user_ID->u_ID,
+        Ticket::create([
+            "u_ID" => $user_ID->u_ID,
             // "t_urgency"=>$request->urgency,
             // "t_impact"=>$request->impact,
             // "t_priority"=>$priority,
-            "t_category"=>strtoupper($request->category),
-            "t_cc"=>$request->cc,
-            "t_title"=>$request->title,
-            "t_description"=>$request->content,
-            "t_image"=>$filename
+            "t_category" => strtoupper($request->category),
+            "t_cc" => $request->cc,
+            "t_title" => $request->title,
+            "t_description" => $request->content,
+            "t_image" => $filename
         ]);
 
         $get_uID = $user_ID->u_ID;
         $get_tID = Ticket::where("u_ID", $get_uID)->get()->last()->t_ID;
-        StatusHistory::create( [
-            "t_ID"=>$get_tID,
-            "sh_Status" => 'REOPENED']);
+        StatusHistory::create([
+            "t_ID" => $get_tID,
+            "sh_Status" => 'REOPENED'
+        ]);
 
 
 
@@ -298,44 +302,44 @@ class TicketController extends Controller
         $ticketss->t_status = 'REOPENED';
         $ticketss->update();
 
-        StatusHistory::create( [
-            "t_ID"=>$tid,
+        StatusHistory::create([
+            "t_ID" => $tid,
             "sh_Status" => 'REOPENED',
             "sh_message" => 'This ticket is Reopened by the Client'
 
         ]);
 
 
-        $recipients = Reporter::wherenotIn('u_role',['Client'])->get();
+        $recipients = Reporter::wherenotIn('u_role', ['Client'])->get();
         foreach ($recipients as $recipient) {
-        Notification::create([
-            "user_id"=> $recipient->u_ID,
-            "ticket_id" => $get_tID,
-            "n_message" => 'A new reopened ticket is awaiting for your response!'
+            Notification::create([
+                "user_id" => $recipient->u_ID,
+                "ticket_id" => $get_tID,
+                "n_message" => 'A new reopened ticket is awaiting for your response!'
 
-        ]);
-    }
-         $allStaff = Reporter::whereNotIn('u_role', ['Client'])->get();
-
-
-    foreach($allStaff as $staffs){
-    $mail = new PHPMailer(true);     // Passing true enables exceptions
-    //email to
-    $emailSendTo = Reporter::where('u_ID', $staffs->u_ID)->first();
-    // Email server settings
-    $mail->SMTPDebug = 0;
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';             //  smtp host
-    $mail->SMTPAuth = true;
-    $mail->Username = 'rthrmorallos@gmail.com';   //  sender username
-    $mail->Password = 'huydgcioffkgmcld';       // sender password
-    $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
-    $mail->Port = 587;                          // port - 587/465
-    $mail->setFrom($mail->Username, 'RAMs CORNER - ITRO TICKETING SERVICE');
+            ]);
+        }
+        $allStaff = Reporter::whereNotIn('u_role', ['Client'])->get();
 
 
-    $mail->addAddress($emailSendTo->email); //from line 275
-    $message  = '<html lang="en">
+        foreach ($allStaff as $staffs) {
+            $mail = new PHPMailer(true); // Passing true enables exceptions
+            //email to
+            $emailSendTo = Reporter::where('u_ID', $staffs->u_ID)->first();
+            // Email server settings
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; //  smtp host
+            $mail->SMTPAuth = true;
+            $mail->Username = 'rthrmorallos@gmail.com'; //  sender username
+            $mail->Password = 'huydgcioffkgmcld'; // sender password
+            $mail->SMTPSecure = 'tls'; // encryption - ssl/tls
+            $mail->Port = 587; // port - 587/465
+            $mail->setFrom($mail->Username, 'RAMs CORNER - ITRO TICKETING SERVICE');
+
+
+            $mail->addAddress($emailSendTo->email); //from line 275
+            $message = '<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -355,9 +359,9 @@ class TicketController extends Controller
         <h2 class="mb-0">ONLINE TICKET UPDATE</h2>
         <p>Hi <strong>' . $emailSendTo->u_name . '</strong><br>,
 <br> This email is to inform you that there a ticket that has been reopened was awaiting for your response. Please check out the details below.<br><hr>
-        <p>Ticket Short Description: ' . $request->title    . '</p>
+        <p>Ticket Short Description: ' . $request->title . '</p>
 
-<p>Ticket #: <strong>INC'.$get_tID.' </strong></p>
+<p>Ticket #: <strong>INC' . $get_tID . ' </strong></p>
         <p>Status:  <strong>NEW</strong></p>
         </p>
 <hr>
@@ -388,119 +392,121 @@ class TicketController extends Controller
     </body>
     </html>';
 
-            $mail->isHTML(true);                // Set email content format to HTML
+            $mail->isHTML(true); // Set email content format to HTML
             $mail->Subject = "Reopened Ticket";
-            $mail->Body    = $message;
-                // $mail->AltBody = plain text version of email body;
-                if (!$mail->send()) {
-                    return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
-                }
-    }
+            $mail->Body = $message;
+            // $mail->AltBody = plain text version of email body;
+            if (!$mail->send()) {
+                return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
+            }
+        }
         Alert::success("Success!", "Your ticket was now Reopened. Please wait for further updates from the ITRO");
-        if($user_ID->u_role == "Admin"){
+        if ($user_ID->u_role == "Admin") {
             return redirect()->route('adminHome');
-        }elseif($user_ID->u_role == "Staff"){
+        } elseif ($user_ID->u_role == "Staff") {
             return redirect()->route('staffHome');
-        }else{
+        } else {
             return redirect()->route('clientHome');
         }
 
     }
 
-    public function viewTicket(){
+    public function viewTicket()
+    {
         $tickets = DB::select('select * from tickets');
         return redirect()->route('clientHome', ['tickets' => $tickets]);
 
     }
 
-//Updating Ticket
-    public function updateTicket(Request $request, $tID){
-            $user = Auth::user();
-            if($user == null){
-                Alert::warning('Warning!!!', 'You are not authorized!');
-                return redirect()->route('loginPage');
-            }
+    //Updating Ticket
+    public function updateTicket(Request $request, $tID)
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
 
 
-            $ticket = Ticket::find($tID);
-
-
-
-            if($request->status == null){
-                Alert::warning('Status Change required!');
-                return back();
-            }
+        $ticket = Ticket::find($tID);
 
 
 
-            if($request->priority == 1){
-                $dues = Carbon::parse($ticket->t_datetime)->addHours(4);
-            }else if($request->priority == 2){
-                $dues = Carbon::parse($ticket->t_datetime)->addHours(72);
-            }else{
-                $dues = Carbon::parse($ticket->t_datetime)->addHours(168);
-            }
+        if ($request->status == null) {
+            Alert::warning('Status Change required!');
+            return back();
+        }
 
 
 
-            if($request->assign == $ticket->t_assignedTo || $request->assign == "Not Assigned"){
+        if ($request->priority == 1) {
+            $dues = Carbon::parse($ticket->t_datetime)->addHours(4);
+        } else if ($request->priority == 2) {
+            $dues = Carbon::parse($ticket->t_datetime)->addHours(72);
+        } else {
+            $dues = Carbon::parse($ticket->t_datetime)->addHours(168);
+        }
 
-            }else{
-                $recipients = Reporter::where('u_name',$request->assign)->get()->first();
-                Notification::create([
-                    "user_id"=> $recipients->u_ID,
-                    "ticket_id" =>$ticket->t_ID,
-                    "n_message" => 'A ticket has been assigned to you. Check it out!'
 
-                ]);
-            }
 
-            $ticket->t_status = $request->status;
-            $ticket->t_category = $request->category;
-            $ticket->t_urgency = $request->urgency;
-            $ticket->t_impact = $request->impact;
-            $ticket->t_due = $dues;
-            $ticket->t_assignedTo = $request->assign;
-            $ticket->update();
+        if ($request->assign == $ticket->t_assignedTo || $request->assign == "Not Assigned") {
 
-            StatusHistory::create( [
-                "t_ID"=>$tID,
-                "sh_Status" => $request->status,
-                "sh_AssignedTo" => $request->assign,
-                "sh_message" => $request->message,
-                "sh_doneBy"=>$user->u_name
-
-            ]);
-
-            $recipient = Reporter::where('u_ID',$ticket->u_ID)->get()->first();
-
+        } else {
+            $recipients = Reporter::where('u_name', $request->assign)->get()->first();
             Notification::create([
-                "user_id"=> $recipient->u_ID,
-                "ticket_id" =>$ticket->t_ID,
-                "n_message" => 'Your ticket has been updated!'
+                "user_id" => $recipients->u_ID,
+                "ticket_id" => $ticket->t_ID,
+                "n_message" => 'A ticket has been assigned to you. Check it out!'
 
             ]);
+        }
+
+        $ticket->t_status = $request->status;
+        $ticket->t_category = $request->category;
+        $ticket->t_urgency = $request->urgency;
+        $ticket->t_impact = $request->impact;
+        $ticket->t_due = $dues;
+        $ticket->t_assignedTo = $request->assign;
+        $ticket->update();
+
+        StatusHistory::create([
+            "t_ID" => $tID,
+            "sh_Status" => $request->status,
+            "sh_AssignedTo" => $request->assign,
+            "sh_message" => $request->message,
+            "sh_doneBy" => $user->u_name
+
+        ]);
+
+        $recipient = Reporter::where('u_ID', $ticket->u_ID)->get()->first();
+
+        Notification::create([
+            "user_id" => $recipient->u_ID,
+            "ticket_id" => $ticket->t_ID,
+            "n_message" => 'Your ticket has been updated!'
+
+        ]);
 
 
 
 
 
 
-            $mail = new PHPMailer(true);     // Passing true enables exceptions
-            //email to
-            $emailSendTo = Reporter::where('u_ID', $ticket->u_ID)->first();
-            // Email server settings
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';             //  smtp host
-            $mail->SMTPAuth = true;
-            $mail->Username = 'rthrmorallos@gmail.com';   //  sender username
-            $mail->Password = 'huydgcioffkgmcld';       // sender password
-            $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
-            $mail->Port = 587;                          // port - 587/465
-            $mail->setFrom($mail->Username, 'RAMs CORNER - ITRO TICKETING SERVICE');
-            $mail->addAddress($emailSendTo->email); //from line 275
-            $message  = '<html lang="en">
+        $mail = new PHPMailer(true); // Passing true enables exceptions
+        //email to
+        $emailSendTo = Reporter::where('u_ID', $ticket->u_ID)->first();
+        // Email server settings
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; //  smtp host
+        $mail->SMTPAuth = true;
+        $mail->Username = 'rthrmorallos@gmail.com'; //  sender username
+        $mail->Password = 'huydgcioffkgmcld'; // sender password
+        $mail->SMTPSecure = 'tls'; // encryption - ssl/tls
+        $mail->Port = 587; // port - 587/465
+        $mail->setFrom($mail->Username, 'RAMs CORNER - ITRO TICKETING SERVICE');
+        $mail->addAddress($emailSendTo->email); //from line 275
+        $message = '<html lang="en">
             <head>
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -522,14 +528,14 @@ class TicketController extends Controller
         <br> This email is to inform you that your submitted ticket has been updated. Please check out the details below and take note of the remarks from the staff working on your ticket.<br><hr>
                 <p>Ticket Short Description: ' . $ticket->t_title . '</p>
 
-        <p>Ticket #: <strong>INC'.$tID.' </strong></p>
-                <p>Status:  <strong>'.$ticket->t_status.'</strong></p>
-                <p>Note from staff: ' .$request->message.' </p>
+        <p>Ticket #: <strong>INC' . $tID . ' </strong></p>
+                <p>Status:  <strong>' . $ticket->t_status . '</strong></p>
+                <p>Note from staff: ' . $request->message . ' </p>
                 </p>
         <hr>
     <p>Thank you for using our service.</p>
     <p>Best regards,</p>
-        <p>'.$user->u_name.'</p>
+        <p>' . $user->u_name . '</p>
         <br>
 
 
@@ -554,150 +560,154 @@ class TicketController extends Controller
             </body>
             </html>';
 
-                    $mail->isHTML(true);                // Set email content format to HTML
-                    $mail->Subject = "Your ticket has been updated";
+        $mail->isHTML(true); // Set email content format to HTML
+        $mail->Subject = "Your ticket has been updated";
 
-                    $mail->Body    = $message;
+        $mail->Body = $message;
 
-                        // $mail->AltBody = plain text version of email body;
-                        if (!$mail->send()) {
-                            return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
-                        }
+        // $mail->AltBody = plain text version of email body;
+        if (!$mail->send()) {
+            return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
+        }
 
 
 
-            Alert::success("Success!", "Ticket details has been updated");
+        Alert::success("Success!", "Ticket details has been updated");
 
-            if($user->u_role == "Admin" ){
-                return back();
-            }elseif($user->u_role == "Staff" ){
-                return back();
-            }else{
-                Alert::warning('Unathorized access!');
-                return back();
-            }
+        if ($user->u_role == "Admin") {
+            return back();
+        } elseif ($user->u_role == "Staff") {
+            return back();
+        } else {
+            Alert::warning('Unathorized access!');
+            return back();
+        }
+
+    }
+
+
+    //Cancel Ticket
+
+    public function cancelTicket(Request $request)
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+
+        $ticketId = $request->tID;
+        $ticket = Ticket::find($ticketId);
+        $ticket->t_status = 'CANCELLED';
+        $ticket->save();
+
+        StatusHistory::create([
+            "t_ID" => $ticketId,
+            "sh_Status" => 'CANCELLED',
+
+        ]);
+
+
+
+
+
+        Alert::info("TICKET CANCELLATION", "You have cancelled your ticket with the ID {$ticketId}");
+
+        return back();
+    }
+
+
+
+    //Saving Resolution
+    public function saveResolution(Request $request, $tID)
+    {
+
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+
+
+        }
+        $user_info = Reporter::where('u_ID', $user->u_ID)->get();
+
+
+        $ticket = Ticket::find($tID);
+        // $ticket->t_status = 'RESOLVED';
+        $ticket->t_resolution = $request->resolution;
+        $ticket->save();
+
+        // StatusHistory::create( [
+        //     "t_ID"=>$tID,
+        //     "sh_Status" => 'RESOLVED',
+        //     "sh_AssignedTo" => $ticket->t_assignedTo,
+        //     "sh_doneBy" => $user->u_name
+
+        // ]);
+        Alert::success("Saved", "Ticket # {$tID} has been resolved!");
+        return back();
+    }
+
+    //Ticket Escalation
+    public function escalateTicket($tID)
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+
+
+        }
+        $user_info = Reporter::where('u_ID', $user->u_ID)->get();
+
+
+
+        $ticket = Ticket::find($tID);
+        $ticket->t_status = 'ESCALATED';
+        $ticket->t_priority = 0;
+        $ticket->t_urgency = '1';
+        $ticket->t_impact = '1';
+        $ticket->t_assignedTo = 'Jose Castillo';
+        $ticket->t_due = now()->addHours(2);
+        $ticket->save();
+
+        StatusHistory::create([
+            "t_ID" => $tID,
+            "sh_Status" => 'ESCALATED',
+            "sh_AssignedTo" => 'Jose Castillo',
+            "sh_doneBy" => $user->u_name
+
+        ]);
+        Alert::success("Escalated", "Ticket # {$tID} has been sent to the Administrator!");
+        return back();
+
 
     }
 
 
-//Cancel Ticket
+    //Viewing tags
+    public function viewTags()
+    {
 
-   public function cancelTicket(Request $request){
-    $user = Auth::user();
-    if($user == null){
-        Alert::warning('Warning!!!', 'You are not authorized!');
-        return redirect()->route('loginPage');
-    }
+        $users = Auth::user();
 
-    $ticketId = $request->tID;
-    $ticket = Ticket::find($ticketId);
-    $ticket->t_status = 'CANCELLED';
-    $ticket->save();
+        if ($users == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+        $user_info = Reporter::where('u_ID', $users->u_ID)->get();
+        $tickets = DB::table('tickets')
+            ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
+            ->select('tickets.*', 'reporters.u_name', 'reporters.email')
+            ->where('tickets.t_cc', $users->u_name)
+            ->get();
 
-    StatusHistory::create( [
-        "t_ID"=>$ticketId,
-        "sh_Status" => 'CANCELLED',
-
-    ]);
-
-
-
-
-
-    Alert::info("TICKET CANCELLATION", "You have cancelled your ticket with the ID {$ticketId}");
-
-    return back();
-   }
-
-
-
-//Saving Resolution
-   public function saveResolution(Request $request, $tID){
-
-    $user = Auth::user();
-    if($user == null){
-        Alert::warning('Warning!!!', 'You are not authorized!');
-        return redirect()->route('loginPage');
-
-
-    }
-    $user_info = Reporter::where('u_ID', $user->u_ID)->get();
-
-
-    $ticket = Ticket::find($tID);
-    // $ticket->t_status = 'RESOLVED';
-    $ticket->t_resolution = $request->resolution;
-    $ticket->save();
-
-    // StatusHistory::create( [
-    //     "t_ID"=>$tID,
-    //     "sh_Status" => 'RESOLVED',
-    //     "sh_AssignedTo" => $ticket->t_assignedTo,
-    //     "sh_doneBy" => $user->u_name
-
-    // ]);
-    Alert::success("Saved", "Ticket # {$tID} has been resolved!");
-    return back();
-   }
-
-//Ticket Escalation
-   public function escalateTicket($tID){
-    $user = Auth::user();
-    if($user == null){
-        Alert::warning('Warning!!!', 'You are not authorized!');
-        return redirect()->route('loginPage');
-
-
-    }
-    $user_info = Reporter::where('u_ID', $user->u_ID)->get();
-
-
-
-    $ticket = Ticket::find($tID);
-    $ticket->t_status = 'ESCALATED';
-    $ticket->t_priority = 0;
-    $ticket->t_urgency = '1';
-    $ticket->t_impact = '1';
-    $ticket->t_assignedTo = 'Jose Castillo';
-    $ticket->t_due = now()->addHours(2);
-    $ticket->save();
-
-    StatusHistory::create( [
-        "t_ID"=>$tID,
-        "sh_Status" => 'ESCALATED',
-        "sh_AssignedTo" => 'Jose Castillo',
-        "sh_doneBy" => $user->u_name
-
-    ]);
-    Alert::success("Escalated", "Ticket # {$tID} has been sent to the Administrator!");
-    return back();
-
-
-   }
-
-
-   //Viewing tags
-   public function viewTags(){
-
-    $users = Auth::user();
-
-    if($users == null){
-        Alert::warning('Warning!!!', 'You are not authorized!');
-        return redirect()->route('loginPage');
-    }
-    $user_info = Reporter::where('u_ID', $users->u_ID)->get();
-    $tickets = DB::table('tickets')
-    ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
-    ->select('tickets.*', 'reporters.u_name','reporters.email')
-    ->where('tickets.t_cc', $users->u_name)
-    ->get();
-
-    $tixCount = $tickets->count();
+        $tixCount = $tickets->count();
         $ticketss = DB::table('tickets')
-        ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
-        ->select('tickets.*', 'reporters.u_name','reporters.email')
-        ->where('tickets.t_cc', $users->u_name)
-        ->get()->first();
+            ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
+            ->select('tickets.*', 'reporters.u_name', 'reporters.email')
+            ->where('tickets.t_cc', $users->u_name)
+            ->get()->first();
 
 
 
@@ -707,56 +717,55 @@ class TicketController extends Controller
 
 
 
-    // $tixCount = Ticket::where('t_cc', $users->u_name)->get()->count();
-    $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
+        // $tixCount = Ticket::where('t_cc', $users->u_name)->get()->count();
+        $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
 
-    if($users->u_role == "Admin"){
-        return view('admin_tags', ['notif'=>$notifCount,'tixCount'=>$tixCount,'sample'=>$ticketss, 'ticket' => $tickets, "user"=>$user_info, "admin"=>$user_info,  'display'=>'block']);
-    }else if ($users->u_role == "Staff"){
-        return view('staff_tags', ['notif'=>$notifCount,'sample'=>$ticketss,'ticket' => $tickets, "user"=>$user_info, "staff"=>$user_info, 'tixCount'=>$tixCount, 'display'=>'block']);
-    }else{
-        return view('client_tags', ['notif'=>$notifCount,'sample'=>$ticketss,'ticket' => $tickets, "user"=>$user_info, "client"=>$user_info, 'tixCount'=>$tixCount, 'display'=>'block']);
+        if ($users->u_role == "Admin" || $users->u_role == "Staff") {
+            return view('admin_tags', ['notif' => $notifCount, 'tixCount' => $tixCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "admin" => $user_info, 'display' => 'block']);
+        } else {
+            return view('client_tags', ['notif' => $notifCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "client" => $user_info, 'tixCount' => $tixCount, 'display' => 'block']);
+        }
     }
-   }
 
-   public function getTicketData($id){
+    public function getTicketData($id)
+    {
 
-    $users = Auth::user();
-    if($users == null){
-        Alert::warning('Warning!!!', 'You are not authorized!');
-        return redirect()->route('loginPage');
+        $users = Auth::user();
+        if ($users == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+        $user_info = Reporter::where('u_ID', $users->u_ID)->get();
+        $tixCount = Ticket::where('t_cc', $users->u_name)->get()->count();
+
+
+        $ticket = DB::table('tickets')
+            ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
+            ->select('tickets.*', 'reporters.u_name', 'reporters.email')
+            ->where('tickets.t_cc', $users->u_name)
+            ->get();
+
+        $ticketss = DB::table('tickets')
+            ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
+            ->select('tickets.*', 'reporters.u_name', 'reporters.email')
+            ->where('tickets.t_cc', $users->u_name)
+            ->where('tickets.t_ID', $id)
+            ->get()->first();
+
+
+
+
+        $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
+
+        if ($users->u_role == "Admin" || $users->u_role == "Staff") {
+
+            return view('admin_tags', ['notif' => $notifCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "admin" => $user_info, 'tixCount' => $tixCount, 'display' => 'block']);
+        } else {
+            return view('client_tags', ['notif' => $notifCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "client" => $user_info, 'tixCount' => $tixCount, 'display' => 'block']);
+        }
     }
-    $user_info = Reporter::where('u_ID', $users->u_ID)->get();
-    $tixCount = Ticket::where('t_cc', $users->u_name)->get()->count();
 
 
-    $ticket= DB::table('tickets')
-    ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
-    ->select('tickets.*', 'reporters.u_name','reporters.email')
-    ->where('tickets.t_cc', $users->u_name)
-    ->get();
-
-    $ticketss = DB::table('tickets')
-    ->join('reporters', 'reporters.u_ID', '=', 'tickets.u_ID')
-    ->select('tickets.*', 'reporters.u_name','reporters.email')
-    ->where('tickets.t_cc', $users->u_name)
-    ->where('tickets.t_ID',$id)
-    ->get()->first();
-
-
-
-
-    $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
-
-    if($users->u_role == "Admin"){
-
-        return view('admin_tags', ['notif'=>$notifCount,'ticket'=>$ticket,'sample'=>$ticketss, "user"=>$user_info, "admin"=>$user_info, 'tixCount'=>$tixCount, 'display'=>'block']);
-    }else if ($users->u_role == "Staff"){
-        return view('staff_tags', ['notif'=>$notifCount,'ticket'=>$ticket, 'sample'=>$ticketss, "user"=>$user_info, "staff"=>$user_info, 'tixCount'=>$tixCount, 'display'=>'block']);
-    }else{
-        return view('client_tags', ['notif'=>$notifCount,'ticket'=>$ticket,'sample'=>$ticketss, "user"=>$user_info, "client"=>$user_info, 'tixCount'=>$tixCount, 'display'=>'block']);
-    }
-   }
 
 
 

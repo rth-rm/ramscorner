@@ -3,7 +3,7 @@
         bottom: 0;
         width: 100%;
         height: 30px;
-        background-color: #e3ad43;
+        background-color: #ffffff;
         color: #fff;
         text-align: center;
     ">

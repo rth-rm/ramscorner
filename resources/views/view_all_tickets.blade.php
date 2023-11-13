@@ -11,9 +11,9 @@
 <body>
     @foreach ($user_loggedin as $userloggedin)
         @include('sweetalert::alert')
-        @if ($userloggedin->u_role == 'Admin')
-            @include('sidebar_admin')
-        @endif
+
+        @include('sidebar_admin')
+
 
 
         <div class="home-contents">

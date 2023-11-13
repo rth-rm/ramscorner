@@ -33,37 +33,14 @@ class DevicesController extends Controller
             return redirect()->route('loginPage');
         }
 
-        if ($user_loggedin->u_role == "Admin") {
-            if ($user_loggedin->u_role != "Admin") {
-                Alert::warning('Warning!!!', 'Unauthorized Access!');
-                if ($user_loggedin->u_role == "Staff") {
-                    return redirect()->route('staffHome');
-                } else {
-                    return redirect()->route('clientHome');
-                }
-            }
-        } else if ($user_loggedin->u_role == "Staff") {
-            if ($user_loggedin->u_role != "Staff") {
-                Alert::warning('Warning!!!', 'Unauthorized Access!');
-                if ($user_loggedin->u_role == "Admin") {
-                    return redirect()->route('adminHome');
-                } else {
-                    return redirect()->route('clientHome');
-                }
-            }
+        if ($user_loggedin->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
         }
 
         $user_info = Reporter::where('u_ID', $user_loggedin->u_ID)->get();
 
         $device_list = Devices::where('d_show', 1)->get();
-
-
-        // foreach ($device_list as $dev) {
-        //     dd($dev->d_code);
-
-        // }
-
-
 
 
 
@@ -88,24 +65,9 @@ class DevicesController extends Controller
             return redirect()->route('loginPage');
         }
 
-        if ($user_ID->u_role == "Admin") {
-            if ($user_ID->u_role != "Admin") {
-                Alert::warning('Warning!!!', 'Unauthorized Access!');
-                if ($user_ID->u_role == "Staff") {
-                    return redirect()->route('staffHome');
-                } else {
-                    return redirect()->route('clientHome');
-                }
-            }
-        } else if ($user_ID->u_role == "Staff") {
-            if ($user_ID->u_role != "Staff") {
-                Alert::warning('Warning!!!', 'Unauthorized Access!');
-                if ($user_ID->u_role == "Admin") {
-                    return redirect()->route('adminHome');
-                } else {
-                    return redirect()->route('clientHome');
-                }
-            }
+        if ($user_ID->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
         }
 
 
@@ -132,6 +94,10 @@ class DevicesController extends Controller
         if ($user_ID == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
+        }
+        if ($user_ID->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
         }
 
 
@@ -195,6 +161,7 @@ class DevicesController extends Controller
     }
 
 
+
     public function viewDeviceDetail($dcode)
     {
 
@@ -204,6 +171,7 @@ class DevicesController extends Controller
         return ['device_detail' => $device_detail, 'repair_history' => $repair_history];
 
     }
+
     public function editDeviceDetail($dcode)
     {
 
@@ -224,6 +192,11 @@ class DevicesController extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
+        }
+
+        if ($user->u_role == "Client") {
+            Alert::warning('Warning!!!', 'Unauthorized Access!');
+            return redirect()->route('clientHome');
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
@@ -254,7 +227,6 @@ class DevicesController extends Controller
         } else {
             return redirect()->route('deices');
         }
-
 
     }
 

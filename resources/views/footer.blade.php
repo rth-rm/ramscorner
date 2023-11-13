@@ -4,7 +4,7 @@
         width: 100%;
         height: 30px;
         background-color: #ffffff;
-        color: #fff;
+        color: #F6F7FB;
         text-align: center;
     ">
     <p style="margin-top: 2px;">

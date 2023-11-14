@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body" style="padding: 5px;   display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
 
-                    <!-- ticket status -->
+
                     <div class="ticket-status me-2" style="border-right: 5px solid #F6F7FB;">
                         <h4 style="color: #817e9d; font-size: 21px; font-weight: 700;" class="pt-4 ps-4 pb-3 fw-bold">
                             Status Tracking</h4>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <!-- ticket details -->
+
                     <div class="ticket-details" style="grid-column: span 3;">
                         <div class="header p-5" style="display: flex; justify-content: space-between; ">
                             <div class="tic-header deets fw-semibold">
@@ -70,12 +70,11 @@
                 <div class="card-footer text-body-secondary p-4"
                     style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
 
-                    {{-- <!-- CHAT BUTTON --> --}}
+
 
                     @include('chat')
 
 
-                    <!-- update dropup -->
                     <div class="dropdown">
                         <button class="btn dropdown-toggle btn-lg me-3" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="background: #6644A8; color: white; border-radius: 25px;">
@@ -109,7 +108,7 @@
 
                         <div class="modal-body">
 
-                            {{-- First --}}
+
 
                             <div class="email-header">
                                 <h3 class="col" style="align-items: center; text-align:Center; "><strong>Update
@@ -135,7 +134,7 @@
                                 </select>
                             </div>
 
-                            {{-- Second --}}
+
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
 
 
@@ -207,7 +206,6 @@
                             </div>
 
 
-                            {{-- Fourth --}}
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
 
                                 <textarea class="form-control mb-2" rows="5" id="message-text" name="message"></textarea>
@@ -237,7 +235,7 @@
     }
 </script>
 
-{{-- impact/urgency/priority script  --}}
+
 <script>
     const urgency = document.getElementById("urgency"),
         impact = document.getElementById("impact"),
@@ -283,7 +281,7 @@
 </script>
 
 
-{{-- assigngroup script --}}
+
 <script>
     $('#assign_group').on('change', function() {
         var selectedGroup = $(this).val();
@@ -312,4 +310,4 @@
 
 
 
-<!-- Modal -->
+

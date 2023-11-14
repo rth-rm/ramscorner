@@ -75,17 +75,20 @@
                     @include('chat')
 
 
-                    <div class="dropdown">
+                    <div class="dropdown" id="updateButton">
                         <button class="btn dropdown-toggle btn-lg me-3" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="background: #6644A8; color: white; border-radius: 25px;">
                             Update
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" onclick="statusUpdate('PENDING')">Resource Pending</a></li>
-                            <li><a class="dropdown-item" onclick="statusUpdate('ONGOING')">Ongoing</a></li>
-                            <li><a class="dropdown-item" onclick="statusUpdate('RESOLVED')">Resolve</a></li>
-                            <li><a class="dropdown-item" onclick="statusUpdate('CLOSE')">Close</a></li>
-                            <li><a class="dropdown-item" onclick="statusUpdate('REJECT')">Reject</a></li>
+                            <li><a class="dropdown-item" onclick="statusUpdate('PENDING')" id="pending">Resource
+                                    Pending</a></li>
+                            <li><a class="dropdown-item" onclick="statusUpdate('ONGOING')" id="ongoing">Ongoing</a>
+                            </li>
+                            <li><a class="dropdown-item" onclick="statusUpdate('RESOLVED')" id="resolved">Resolve</a>
+                            </li>
+                            <li><a class="dropdown-item" onclick="statusUpdate('REJECTED')" id="rejected">Reject</a>
+                            </li>
                         </ul>
                     </div>
 
@@ -108,28 +111,20 @@
 
                         <div class="modal-body">
 
+                            <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
 
-
-                            <div class="email-header">
-                                <h3 class="col" style="align-items: center; text-align:Center; "><strong>Update
-                                        Ticket</strong>
-                                </h3>
+                                <input type="text" value="{{ $tickets->t_status }}" class="form-control mb-2"
+                                    id="status" name="status" hidden>
                             </div>
-
-
-
-
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
 
                                 <select class="form-select mb-2" aria-label="Default select example" name="category"
                                     title="Select appropriate category for the ticket for easier identifying the solution for the problem and assigning of ticket.">
-                                    @if ($tickets->t_category == 'INFRASTRUCTURE')
-                                        <option value="INFRASTRUCTURE" selected>Infrastructure</option>
-                                        <option value="SOFTWARE">Software</option>
-                                    @else
-                                        <option value="INFRASTRUCTURE">Infrastructure</option>
-                                        <option value="SOFTWARE" selected>Software</option>
-                                    @endif
+                                    <option value="INFRASTRUCTURE" @if (old('INFRASTRUCTURE', $tickets->t_urgency) == 'INFRASTRUCTURE') selected @endif>
+                                        Infrastructure</option>
+                                    <option value="SOFTWARE" @if (old('SOFTWARE', $tickets->t_urgency) == 'SOFTWARE') selected @endif>
+                                        Software</option>
+
 
                                 </select>
                             </div>
@@ -220,22 +215,106 @@
                         </div>
             </form>
         </div>
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+
+</div>
+
+{{-- resolution modal --}}
+
+
+<div class="modal fade" id="resolveUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <form method="POST" enctype="multipart/form-data" action="{{ url('updateTicket/' . $tickets->t_ID) }}">
+
+        @csrf
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Resolution Steps</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+                        <input type="text" class="form-control mb-2" id="rdcode" name="rdcode"
+                            value={{ $tickets->dev_code }}>
+                    </div>
+                    <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+                        <input type="text" class="form-control mb-2" id="rtitle" name="rtitle">
+                    </div>
+
+                    <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+
+                        <input type="text" class="form-control mb-2" id="rsteps" name="rsteps">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    @if ($tickets->t_category == 'INFRASTRUCTURE')
+                        <button type="submit" class="btn btn-primary">Send Resolution and Save to Repair
+                            History</button>
+                    @else
+                        <button type="submit" class="btn btn-primary">Send Resolution </button>
+                    @endif
+                </div>
+    </form>
 </div>
 <script>
     function statusUpdate(item) {
-        {{-- $('#statusUpdate').modal('show'); --}}
+
         var modal = new bootstrap.Modal(document.getElementById('statusUpdate'));
-        {{-- var modalText = document.getElementById('modalText');
-        modalText.innerText = 'You clicked on: ' + item; --}}
-        modal.show();
+        var modal_resolve = new bootstrap.Modal(document.getElementById('resolveUpdate'));
+        var modalText = document.getElementsByName('status')[0];
+
+        modalText.setAttribute('value', item);
+
+        if (item == 'RESOLVED') {
+            modal_resolve.show();
+
+        } else {
+            modal.show();
+        }
+
 
 
 
     }
 </script>
 
+<script>
+    window.onload = function() {
 
+        var updateButton = document.getElementById("updateButton");
+
+        if (updateButton && (document.getElementById("status").value == "RESOLVED" ||
+                document.getElementById("status").value == "CLOSED" ||
+                document.getElementById("status").value == "CANCELLED" ||
+                document.getElementById("status").value == "REJECTED")) {
+            updateButton.style.display = 'none';
+        }
+
+
+
+    };
+</script>
+
+{{-- impact/urgency/priority script  --}}
 <script>
     const urgency = document.getElementById("urgency"),
         impact = document.getElementById("impact"),
@@ -281,7 +360,7 @@
 </script>
 
 
-
+{{-- assigngroup script --}}
 <script>
     $('#assign_group').on('change', function() {
         var selectedGroup = $(this).val();
@@ -307,7 +386,3 @@
 
 
 </div>
-
-
-
-

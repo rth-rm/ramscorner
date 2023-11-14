@@ -419,7 +419,7 @@ class TicketController extends Controller
     }
 
     //Updating Ticket
-    public function updateTicket(Request $request, $tID)
+ public function updateTicket(Request $request, $tID)
     {
         $user = Auth::user();
         if ($user == null) {
@@ -432,7 +432,7 @@ class TicketController extends Controller
 
 
 
-        if ($request->status == null) {
+        if ($ticket->t_status == $request->status ) {
             Alert::warning('Status Change required!');
             return back();
         }
@@ -465,6 +465,7 @@ class TicketController extends Controller
         $ticket->t_category = $request->category;
         $ticket->t_urgency = $request->urgency;
         $ticket->t_impact = $request->impact;
+        $ticket->t_priority = $request->priority;
         $ticket->t_due = $dues;
         $ticket->t_assignedTo = $request->assign;
         $ticket->update();
@@ -574,9 +575,7 @@ class TicketController extends Controller
 
         Alert::success("Success!", "Ticket details has been updated");
 
-        if ($user->u_role == "Admin") {
-            return back();
-        } elseif ($user->u_role == "Staff") {
+        if ($user->u_role == "Admin" || $user->u_role == "Staff") {
             return back();
         } else {
             Alert::warning('Unathorized access!');
@@ -584,7 +583,6 @@ class TicketController extends Controller
         }
 
     }
-
 
     //Cancel Ticket
 

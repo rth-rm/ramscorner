@@ -3,7 +3,7 @@
     <div>
         <form method="POST" enctype="multipart/form-data" action="{{ url('generate') }}">
             @csrf
-            <div class="row p-4" style="background-color: #f7f7f7; border-bottom: 1px solid #ccc;">
+            <div class="row p-4 ms-5" style="background-color: #f7f7f7; border-bottom: 1px solid #ccc;">
                 <div class="col">
 
                     {{-- date range selection --}}

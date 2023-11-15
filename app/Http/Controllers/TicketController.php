@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Models\Devices;
 use App\Models\RepairHistory;
 use App\Notifications\NewTicketNotification;
 
@@ -30,6 +31,23 @@ class TicketController extends Controller
     //         $this->notify(new NewTicketNotification($this));
     //     }
 //Ticket Creation
+
+    public function createTicketPage(){
+
+        $user_ID = Auth::user();
+
+        if ($user_ID == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
+
+        $allUser = Reporter::get()->all();
+
+        return view('create_ticket', ['allUser' => $allUser]);
+    }
+
+
+
     public function createTicket(Request $request)
     {
 
@@ -42,6 +60,7 @@ class TicketController extends Controller
         }
 
 
+
         if ($request->file('profile')) {
             $file = $request->file('profile');
             #filename -> isesave sa database
@@ -52,52 +71,35 @@ class TicketController extends Controller
         }
 
 
-        // if($request->urgency == 1 && $request->impact ==1){
-        //     $priority = 1;
+        $device = Devices::where('d_code', $request->devcode)->first();
 
-        // }else if($request->urgency == 1 && $request->impact ==2){
-        //     $priority = 2;
+        if ($device) {
+            Ticket::create([
+                "u_ID" => $user_ID->u_ID,
+                "t_category" => strtoupper($request->category),
+                "dev_code" => $request->devcode,
+                "t_cc" => $request->cc,
+                "t_title" => $request->title,
+                "t_description" => $request->content,
+                "t_image" => $filename
+            ]);
 
-        // }else if($request->urgency == 1 && $request->impact ==3){
-        //     $priority = 2;
-
-        // }else  if($request->urgency == 2 && $request->impact ==1){
-        //     $priority = 1;
-
-        // }else if($request->urgency == 2 && $request->impact ==2){
-        //     $priority = 2;
-
-        // }else if($request->urgency == 2 && $request->impact ==3){
-        //     $priority = 3;
-
-        // }else if($request->urgency == 3 && $request->impact ==1){
-        //     $priority = 2;
-
-        // }else if($request->urgency == 3 && $request->impact ==2){
-        //     $priority = 2;
-
-        // }else if($request->urgency == 3 && $request->impact ==3){
-        //     $priority = 3;
-
-        // }else{
-        //     $priority = 3;
-
-        // }
+        } else {
+            Ticket::create([
+                "u_ID" => $user_ID->u_ID,
+                "t_category" => strtoupper($request->category),
+                "dev_code" => "NONE",
+                "t_cc" => $request->cc,
+                "t_title" => $request->title,
+                "t_description" => $request->content,
+                "t_image" => $filename
+            ]);
+        }
 
 
 
 
-        Ticket::create([
-            "u_ID" => $user_ID->u_ID,
-            // "t_urgency"=>$request->urgency,
-            // "t_impact"=>$request->impact,
-            // "t_priority"=>$priority,
-            "t_category" => strtoupper($request->category),
-            "t_cc" => $request->cc,
-            "t_title" => $request->title,
-            "t_description" => $request->content,
-            "t_image" => $filename
-        ]);
+
 
         $get_uID = $user_ID->u_ID;
         $get_tID = Ticket::where("u_ID", $get_uID)->get()->last()->t_ID;
@@ -205,10 +207,8 @@ class TicketController extends Controller
 
 
         Alert::success("Success!", "Your ticket was sent successfully. Please wait for the notification of status updates of your ticket.");
-        if ($user_ID->u_role == "Admin") {
+        if ($user_ID->u_role == "Admin" || $user_ID->u_role == "Staff") {
             return redirect()->route('adminHome');
-        } elseif ($user_ID->u_role == "Staff") {
-            return redirect()->route('staffHome');
         } else {
             return redirect()->route('clientHome');
         }

@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/clientOpenTicket/{t_id}', [ClientController::class, 'clientOpenTicket'])->name('clientOpenTicket');
     Route::get('/viewHelp', [ClientController::class, 'viewHelp'])->name('viewHelp');
 
+    Route::get('/createTicketPage', [TicketController::class, 'createTicketPage'])->name ('createTicketPage');
+
 
     //Admin
     Route::get('/adminHome', [AdminController::class, 'adminHome'])->name('adminHome');

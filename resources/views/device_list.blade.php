@@ -20,7 +20,8 @@
             <!-- <div class="dashboard-boxes"></div> -->
             <div class="title mb-5">
                 <h1>Device List</h1>
-                <i class="bi bi-arrows-expand"></i>
+                <!-- EDIT sort button -->
+                <i id="sortButton" type="button" class="bi bi-arrows-expand ms-5"></i>
             </div>
 
             <div class="dash-contents">
@@ -178,7 +179,18 @@
 
 
 
+                    <!-- EDIT sort script -->
+                    <script>
+                        $(document).ready(function() {
+                            var table = $('#example').DataTable();
 
+                            // Add event listener for sorting button
+                            $('#sortButton').on('click', function() {
+                                // Toggle between ascending and descending order on each click
+                                table.order(table.order()[0][0], table.order()[0][1] === 'asc' ? 'desc' : 'asc').draw();
+                            });
+                        });
+                    </script>
 
                     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
                     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

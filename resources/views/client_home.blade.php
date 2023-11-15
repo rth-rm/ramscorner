@@ -2,16 +2,6 @@
 @foreach ($client as $userloggedin)
     <title>{{ $userloggedin->u_name }}'s Dashboard</title>
     <link rel="stylesheet" href="{{ asset('assets/css/client_dashboard.css') }}">
-    <!-- bootstrap link -->
-
-    <!-- date range picker -->
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> --}}
-
-    <!-- chart js -->
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script> --}}
     </head>
 
 
@@ -24,7 +14,7 @@
             <div class="dashboard-boxes"></div>
             <div class="title mb-5">
                 <h1>Hello, {{ $userloggedin->u_name }}</h1>
-                <a href=""><button type="button" class="btn btn-lg"
+                <a href="{{ url('createTicketPage') }}"><button type="button" class="btn btn-lg"
                         style="border-radius: 25px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background-color: #6644A8">Create
                         Ticket</button>
                 </a>

@@ -40,34 +40,56 @@
         </div>
         <div class="">
             <div class="grid-stats">
-                <div class="items" style=" border-top:50px solid #75D481">69
-                    <h6>Opened TIckets</h6>
+                <div class="items">
+                    <div style="border-top: 50px solid #75D481;  border-radius: 25px;">
+                    </div>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <h6>Opened Tickets</h6>
                 </div>
-                <div class="items" style=" border-top:50px solid #6257E3">420
-                    <h6>Opened TIckets</h6>
+                <div class="items">
+                    <div style="border-top: 50px solid #6257E3;  border-radius: 25px;">
+                    </div>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <h6>Total Tickets</h6>
                 </div>
-                <div class="items" style=" border-top:50px solid #EEF8EB">69
-                    <h6>Opened TIckets</h6>
+                <div class="items">
+                    <div style="border-top: 50px solid #EEF8EB;  border-radius: 25px;">
+                    </div>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <h6>Opened Tickets</h6>
                 </div>
-                <div class="items" style=" border-top:50px solid #8F5D46">12
-                    <h6>Opened TIckets</h6>
+                <div class="items">
+                    <div style="border-top: 50px solid #8F5D46;  border-radius: 25px;">
+                    </div>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <h6>Active Clients</h6>
                 </div>
-                <div class="items" style=" border-top:50px solid #05E0E9">12
-                    <h6>Opened TIckets</h6>
+                <div class="items">
+                    <div style="border-top: 50px solid #05E0E9;  border-radius: 25px;">
+                    </div>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <h6>Opened Tickets</h6>
                 </div>
-                <div class="items" style=" border-top:50px solid #E0DFD8">54
-                    <h6>Opened TIckets</h6>
+                <div class="items">
+                    <div style="border-top: 50px solid #E0DFD8;  border-radius: 25px;">
+                    </div>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <h6>Opened Tickets</h6>
                 </div>
+
             </div>
-            <div class="KB" type="button">
-                <div>
-                    <p>Create KB Article</p>
-                    <p>Let the users know about the most common issues and their solutions!</p>
+            <a href="{{ url('admin_KB') }}" style="text-decoration: none;">
+                <div class="KB" type="button">
+                    <div>
+                        <p>Create KB Article</p>
+                        <p>Let the users know about the most common issues and their solutions!</p>
+                    </div>
+                    <div style="font-size: 60px; margin-right: 10%;">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
                 </div>
-                <div style="font-size: 60px; margin-right: 10%;">
-                    <i class="bi bi-lightbulb"></i>
-                </div>
-            </div>
+            </a>
+
         </div>
         {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">

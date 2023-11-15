@@ -38,7 +38,8 @@
                         {{-- edited --}}
                         <div class="head pt-4 ps-3 pe-3"style="color: #817e9d; font-size: 21px; font-weight: 700;">
                             Ticket Filter
-                            <i class="bi bi-arrow-repeat"></i>
+                            <!-- EDIT reset button -->
+                            <i type="button" id="resetButton" class="bi bi-arrow-repeat"></i>
                         </div>
                         <hr>
                         {{-- EDITED --}}
@@ -177,6 +178,22 @@
         </div>
 
         </section>
+        <!-- reset button script -->
+        <script>
+            document.getElementById('resetButton').addEventListener('click', function() {
+                // Reset the values of all select elements
+                resetSelect(document.getElementById('recencySelect'));
+                resetSelect(document.getElementById('categorySelect'));
+                resetSelect(document.getElementById('statusSelect'));
+                resetSelect(document.getElementById('agentSelect'));
+                resetSelect(document.getElementById('levelSelect'));
+            });
+
+            function resetSelect(selectElement) {
+                // Set the first option as selected
+                selectElement.selectedIndex = 0;
+            }
+        </script>
         <script>
             function openDiv(divId) {
 

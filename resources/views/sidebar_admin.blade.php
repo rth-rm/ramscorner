@@ -57,10 +57,11 @@
 
             <div class="dropdown1">
                 <i class="bi bi-bell" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                    data-bs-auto-close="outside"><span class="badge">{{ $notifCount + $notifChatCount }}</span></i>
+                    data-bs-auto-close="outside"><span class="badge"
+                        style = "margin-top: -30%">{{ $notifCount + $notifChatCount }}</span></i>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><span class="dropdown-item-text" style="font-weight: 700; margin-top: -30%s">Notifications<span
-                                class="badge">{{ $notifCount + $notifChatCount }}</span></li>
+                    <li><span class="dropdown-item-text" style="font-weight: 700; ">Notifications<span
+                                class="badge"></span></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

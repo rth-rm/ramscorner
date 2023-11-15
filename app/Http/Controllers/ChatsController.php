@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TicketMessages;
 use App\Models\Ticket;
+use App\Models\Notification;
 use App\Models\Reporter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -40,8 +41,12 @@ class ChatsController extends Controller
         ]);
         $message->save();
 
+        Notification::create([
+            "user_id"=>$uid,
+            "ticket_id" => $tid,
+            "n_message" => 'New message in Ticket#'.$tid
 
-        // Broadcast the message for real-time chat (if using WebSocket or Laravel Echo)
+        ]);
 
         return redirect()->back();
     }

@@ -2,7 +2,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <center class="profile">
-            <img src={{ asset('images/APCLOGO11.png') }} alt="">
+            <img src={{ asset('images/APCLogo.png') }} alt="">
             <!-- <p>Nacor Industries</p> -->
         </center>
     </div>

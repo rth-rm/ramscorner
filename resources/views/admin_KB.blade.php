@@ -19,12 +19,13 @@
             <div class="dash-contents">
                 <div class="dash-container">
                     <div class="kb-categories me-3">
-                        <div class="kbtitle pt-4">
-                            <h3>KB Categories</h3>
+                        <div class="kbtitle pt-5; pe-3">
+                            <h3 style="margin-top: 25px; margin-bottom: 25px;">KB Categories</h3>
+
                         </div>
                         <hr>
                         <div class="kb-btns">
-                            <div class="d-grid gap-4 col-10 mx-auto m-5">
+                            <div class="d-grid gap-1 col-10 mx-auto m-1">
                                 <button class="btn btn-lg" type="button">All</button>
                                 <button class="btn btn-lg" type="button">Approved</button>
                                 <button class="btn btn-lg" type="button">Rejected</button>
@@ -77,15 +78,16 @@
                                             $('#example').DataTable();
                                         });
                                     </script>
+                                    <div class="card-footer text-body-secondary"
+                                        style="display: flex; justify-content: end; background-color: #fff">
+                                        <a href = "{{ url('add_kb') }}">
+                                            <button type="button" class="btn btn-primary btn-lg"
+                                                style="border-radius: 25px; background-color:#6644a8;">Create KB
+                                                Article</button>
+                                        </a>
+                                    </div>
                                 </div>
 
-                            </div>
-                            <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
-                                <a href = "{{ url('add_kb') }}">
-                                    <button type="button" class="btn btn-primary btn-lg me-5 m-3 "
-                                        style="border-radius: 25px;">Create KB
-                                        Article</button>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -116,7 +118,7 @@
 
         <!-- kb category btn color change script -->
     @endforeach
-    @include('footer')
+    {{-- @include('footer') --}}
 
 
 

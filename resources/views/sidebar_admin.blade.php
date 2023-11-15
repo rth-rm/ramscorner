@@ -59,7 +59,8 @@
                 <i class="bi bi-bell" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                     data-bs-auto-close="outside"></i>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><span class="dropdown-item-text" style="font-weight: 700;">Notifications</span></li>
+                    <li><span class="dropdown-item-text" style="font-weight: 700;">Notifications<span
+                                class="badge">{{ $notifCount + $notifChaatCount }}</span></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -75,7 +76,7 @@
                         </button>
                         <button class="btn" type="button"
                             style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats
-                            @if ($notifCount > 0)
+                            @if ($notifChatCount > 0)
                                 <span class="badge">{{ $notifChatCount }}</span>
                             @endif
                         </button>

@@ -68,7 +68,7 @@
                         style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;">Ticket
                         Updates
                         @if ($notifCount > 0)
-                            <span class="badge">{{ $notifChatCount }}</span>
+                            <span class="badge">{{ $notifCount }}</span>
                         @endif
                     </button>
                     <button class="btn" type="button"

@@ -39,7 +39,14 @@ class AdminController extends Controller
         }
 
 
+        $thirtyMinutesAgo = Carbon::now()->subMinutes(30);
+            $newpastthirtymins = Ticket::where('t_status', "NEW")
+                        ->where('t_datetime', '>', $thirtyMinutesAgo)
+                        ->get()->count();
+            if($newpastthirtymins != 0){
+              Alert::toast($newpastthirtymins.' tickets are still unopened. Check them out!');
 
+            }
 
         if ($admin->u_role == "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
@@ -433,7 +440,7 @@ class AdminController extends Controller
                 'chats' => $chats,
                 'chatss' => $chatss,
                 'last' => $last,
-                // 'notif' => $notifCount, 
+                // 'notif' => $notifCount,
                 'tickets' => $tickets,
                 "admin" => $user_info,
                 'client' => $client,

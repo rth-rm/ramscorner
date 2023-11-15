@@ -212,12 +212,13 @@ class AdminController extends Controller
 
         $ticketsssss = $ticketssss->where('breaches', true)->count();
 
+        list($statusCounts, $softwareCounts, $hardwareCounts) = $this->dashboard();
+
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
                                     ->where('user_id', $admin->u_ID)
                                     ->where('read_at', null)->get()->count();
 
-        list($statusCounts, $softwareCounts, $hardwareCounts) = $this->dashboard();
 
         return view('admin_home', [
             "notifCount"=>$notifCount,
@@ -372,8 +373,19 @@ class AdminController extends Controller
 
         $ticketsssss = $ticketssss->where('breaches', true)->count();
 
+         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+                                    ->where('user_id', $admin->u_ID)
+                                    ->where('read_at', null)->get()->count();
+
+
+
+
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         return view('view_all_tickets', [
+
+            "notifCount"=>$notifCount,
+            "notifChatCount"=>$notifChatCount,
             "notif" => $notifCount,
             "tickets" => $alltickets,
             "users" => $allUsers,
@@ -435,17 +447,24 @@ class AdminController extends Controller
 
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
 
+        $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+                                    ->where('user_id', $admin->u_ID)
+                                    ->where('read_at', null)->get()->count();
+
 
         return view(
             'admin_open_ticket',
             [
+
+            "notifCount"=>$notifCount,
+            "notifChatCount"=>$notifChatCount,
                 'device' => $device_detail,
                 'repair' => $repair_history,
                 'ticket_id' => $t_id,
                 'chats' => $chats,
                 'chatss' => $chatss,
                 'last' => $last,
-                // 'notif' => $notifCount,
                 'tickets' => $tickets,
                 "admin" => $user_info,
                 'client' => $client,

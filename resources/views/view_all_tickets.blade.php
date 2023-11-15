@@ -19,8 +19,11 @@
     <div class="home-contents">
         <div class="title mb-5">
             <h1>Ticket Center</h1>
-            <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr">
-                <select class="form-select" aria-label="Default select example" style="border-radius: 25px; border: none">
+            <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr .5fr">
+                <a href="">
+                    <button type="button" class="btn btn-lg me-5 m-3 mt-1" style="border-radius: 25px; background-color:#6644A8; color: #ffffff;">Create Ticket</button>
+                </a>
+                <select class="form-select" aria-label="Default select example" style="border-radius: 25px; border: 2px solid #6644A8; color:#6644A8; font-weight: 700; height: 80%; width: 200px">
                     <option selected disabled>View My Ticket</option>
                     <option value="1">Recieved Tickets</option>
                     <option value="2">Sent Tickets</option>

@@ -26,8 +26,8 @@
                     <option value="2">Sent Tickets</option>
                     <option value="3">Tagged Tickets</option>
                 </select>
-
-                <i class="bi bi-arrows-expand ms-5"></i>
+                <!-- EDIT  sort button -->
+                <i id="sortButton" type="button" class="bi bi-arrows-expand ms-5"></i>
             </div>
         </div>
 
@@ -175,7 +175,13 @@
                         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
                         <script>
                             $(document).ready(function() {
-                                $('#example').DataTable();
+                                var table = $('#example').DataTable();
+
+                                // Add event listener for sorting button
+                                $('#sortButton').on('click', function() {
+                                    // Toggle between ascending and descending order on each click
+                                    table.order(table.order()[0][0], table.order()[0][1] === 'asc' ? 'desc' : 'asc').draw();
+                                });
                             });
                         </script>
                     </div>

@@ -67,7 +67,12 @@
                       <button class="btn" type="button" style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket Chats</button> -->
                     <div class="d-grid gap-2 d-md-block m-3">
                         <button class="btn" type="button"
-                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">Ticket Updates</button>
+                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">
+                            Ticket Updates
+                            @if ($notifCount > 0)
+                                <span class="badge">{{ $notifCount }}</span>
+                            @endif
+                        </button>
                         <button class="btn" type="button"
                             style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats</button>
                         <style>
@@ -102,3 +107,17 @@
             </div>
         </div>
     </nav>
+    <style>
+        .badge {
+            background-color: red;
+            /* Set your preferred background color */
+            color: white;
+            /* Set your preferred text color */
+            padding: 5px 10px;
+            /* Adjust padding as needed */
+            border-radius: 50%;
+            /* Make it circular */
+            font-size: 12px;
+            /* Adjust font size as needed */
+        }
+    </style>

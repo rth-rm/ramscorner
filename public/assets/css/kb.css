@@ -180,7 +180,7 @@ body {
     background-color: #ffffff;
 }
 .dash-contents .dash-container .kb-categories .kbtitle h3 {
-    font-size: 30px;
+    font-size: 21px;
     font-weight: 700;
     color: #817e9d;
 }
@@ -188,7 +188,7 @@ body {
 .dash-contents .dash-container .kb-categories .kb-btns button {
     border-radius: 25px;
     background-color: #f6f7fb;
-    padding: 15px;
+    padding: 10px;
     margin: 15px;
 }
 .dash-contents .dash-container .kb-categories .kb-btns button:focus {

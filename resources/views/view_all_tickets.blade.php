@@ -1,5 +1,5 @@
 @include('header')
-<title>Ticket Center | Ram's Corner</title>
+<title>Ticket Center | RAMS Corner</title>
 <link rel="stylesheet" href="{{ asset('assets/css/ticketcenter.css') }}" type = "text/css">
 <!-- data tables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -19,8 +19,9 @@
         <div class="home-contents">
             <div class="title mb-5">
                 <h1>Ticket Center</h1>
-                <div style="display: grid; grid-template-columns: 1fr 1fr">
-                    <select class="form-select" aria-label="Default select example" style="border-radius: 25px;">
+                <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr">
+                    <select class="form-select" aria-label="Default select example"
+                        style="border-radius: 25px; border: none">
                         <option selected disabled>View My Ticket</option>
                         <option value="1">Recieved Tickets</option>
                         <option value="2">Sent Tickets</option>
@@ -34,21 +35,24 @@
             <div class="dash-contents">
                 <div class="dash-container">
                     <div class="tic-filters me-3">
-                        <div class="head pt-3 ps-5 pe-5">
+                        {{-- edited --}}
+                        <div class="head pt-4 ps-3 pe-3"style="color: #817e9d; font-size: 21px; font-weight: 700;">
                             Ticket Filter
                             <i class="bi bi-arrow-repeat"></i>
                         </div>
                         <hr>
-                        <div class="container pt-3 ps-4 dropdiv mt-5">
-                            <!-- regency -->
-                            <div class="container pb-5 mb-3">
+                        {{-- EDITED --}}
+                        <div class="container pt-2 ps-2 dropdiv mt-1">
+                            <!-- recency -->
+                            <div class="container pb-1 mb-4">
                                 <div class="row">
                                     <div class="col titlename">
-                                        Regency
+                                        Recency
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected disabled>Open this select menu</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none; color: eeeff1">
+                                            <option selected disabled>Select</option>
                                             <option value="1">Daily</option>
                                             <option value="2">Weekly</option>
                                             <option value="3">Monthly</option>
@@ -57,14 +61,15 @@
                                 </div>
                             </div>
                             <!-- Catgeory -->
-                            <div class="container pb-5 mb-3">
+                            <div class="container pb-1 mb-4">
                                 <div class="row">
                                     <div class="col titlename">
                                         Category
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected disabled>Open this select menu</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none; color: eeeff1">
+                                            <option selected disabled>Select</option>
                                             <option value="1">Software</option>
                                             <option value="2">Infrastructure</option>
                                         </select>
@@ -72,30 +77,32 @@
                                 </div>
                             </div>
                             <!-- Status -->
-                            <div class="container pb-5 mb-3">
+                            <div class="container pb-1 mb-4">
                                 <div class="row">
                                     <div class="col titlename">
                                         Status
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected disabled>Open this select menu</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none; color: eeeff1">
+                                            <option selected disabled>Select</option>
                                             <option value="1">Pending</option>
                                             <option value="2">New</option>
-                                            <option value="3">CLosed</option>
+                                            <option value="3">Closed</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <!-- Agent -->
-                            <div class="container pb-5 mb-3">
+                            <div class="container pb-1 mb-4">
                                 <div class="row">
                                     <div class="col titlename">
                                         Agent
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected disabled>Open this select menu</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none; color: eeeff1">
+                                            <option selected disabled>Select</option>
                                             <option value="1">Vincent Nacor</option>
                                             <option value="2">Ruth Morallos</option>
                                             <option value="3">Patrick Cortez</option>
@@ -110,8 +117,9 @@
                                         Level
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected disabled>Open this select menu</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none; color: eeeff1">
+                                            <option selected disabled>Select</option>
                                             <option value="1">I</option>
                                             <option value="2">II</option>
                                             <option value="3">III</option>
@@ -160,9 +168,9 @@
                                 });
                             </script>
                         </div>
-                        <footer>
+                        {{-- <footer>
                             <hr>
-                        </footer>
+                        </footer> --}}
                     </div>
                 </div>
             </div>
@@ -198,7 +206,7 @@
     @endforeach
     @include('footer')
 
-    {{-- 
+    {{--
     <div>
         <!-- 1st -->
 

@@ -13,8 +13,6 @@
         @include('sidebar_admin')
 
 
-
-
         <!-- header/contents -->
 
 
@@ -27,57 +25,69 @@
 
             <div class="dash-contents">
                 <div class="dash-container">
-                    <div class="device-filters me-3">
-                        <div class="head pt-3 ps-5 pe-5">
+                    <div class="device-filters me-2" style="background-color: #fff;">
+                        {{-- <div class="head pt-3 ps-5 pe-5"> --}}
+                        <div class="head pt-4 ps-3 pe-3"style="color: #817e9d; font-size: 21px; font-weight: 700;">
                             Device Filters
                             <i class="bi bi-arrow-repeat"></i>
                         </div>
                         <hr>
-                        <div class="cont pt-3 dropdowns">
+                        <div class="cont pt-2 dropdiv mt-1 dropdowns">
                             <!-- Device Type -->
-                            <div class="container pb-5 mb-3 droptstyle">
+                            <div class="container pb-1 mb-4 droptstyle">
                                 <div class="row">
                                     <div class="col titlename">
                                         Device Type
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none">
+                                            <option selected>Select</option>
+                                            <option value="1">All</option>
+                                            <option value="2">Infrastructure</option>
+                                            <option value="3">Software</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <!-- Assignement -->
-                            <div class="container pb-5 mb-3 droptstyle">
+                            <div class="container pb-1 mb-4 droptstyle">
                                 <div class="row">
                                     <div class="col titlename">
                                         Assignment
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none">
+                                            <option selected>Select</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <!-- Recency -->
-                            <div class="container pb-5 mb-3 droptstyle">
+                            <div class="container pb-1 mb-4 droptstyle" style="border: none">
                                 <div class="row">
                                     <div class="col titlename">
                                         Recency
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="form-select" aria-label="Default select example"
+                                            style="border: none">
+                                            <option selected>Select</option>
+                                            <option value="1">Latest</option>
+                                            <option value="2">Oldest</option>
+                                            <option value="3">Past Due</option>
                                         </select>
                                     </div>
                                 </div>
@@ -124,11 +134,19 @@
                                                 </span>
 
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
+                            <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
+                                <a href = "{{ url('addDevicePage') }}">
+                                    <button type="button" class="btn btn-primary btn-lg me-2 m-3 "
+                                        style="border-radius: 25px;">Add
+                                        a
+                                        Device</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -149,7 +167,8 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                         onclick = "closeModal()">Close</button>
-                                    <button type="submit" class="btn btn-primary" id = "confirmButton">Confirm</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        id = "confirmButton">Confirm</button>
                                 </div>
                             </div>
                         </div>
@@ -168,13 +187,6 @@
                             $('#example').DataTable();
                         });
                     </script>
-                </div>
-                <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
-                    <a href = "{{ url('addDevicePage') }}">
-                        <button type="button" class="btn btn-primary btn-lg me-5 m-3 " style="border-radius: 25px;">Add
-                            a
-                            Device</button>
-                    </a>
                 </div>
 
             </div>
@@ -233,4 +245,4 @@
             }
         </script>
     @endforeach
-    @include('footer')
+    {{-- @include('footer') --}}

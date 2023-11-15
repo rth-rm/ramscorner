@@ -148,7 +148,7 @@
                                     </option>
                                 </select>
                             </div>
-
+                            <h5 style="padding-left:10%;padding-right:10%">Priority</h5>
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
                                 <input type="text" readonly value="{{ $tickets->t_priority }}" class="form-control mb-2" id="priority" name="priority">
                             </div>
@@ -238,7 +238,7 @@
                     <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
                         <input type="text" class="form-control mb-2" id="rdcode" name="rdcode" value="{{ $tickets->dev_code }}" hidden>
                     </div>
-                    
+
                     <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
                         <input type="text" class="form-control mb-2" name="rsave" hidden>
                     </div>

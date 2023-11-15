@@ -9,6 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\TicketUpdatedNotification;
 use App\Models\Notification;
 use PHPMailer\PHPMailer\PHPMailer;
+use App\Models\RepairHistory;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -765,7 +766,56 @@ class TicketController extends Controller
 
 
 
+public function addRepairHistory(Request $request, $tID, $problem){
+        $users = Auth::user();
+        if ($users == null) {
+            Alert::warning('Warning!!!', 'You are not authorized!');
+            return redirect()->route('loginPage');
+        }
 
+        $user_info = Reporter::where('u_ID', $users->u_ID)->get();
+
+
+        if($request->rsave == "no"){
+        $ticket = Ticket::find($tID);
+        $ticket->t_status = 'RESOLVED';
+        $ticket->t_resolution = $request->rsteps;
+        $ticket->save();
+
+        StatusHistory::create([
+            "t_ID" => $tID,
+            "sh_Status" => 'RESOLVED',
+            "sh_AssignedTo" => $ticket->t_assignedTo,
+            "sh_doneBy" => $users->u_name
+
+        ]);
+
+
+        }else{
+            $ticket = Ticket::find($tID);
+        $ticket->t_status = 'RESOLVED';
+        $ticket->t_resolution = $request->rsteps;
+        $ticket->save();
+
+        StatusHistory::create([
+            "t_ID" => $tID,
+            "sh_Status" => 'RESOLVED',
+            "sh_AssignedTo" => $ticket->t_assignedTo,
+            "sh_doneBy" => $users->u_name
+
+        ]);
+        RepairHistory::create([
+                "dcode" => $request->rdcode,
+                "rh_problem" => $problem,
+                "rh_solution" => $request->rtitle,
+                "d_submittedby" => $users->u_name,
+        ]);
+        }
+
+        Alert::success("Resolved", "Ticket # {$tID} has been resolved!");
+        return back();
+
+    }
 
 
 }

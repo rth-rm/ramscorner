@@ -43,11 +43,11 @@
 
                                 @foreach ($repair as $repairs)
                                     <li style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;">
-                                        <h5 style="font-weight: 600; color: #6644a8">
+                                        <p style="font-weight: 600; color: #6644a8">
                                             {{ $repairs->created_at }}
-                                        </h5>
-                                        <h5>Problem: {{ $repairs->rh_problem }}</h5>
-                                        <h5>Solution: {{ $repairs->rh_solution }}</h5>
+                                        </p>
+                                        <p>Problem: {{ $repairs->rh_problem }}</p>
+                                        <p>Solution: {{ $repairs->rh_solution }}</p>
                                     </li>
                                 @endforeach
                             </ul>

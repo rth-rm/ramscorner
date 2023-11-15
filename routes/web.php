@@ -113,6 +113,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/editDevices', [DevicesController::class, 'editDevices'])->name('editDevices');
     Route::get('/archiveDevice/{dcode}', [DevicesController::class, 'archiveDevice'])->name('archiveDevice');
 
+    //RepairHistory
+    Route::post('/addRepairHistory/{tID}/{problem}', [TicketController::class, 'addRepairHistory'])->name('addRepairHistory');
 
 
     //chatbox

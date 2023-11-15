@@ -38,11 +38,12 @@
                                 <h5>Assigned to: {{ $tickets->t_assignedTo }}</h5>
                             </div>
                             <div class="tic-id">
-                                @if ($tickets->t_category == 'INFRASTRUCTURE')
-                                    <h6>Hardware ID: ITRO-P12345</h6>
+                                @if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code != 'NONE')
+                                    <h6>Hardware ID: {{ $tickets->dev_code }}</h6>
                                     <h6><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View
                                             Repair History</a></h6>
                                     @include('view_device_details')
+                                @else
                                 @endif
 
                             </div>
@@ -239,7 +240,8 @@
 
 <div class="modal fade" id="resolveUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <form method="POST" enctype="multipart/form-data" action="{{ url('updateTicket/' . $tickets->t_ID) }}">
+    <form method="POST" enctype="multipart/form-data"
+        action="{{ url('addRepairHistory/' . $tickets->t_ID . '/' . $tickets->t_title) }}">
 
         @csrf
         <div class="modal-dialog modal-dialog-centered">
@@ -253,25 +255,41 @@
 
                     <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
                         <input type="text" class="form-control mb-2" id="rdcode" name="rdcode"
-                            value={{ $tickets->dev_code }}>
-                    </div>
-                    <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-                        <input type="text" class="form-control mb-2" id="rtitle" name="rtitle">
+                            value="{{ $tickets->dev_code }}" hidden>
                     </div>
 
                     <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
-                        <input type="text" class="form-control mb-2" id="rsteps" name="rsteps">
+                        <input type="text" class="form-control mb-2" name="rsave" hidden>
                     </div>
+                    <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+                        <input type="text" class="form-control mb-2" id="rtitle" name="rtitle" required>
+                    </div>
+
+                    <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+                        <input type="text" class="form-control mb-2" id="rsteps" name="rsteps" required>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     @if ($tickets->t_category == 'INFRASTRUCTURE')
-                        <button type="submit" class="btn btn-primary">Send Resolution and Save to Repair
-                            History</button>
+                        <button type="submit" onclick="saveRepair()" class="btn btn-primary"
+                            style = "display:block">Send Resolution and
+                            Save to
+                            Repair
+                            History
+                        </button>
+
+                        <button type="submit" onclick = "dontSaveRepair()" class="btn btn-primary"
+                            style = "display:block">Send Resolution
+                        </button>
                     @else
-                        <button type="submit" class="btn btn-primary">Send Resolution </button>
+                        <button type="submit" onclick = "dontSaveRepair()" class="btn btn-primary"
+                            style = "display:block">Send Resolution
+                        </button>
                     @endif
+
                 </div>
     </form>
 </div>
@@ -296,7 +314,17 @@
 
     }
 </script>
+<script>
+    function saveRepair() {
+        document.getElementsByName('rsave').value = "yes";
+        console.log(document.getElementsByName('rsave').value);
+    }
 
+    function dontSaveRepair() {
+        document.getElementsByName('rsave').value = "no";
+        console.log(document.getElementsByName('rsave').value);
+    }
+</script>
 <script>
     window.onload = function() {
 
@@ -308,9 +336,6 @@
                 document.getElementById("status").value == "REJECTED")) {
             updateButton.style.display = 'none';
         }
-
-
-
     };
 </script>
 

@@ -20,7 +20,7 @@
         <div class="title mb-5">
             <h1>Ticket Center</h1>
             <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr .5fr">
-                <a href="">
+                <a href="s">
                     <button type="button" class="btn btn-lg me-5 m-3 mt-1" style="border-radius: 25px; background-color:#6644A8; color: #ffffff;">Create Ticket</button>
                 </a>
                 <select class="form-select" aria-label="Default select example" style="border-radius: 25px; border: 2px solid #6644A8; color:#6644A8; font-weight: 700; height: 80%; width: 200px">

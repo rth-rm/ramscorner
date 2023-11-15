@@ -71,13 +71,8 @@
                 <div class="card-footer text-body-secondary p-4"
                     style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
 
-
-
-                    @include('chat')
-
-
                     <div class="dropdown" id="updateButton">
-                        <button class="btn dropdown-toggle btn-lg me-3" type="button" data-bs-toggle="dropdown"
+                        <button class="btn dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="background: #6644A8; color: white; border-radius: 25px;">
                             Update
                         </button>
@@ -91,6 +86,9 @@
                             <li><a class="dropdown-item" onclick="statusUpdate('REJECTED')" id="rejected">Reject</a>
                             </li>
                         </ul>
+                    </div>
+                    <div style="margin-right: 5%;">
+                        @include('chat')
                     </div>
 
                 </div>
@@ -216,23 +214,7 @@
                         </div>
             </form>
         </div>
-
-
-
-
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
 </div>
 
 {{-- resolution modal --}}

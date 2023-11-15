@@ -112,3 +112,17 @@
             </div>
         </div>
     </nav>
+    <style>
+        .badge {
+            background-color: red;
+            /* Set your preferred background color */
+            color: white;
+            /* Set your preferred text color */
+            padding: 5px 10px;
+            /* Adjust padding as needed */
+            border-radius: 50%;
+            /* Make it circular */
+            font-size: 12px;
+            /* Adjust font size as needed */
+        }
+    </style>

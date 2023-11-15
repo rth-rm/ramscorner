@@ -11,6 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\StatusHistory;
 use App\Models\Notification;
 use Illuminate\Support\Facades\DB;
+use App\Models\TicketMessages;
 
 
 
@@ -113,6 +114,8 @@ class ClientController extends Controller
         $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();
         return view('ticket_list',["notif"=>$notifCount,"client"=>$user_info,"ticket"=>$ticket_info, "tixCount"=>$ticketCount]);
     }
+
+
     public function clientViewTickets(){
 
         $client = Auth::user();
@@ -164,6 +167,10 @@ class ClientController extends Controller
         $status = StatusHistory::where('t_id', $tickets->t_ID)->get();
         $staff = Reporter::where('u_role', "Staff")->get();
 
+        $chats = TicketMessages::where('tix_id', $tickets->t_ID)->get();
+        $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
+
+
         $allUsers = Reporter::all();
         $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
@@ -174,7 +181,8 @@ class ClientController extends Controller
             return view('staff_personal_tickets', ['last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
 
         }else{
-            return view('client_open_ticket', ['last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
+            return view('client_open_ticket', ['chats' => $chats,
+                'chatss' => $chatss,'ticket_id'=>$t_id, 'last'=>$last,'notif'=>$notifCount,'allUser'=>$allUsers, 'tickets' => $tickets, "client"=>$user_info, 'userinfo'=>$client, 'status'=>$status, 'staffs'=>$staff]);
 
         }
 

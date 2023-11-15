@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/createTicketTab', [TicketController::class, 'createTicketTab'])->name('createTicketTab');
     Route::post('/createTicket', [TicketController::class, 'createTicket'])->name('createTicket');
     Route::post('/reopenTicket/{tid}', [TicketController::class, 'reopenTicket'])->name('reopenTicket');
-    Route::post('/cancelTicket', [TicketController::class, 'cancelTicket'])->name('cancelTicket');
+    Route::post('/cancelTicket/{tid}', [TicketController::class, 'cancelTicket'])->name('cancelTicket');
     Route::post('/updateTicket/{t_id}', [TicketController::class, 'updateTicket'])->name('updateTicket');
     Route::post('/saveResolution/{t_id}', [TicketController::class, 'saveResolution'])->name('saveResolution');
     Route::get('/viewTags', [TicketController::class, 'viewTags'])->name('viewTags');
@@ -115,7 +115,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //RepairHistory
     Route::post('/addRepairHistory/{tID}/{problem}', [TicketController::class, 'addRepairHistory'])->name('addRepairHistory');
-
 
     //chatbox
     Route::get('/getmessages', [ChatsController::class, 'getmessages'])->name('getmessages');

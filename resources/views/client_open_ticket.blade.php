@@ -1,31 +1,40 @@
 @include('header')
 
-
-    <title>OPEN TICKET</title>
-
+<title>INC#{{ $ticket_id }} | Ram's Corner</title>
+<link rel="stylesheet" href="{{ asset('assets/css/opened_sent_ticket.css') }}" type = "text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<!-- bootstrap link -->
 </head>
 
-<body style="background-color: rgb(255, 255, 255); ">
+<body>
+    @foreach ($client as $userloggedin)
+        @include('sweetalert::alert')
 
-@section('title', 'All Tickets')
+        @include('sidebar_client')
 
-@include('sweetalert::alert')
-@foreach ($client as $clients)
-    @include('sidebar_client')
+        @include('users_open_ticket')
+        </section>
 
-    @include('users_open_ticket')
 
-    @include('cancel_ticket')
-@endforeach
-<script type="text/javascript">
-    function refreshPage() {
-        // check if page has already been refreshed
-        if (!sessionStorage.getItem('refreshed')) {
-            sessionStorage.setItem('refreshed', 'true');
-            location.reload();
+        <!-- sidebar button script -->
+        <script>
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".sidebarBtn");
+
+            sidebarBtn.onclick = function() {
+                sidebar.classList.toggle("active");
+            }
+        </script>
+    @endforeach
+    <script type="text/javascript">
+        function refreshPage() {
+            // check if page has already been refreshed
+            if (!sessionStorage.getItem('refreshed')) {
+                sessionStorage.setItem('refreshed', 'true');
+                location.reload();
+            }
         }
-    }
 
-    setTimeout(refreshPage, 1000); // Refresh after 5 seconds
-</script>
-@include('footer')
+        setTimeout(refreshPage, 1000); // Refresh after 5 seconds
+    </script>
+    @include('footer')

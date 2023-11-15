@@ -9,13 +9,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\TicketUpdatedNotification;
 use App\Models\Notification;
 use PHPMailer\PHPMailer\PHPMailer;
-use App\Models\RepairHistory;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
-
+use App\Models\RepairHistory;
 use App\Notifications\NewTicketNotification;
 
 use Carbon\Carbon;
@@ -420,7 +419,7 @@ class TicketController extends Controller
     }
 
     //Updating Ticket
- public function updateTicket(Request $request, $tID)
+    public function updateTicket(Request $request, $tID)
     {
         $user = Auth::user();
         if ($user == null) {
@@ -585,9 +584,10 @@ class TicketController extends Controller
 
     }
 
+
     //Cancel Ticket
 
-    public function cancelTicket(Request $request)
+    public function cancelTicket(Request $request, $tid)
     {
         $user = Auth::user();
         if ($user == null) {
@@ -595,22 +595,22 @@ class TicketController extends Controller
             return redirect()->route('loginPage');
         }
 
-        $ticketId = $request->tID;
-        $ticket = Ticket::find($ticketId);
+
+
+        $ticket = Ticket::find($tid);
         $ticket->t_status = 'CANCELLED';
         $ticket->save();
 
         StatusHistory::create([
-            "t_ID" => $ticketId,
+            "t_ID" => $tid,
             "sh_Status" => 'CANCELLED',
-
         ]);
 
 
 
 
 
-        Alert::info("TICKET CANCELLATION", "You have cancelled your ticket with the ID {$ticketId}");
+        Alert::info("TICKET CANCELLATION", "You have cancelled your ticket with the ID {$tid}");
 
         return back();
     }
@@ -765,8 +765,7 @@ class TicketController extends Controller
     }
 
 
-
-public function addRepairHistory(Request $request, $tID, $problem){
+    public function addRepairHistory(Request $request, $tID, $problem){
         $users = Auth::user();
         if ($users == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
@@ -816,6 +815,9 @@ public function addRepairHistory(Request $request, $tID, $problem){
         return back();
 
     }
+
+
+
 
 
 }

@@ -1,148 +1,94 @@
- <!-- header -->
- <style>
-     .sidebar {
-         position: fixed;
-         /* display: inline-block; */
-         top: 80px;
-         left: 0;
-         bottom: 0;
-         width: 100px;
-         color: #fff;
-         padding: 20px;
-         transition: 0.2s ease;
-         z-index: 10;
-     }
+<!-- sidebar -->
+<div class="sidebar">
+    <div class="logo-details">
+        <center class="profile">
+            <img src={{ asset('images/APCLogo.png') }}>
 
-     i.iconS {
-         font-size: 40px;
-         color: white;
-     }
+            <!-- <p>Nacor Industries</p> -->
+        </center>
+    </div>
+    <ul class="nav-links" style="padding: 0;">
+        <li>
+            <a href="{{ url('/clientHome') }}">
+                <i class="bi bi-columns-gap"></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href = "{{ url('/clientViewTickets') }}">
+                <i class="bi bi-ticket-perforated"></i>
+                <span class="link_name">Tickets</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/user_KB') }}">
+                <i class="bi bi-lightbulb"></i>
+                <span class="link_name">Knowledge Base</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/viewHelp') }}">
+                <i class="bi bi-question-circle"></i>
+                <span class="link_name">Help</span>
+            </a>
+        </li>
+    </ul>
+</div>
 
-     .sidebar:hover {
-         width: 250px;
-         transition: 0.2s ease;
-     }
+<section class="home-section">
+    <!-- nav-header -->
+    <nav>
+        <div class="sidebar-button">
+            <i class="bi bi-list sidebarBtn"></i>
+            <!-- <span class="dashboard">Rams Corner</span> -->
+        </div>
+        <div class="profile-details">
 
-     ul.sideB {
-         list-style-type: none;
-         margin: 0;
-         padding: 0;
-     }
+            <div class="dropdown1">
+                <i class="bi bi-bell" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    data-bs-auto-close="outside"></i>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><span class="dropdown-item-text" style="font-weight: 700;">Notifications</span></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <!-- <button class="btn" type="button" style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;">Ticket Updates</button>
+                      <button class="btn" type="button" style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket Chats</button> -->
+                    <div class="d-grid gap-2 d-md-block m-3">
+                        <button class="btn" type="button"
+                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">Ticket Updates</button>
+                        <button class="btn" type="button"
+                            style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats</button>
+                        <style>
+                            button:focus {
+                                background-color: #E9E9E9;
+                            }
+                        </style>
+                    </div>
+                    <div>
+                        <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
+                        </li>
+                    </div>
 
-     .aa {
-         display: flex;
-         align-items: center;
-         justify-content: flex-start;
-         padding: 10px;
-         color: #fff;
-         text-decoration: none;
-     }
+                </ul>
+            </div>
 
-     a.aa:hover {
-         background-color: #eda302a5;
-     }
+            <div class="dropdown2">
+                <img src="{{ url('userProfile/' . $userloggedin->u_profile) }}" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
 
-     span.iconLabel {
-         display: none;
-     }
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><b>{{ $userloggedin->u_name }}</b>
+                            <hr>
+                        </a>
+                    </li>
+                    <li><a class="dropdown-item" href="{{ url('/signout') }}"><i class="bi bi-box-arrow-right"></i>Sign
+                            out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-     .sidebar:hover .iconLabel {
-         display: block;
-         margin-left: 25px;
-         font-size: 20px;
-         color: white;
-     }
- </style>
- <div
-     style="
-background-color: #22246C; color: black; position: fixed; top: 0; left: 0; right: 0; height: 80px; z-index: 10; border-bottom:#eda302a5 solid 5px;
-">
-
-     <!-- logo here -->
-     <div style="position: absolute; left: 20px; top: 5px;">
-         <a href="https://www.apc.edu.ph" target="_blank" rel="Asia Pacific College"><img
-                 width="70px"src={{ asset('images/APCLogotrns.png') }} title="Asia Pacific College"></a>
-     </div>
-     <div class="" style="position: absolute; left: 5%; top: 40%;">
-         <h5 class="" style="font-size: auto; color: white;">
-             <strong>{{ $clients->u_name }}</strong></h6>
-
-     </div>
-
-
-     <!-- photo button -->
-     <div>
-         <div class="dropdown" style="position: absolute; right: 30px; top: 10px;">
-             <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                 style="color: white;" title="Click the dropdown if you want to sign out.">
-                 <img src={{ url('userProfile/' . $clients->u_profile) }} style="border-radius: 25px; " width="60px">
-             </a>
-             <ul class="dropdown-menu mt-">
-                 <li><a class="dropdown-item" href="{{ url('/signout') }}">SIGN-OUT</a></li>
-             </ul>
-
-         </div>
-     </div>
- </div>
-
- {{-- -- <!-- sidebar --> --}}
-
-
- <div class="sidebar" style="background-color: #22246C">
-     <nav>
-         <ul class="sideB">
-             <li class="sbarIcon">
-                 <a href="{{ url('/clientHome') }}" class="aa">
-                     <i class="bi bi-house-door-fill iconS"></i>
-                     <span class="iconLabel">Home</span>
-                 </a>
-             </li>
-             <hr>
-             <li class="sbarIcn">
-                 <a href="{{ url('/notification') }}" class="aa">
-                     <i class="bi bi-bell-fill iconS"></i>
-
-                     <span class="iconLabel">Notifications</span>
-                     @if ($notif != 0)
-                         <span class="badge rounded-pill bg-danger" style="margin-top: -20%;">
-                             {{ $notif }}
-                             <span class="visually-hidden">unread messages</span>
-                         </span>
-                     @else
-                     @endif
-
-                 </a>
-             </li>
-             <hr>
-             <li class="sbarIcon">
-                 <a href="{{ url('/clientViewTickets') }}" class="aa">
-                     <i class="bi bi-ticket-perforated iconS"></i>
-                     <span class="iconLabel">My Tickets</span>
-                 </a>
-             </li>
-             <hr>
-             <li class="sbarIcon">
-                 <a href="{{ url('/user_KB') }}" class="aa">
-                     <i class="bi bi-book-half iconS"></i>
-                     <span class="iconLabel">Knowledge Base</span>
-                 </a>
-             </li>
-             <hr>
-             <li class="sbarIcn">
-                 <a href="{{ url('viewTags') }}" class="aa">
-                     <i class="bi bi-tags-fill iconS"></i>
-                     <span class="iconLabel">Tags</span>
-                 </a>
-             </li>
-             <hr>
-             <li class="sbarIcn">
-                 <a href="{{ url('viewHelp') }}" class="aa">
-                     <i class="bi bi-question-circle iconS"></i>
-                     <span class="iconLabel">Help</span>
-                 </a>
-             </li>
-             <hr>
-
-         </ul>
-     </nav>
- </div>
+    <!-- dashboard -->

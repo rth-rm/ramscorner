@@ -1,261 +1,167 @@
-<div>
-    {{-- Ticket Status History  --}}
-    <div class="overflow-auto"
-        style="border-radius: 4px; border: 1px solid #ffffff7c; position: absolute; background-color: rgb(255, 255, 255); top: 10%; right: 1%; height: 89%; width: 25%; ">
+<div class="home-contents">
+    <div class="dash-contents">
+        <div class="dash-container">
 
-        <!-- list content -->
-
-        <div class="dropdown row" style="position: relative; margin: 4.5%;">
-            <h3 class="col" style="margin: 1%; align-content:stretch;"><strong>Ticket Status History
-                    Tracking</strong></h3>
-        </div>
-        <hr>
-        @foreach ($status as $stat)
-            <ul class="list">
-
-                <li class="list-item"
-                    style="margin:15px; {{ $stat == $last ? 'background-color: #ffaf7a; color: black' : '' }}">
+            <div class="card border-0">
+                <div class="card-header p-4"
+                    style="background: #fff; border-radius: 25px; display: flex; justify-content: space-between; color: #242934; font-size: 26.2px; font-weight: 700;">
+                    {{ $tickets->t_title }}
+                    <span style="font-weight: 300; color:#817e9d; font-size: 21px">{{ $tickets->t_datetime }}<i
+                            class="bi bi-info-circle ms-4 me-2"></i></span>
+                </div>
+                <div class="card-body" style="padding: 5px;   display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
 
 
-
-                    <div class="list-item-content ">
-
-                        <div class="list-item-title" style="padding-left: 20px;">
-                            {{ $stat->sh_Status }}</div>
-                        <div class="list-item-text" style="padding-left: 20px;">
-                            {{ $stat->sh_datetime }}<br>
-                            {{ 'Assigned To: ' . $stat->sh_AssignedTo }}<br>
-                            {{ $stat->sh_message }}
+                    <div class="ticket-status me-2" style="border-right: 5px solid #F6F7FB;">
+                        <h4 style="color: #817e9d; font-size: 21px; font-weight: 700;" class="pt-4 ps-4 pb-3 fw-bold">
+                            Status Tracking</h4>
+                        <div class="status-display" style="overflow-y: auto; max-height: 55vh; ">
+                            <ul style="list-style: none; padding: 10px;">
+                                @foreach ($status as $status_tracking)
+                                    <li
+                                        style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;{{ $status_tracking == $last ? 'background-color: #CDB9D9; color: black' : '' }}">
+                                        <h5 style="font-weight: 600; color: #6644a8">
+                                            {{ $status_tracking->sh_Status }}</h5>
+                                        <h5>{{ $status_tracking->sh_datetime }}</h5>
+                                        <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <div class="list-item-text" style="padding-left: 20px;">
-
-                        </div>
-
-
-
                     </div>
-                </li>
-                <hr>
-        @endforeach
-
-        </ul>
 
 
-    </div>
-    @if (
-        $tickets->t_status == 'RESOLVED' ||
-            $tickets->t_status == 'CANCELLED' ||
-            $tickets->t_status == 'REJECTED' ||
-            $tickets->t_status == 'REOPENED')
-    @else
-        <div class="position-absolute bottom-0 end-0 me-5 mb-5">
-            <a type="button" class="btn btn-danger btn-lg" style="padding- left : 5%; font-size: 20px;width:300px"
-                data-bs-toggle="modal" data-bs-target="#TicketCancel" id="cancel"><i class="bi bi-x-octagon-fill"
-                    style="font-size: 20px; padding-top:20%; padding-right: 10px"></i>
-                CANCEL MY TICKET</a>
-        </div>
-    @endif
+                    <div class="ticket-details" style="grid-column: span 3;">
+                        <div class="header p-5" style="display: flex; justify-content: space-between; ">
+                            <div class="tic-header deets fw-semibold">
+                                <h5>Sent by: {{ $userinfo->u_name }}</h5>
+                                <h5>Assigned to: {{ $tickets->t_assignedTo }}</h5>
+                            </div>
 
-    @include('reopen')
-    @if ($tickets->t_status == 'CLOSED')
-        <div class="position-absolute bottom-0 end-0 me-5 mb-5">
-            <a type="button" class="btn btn-danger btn-lg" style="padding- left : 5%; font-size: 20px;width:300px"
-                data-bs-toggle="modal" data-bs-target="#TicketSubmition"><i class="bi bi-envelope-open-fill"
-                    style="font-size: 20px; padding-top:20%; padding-right: 10px"></i>
-                REOPEN </a>
-        </div>
-    @else
-    @endif
-
-
-    {{-- End of Ticket Status History  --}}
-
-    <!-- ticket contents category -->
-
-    <div class="ticketContent overflow-auto"
-        style="text-align: left;border-radius: 4px; border: 1px solid #ffffff7c; position: absolute; background-color: rgb(255, 255, 255); top: 10%; left: 6.5%; height: 89%; width: 65%; ">
-        <div id="div1">
-            <div class="" style="border: 1px solid #ccc; border-radius: 5px; overflow: hidden;">
-                <div class="email-header"
-                    style="background-color: #f7f7f7; border-bottom: 1px solid #ccc; padding: 20px;">
-                    <div class="sender" style="font-size: 18px;">
-                        <span class="sender-name" style="font-weight: bold;">From: {{ $userinfo->u_name }}</span>
-                        <span class="sender-email" style="color: #a99f9f;"> {{ $userinfo->email }}</span>
-                    </div>
-                   
-                    <div class="subject row" style=" font-size: 24px; margin-top: 10px;">
-                        <div class="col-9">
-                            {{ $tickets->t_title }}
                         </div>
-                        <div class="col-3"
-                            style="text-align:right;color: #000000; font-size:30px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
-                            INC#{{ $tickets->t_ID }}</div>
+                        <div class="tic-description p-5">
+                            <h5>
+                                {{ $tickets->t_description }}
+                            </h5>
+                        </div>
+                        <div class="tic-attachment ps-5">
+                            <h5>
+                                @if ($tickets->t_image != '')
+                                    Attachment:
+                                    <h6>
+                                        <a href="{{ url('ticketImages/' . $tickets->t_image) }}" download>
+                                            {{ $tickets->t_image }}
+                                        </a>
+                                    </h6>
+                                @endif
+                            </h5>
+                        </div>
+
                     </div>
                 </div>
-                <div class="email-body" style="padding: 50px;">
-                    <p>
-                        {{ $tickets->t_description }}
-                    </p>
-                    @if ($tickets->t_image != '')
-                        <label for="attachment"><strong>Attachment:</strong></label><br>
-                        <a href="{{ url('ticketImages/' . $tickets->t_image) }}" download>{{ $tickets->t_image }}</a>
-                    @else
-                        {{-- <label for="attachment"><strong>No Attachment Included</strong></label><br> --}}
-                    @endif
+                <div class="card-footer text-body-secondary p-4"
+                    style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
+
+                    @include('chat')
+
+                    <div class="dropdown" id="updateButton">
+                        <button class="btn dropdown-toggle btn-lg me-3" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="background: #6644A8; color: white; border-radius: 25px;">
+                            Update
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="statusUpdate('cancelled')" id="cancelled">Cancel</a>
+                            </li>
+                            <li><a class="dropdown-item" onclick="statusUpdate('reopened')" id="reopened"
+                                    hidden>Reopened
+                                </a></li>
+                        </ul>
+                    </div>
 
                 </div>
-
             </div>
-            <div class="mb-3" style="margin:10px">
-                <label for="message-text" class="col-form-label" style="font-size: 20px"><b>Resolution</b></label>
-                <textarea class="form-control" id="message-text" name="resolution" readonly>{{ $tickets->t_resolution }}</textarea>
+            <input type="text" value="{{ $tickets->t_status }}" class="form-control mb-2" id="status"
+                name="status" hidden>
+        </div>
+        <div class="modal fade" id="statusUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <form method="POST" enctype="multipart/form-data" action="{{ url('cancelTicket/' . $tickets->t_ID) }}">
 
-            </div>
+                @csrf
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Ticket Cancellation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
 
+                        <div class="modal-body">
 
+                            <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+                                <h6>Are you sure you want to cancel your ticket?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                            </div>
+            </form>
         </div>
 
+        {{-- <div class="modal fade" id="statusUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <form method="POST" enctype="multipart/form-data" action="{{ url('cancelTicket/' . $tickets->t_ID) }}">
 
-        </ul>
+                @csrf
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Ticket Cancellation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
 
+                        <div class="modal-body">
 
+                            <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
+                                <h6>Are you sure you want to cancel your ticket?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                            </div>
+            </form>
+        </div> --}}
     </div>
 </div>
-
-
-
-
-
-
 <script>
-    const urgency = document.getElementById("urgency"),
-        impact = document.getElementById("impact"),
-        priority = document.getElementById("priority");
-    urgency.addEventListener('change', updateInputValue);
-    impact.addEventListener('change', updateInputValue);
+    function statusUpdate(item) {
 
-    function updateInputValue() {
-        const urge = urgency.value,
-            imp = impact.value;
-        if (urge == 1 && imp == 1) {
-            priority.value = 1;
-        } else if (urge == 1 && imp == 2) {
-            priority.value = 2;
-
-        } else if (urge == 1 && imp == 3) {
-            priority.value = 2;
-
-        } else if (urge == 2 && imp == 1) {
-            priority.value = 1;
-
-        } else if (urge == 2 && imp == 2) {
-            priority.value = 2;
-
-        } else if (urge == 2 && imp == 3) {
-            priority.value = 3;
-
-        } else if (urge == 3 && imp == 1) {
-            priority.value = 2;
-
-        } else if (urge == 3 && imp == 2) {
-            priority.value = 2;
-
-        } else if (urge == 3 && imp == 3) {
-            priority.value = 3;
-
-        } else {
-            priority.value = 3;
-
-        }
-
+        var modal = new bootstrap.Modal(document.getElementById('statusUpdate'));
+        var modalText = document.getElementsByName('status')[0];
+        console.log(modalText);
+        modalText.setAttribute('value', item);
+        modal.show();
     }
 </script>
-
 <script>
-    $('#assign_group').on('change', function() {
-        var selectedGroup = $(this).val();
-        console.log(selectedGroup);
-
-        if (selectedGroup == "All") {
-            $(".Infrastructure").show();
-            $(".Software").show();
-        } else if (selectedGroup == "Infrastructure") {
-            $(".Infrastructure").show();
-            $(".Software").hide();
-        } else {
-            $(".Infrastructure").hide();
-            $(".Software").show();
-        }
-
-
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('.show-div').click(function(e) {
-            e.preventDefault();
-            var divId = $(this).data("div");
-            $('.show-div').each(function() {
-                $('#' + $(this).data("div")).hide();
-            });
-            $('#' + divId).show();
-        });
-    });
-</script>
-
-<script>
-    function showDiv(divId) {
-        document.getElementById(divId).style.display = 'block';
-    }
     window.onload = function() {
-        // Get the fragment identifier from the URL
-        var divId = window.location.hash.substr(1);
-        // If a fragment identifier is present, show the corresponding div
-        if (divId) {
-            showDiv(divId);
+
+        var updateButton = document.getElementById("updateButton");
+
+        if (updateButton && (
+                document.getElementById("status").value == "CANCELLED" ||
+                document.getElementById("status").value == "REJECTED")) {
+            updateButton.style.display = 'none';
         }
-    }
+
+        if (document.getElementById("status").value == "CLOSED") {
+            document.getElementById("reopened").removeAttribute('hidden');
+            document.getElementById("cancelled").setAttribute('hidden', true);
+        }
+    };
 </script>
 
-<style>
-    .list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        position: relative;
-    }
-
-    .list-item {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-        position: relative;
-    }
-
-    .list-item:before {
-        content: "";
-        width: 2px;
-        height: 100%;
-        background-color: blue;
-        position: absolute;
-        left: 6px;
-        top: 0;
-    }
-
-    .list-item-circle {
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background-color: blue;
-        margin-right: 10px;
-    }
-
-    .list-item-content {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .list-item-title {
-        font-weight: bold;
-    }
-</style>
+</div>
+</div>

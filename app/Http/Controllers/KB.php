@@ -98,7 +98,14 @@ class KB extends Controller
             ->where('kb_view', 1)
             ->get();
         $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();
-        return view('user_KB', ['notif' => $notifCount, 'kb_info' => $kb_info, 'client' => $user_info]);
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $client->u_ID)
+            ->where('read_at', null)->get()->count();
+
+        return view('user_KB', [
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount, 'kb_info' => $kb_info, 'client' => $user_info
+        ]);
     }
 
     // public function staff_KB()

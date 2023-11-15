@@ -1,7 +1,7 @@
 <div class="home-contents">
     <div class="dashboard-boxes"></div>
     <div class="title mb-5">
-        <h1>Admin Dashboard</h1>
+        <h1>Admin Dashboards</h1>
         <i class="bi bi-calendar2  me-4"><input class="ms-3" type="text" name="daterange" value="01/01/2023 - 01/15/2023" /></i>
         <script>
             $(function() {

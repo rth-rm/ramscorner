@@ -217,6 +217,7 @@ class AdminController extends Controller
         list($statusCounts, $softwareCounts, $hardwareCounts) = $this->dashboard();
 
         return view('admin_home', [
+            "notifCount"=>$notifCount,
             "statusmonth" => $statusCounts,
             "softwaremonth" => $softwareCounts,
             "hardwaremonth" => $hardwareCounts,

@@ -67,7 +67,12 @@
                       <button class="btn" type="button" style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket Chats</button> -->
                     <div class="d-grid gap-2 d-md-block m-3">
                         <button class="btn" type="button"
-                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">Ticket Updates</button>
+                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">
+                            @if ($count > 0)
+                                <span class="badge">{{ $notifCount }}</span>
+                            @endif
+                            Ticket Updates
+                        </button>
                         <button class="btn" type="button"
                             style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats</button>
                         <style>

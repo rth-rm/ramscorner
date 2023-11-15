@@ -3,11 +3,9 @@
         <div class="dash-container">
 
             <div class="card border-0">
-                <div class="card-header p-4"
-                    style="background: #fff; border-radius: 25px; display: flex; justify-content: space-between; color: #242934; font-size: 26.2px; font-weight: 700;">
+                <div class="card-header p-4" style="background: #fff; border-radius: 25px; display: flex; justify-content: space-between; color: #242934; font-size: 26.2px; font-weight: 700;">
                     {{ $tickets->t_title }}
-                    <span style="font-weight: 300; color:#817e9d; font-size: 21px">{{ $tickets->t_datetime }}<i
-                            class="bi bi-info-circle ms-4 me-2"></i></span>
+                    <span style="font-weight: 300; color:#817e9d; font-size: 21px">{{ $tickets->t_datetime }}<i class="bi bi-info-circle ms-4 me-2"></i></span>
                 </div>
                 <div class="card-body" style="padding: 5px;   display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
 
@@ -18,13 +16,13 @@
                         <div class="status-display" style="overflow-y: auto; max-height: 55vh; ">
                             <ul style="list-style: none; padding: 10px;">
                                 @foreach ($status as $status_tracking)
-                                    <li
-                                        style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;{{ $status_tracking == $last ? 'background-color: #CDB9D9; color: black' : '' }}">
-                                        <h5 style="font-weight: 600; color: #6644a8">
-                                            {{ $status_tracking->sh_Status }}</h5>
-                                        <h5>{{ $status_tracking->sh_datetime }}</h5>
-                                        <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
-                                    </li>
+                                <li style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;{{ $status_tracking == $last ? 'background-color: #CDB9D9; color: black' : '' }}">
+                                    <h5 style="font-weight: 600; color: #6644a8">
+                                        {{ $status_tracking->sh_Status }}
+                                    </h5>
+                                    <h5>{{ $status_tracking->sh_datetime }}</h5>
+                                    <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -39,10 +37,10 @@
                             </div>
                             <div class="tic-id">
                                 @if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code != 'NONE')
-                                    <h6>Hardware ID: {{ $tickets->dev_code }}</h6>
-                                    <h6><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View
-                                            Repair History</a></h6>
-                                    @include('view_device_details')
+                                <h6>Hardware ID: {{ $tickets->dev_code }}</h6>
+                                <h6><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View
+                                        Repair History</a></h6>
+                                @include('view_device_details')
                                 @else
                                 @endif
 
@@ -56,24 +54,23 @@
                         <div class="tic-attachment ps-5">
                             <h5>
                                 @if ($tickets->t_image != '')
-                                    Attachment:
-                                    <h6>
-                                        <a href="{{ url('ticketImages/' . $tickets->t_image) }}" download>
-                                            {{ $tickets->t_image }}
-                                        </a>
-                                    </h6>
+                                Attachment:
+                                <h6>
+                                    <a href="{{ url('ticketImages/' . $tickets->t_image) }}" download>
+                                        {{ $tickets->t_image }}
+                                    </a>
+                                </h6>
                                 @endif
                             </h5>
                         </div>
 
                     </div>
                 </div>
-                <div class="card-footer text-body-secondary p-4"
-                    style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
+                <div class="card-footer text-body-secondary p-4" style="background: #fff; border-radius: 25px; display: flex; justify-content: end; align-items: center;">
+
 
                     <div class="dropdown" id="updateButton">
-                        <button class="btn dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="background: #6644A8; color: white; border-radius: 25px;">
+                        <button class="btn dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: #6644A8; color: white; border-radius: 25px;">
                             Update
                         </button>
                         <ul class="dropdown-menu">
@@ -91,34 +88,31 @@
                         @include('chat')
                     </div>
 
+
                 </div>
             </div>
 
         </div>
-        <div class="modal fade" id="statusUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="statusUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <form method="POST" enctype="multipart/form-data" action="{{ url('updateTicket/' . $tickets->t_ID) }}">
 
                 @csrf
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <h5 class="modal-title" id="staticBackdropLabel">Update Ticket</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <div class="modal-body">
 
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
 
-                                <input type="text" value="{{ $tickets->t_status }}" class="form-control mb-2"
-                                    id="status" name="status" hidden>
+                                <input type="text" value="{{ $tickets->t_status }}" class="form-control mb-2" id="status" name="status" hidden>
                             </div>
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
-                                <select class="form-select mb-2" aria-label="Default select example" name="category"
-                                    title="Select appropriate category for the ticket for easier identifying the solution for the problem and assigning of ticket.">
+                                <h5>Category</h5>
+                                <select class="form-select mb-2" aria-label="Default select example" name="category" title="Select appropriate category for the ticket for easier identifying the solution for the problem and assigning of ticket.">
                                     <option value="INFRASTRUCTURE" @if (old('INFRASTRUCTURE', $tickets->t_urgency) == 'INFRASTRUCTURE') selected @endif>
                                         Infrastructure</option>
                                     <option value="SOFTWARE" @if (old('SOFTWARE', $tickets->t_urgency) == 'SOFTWARE') selected @endif>
@@ -131,9 +125,8 @@
 
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
 
-
-                                <select class="form-select mb-2" aria-label="Default select example" id="urgency"
-                                    name="urgency">
+                                <h5>Urgency</h5>
+                                <select class="form-select mb-2" aria-label="Default select example" id="urgency" name="urgency">
 
                                     <option value="1" @if (old('1', $tickets->t_urgency) == '1') selected @endif>Critical
                                     </option>
@@ -145,9 +138,8 @@
                             </div>
 
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
-                                <select class="form-select mb-2" aria-label="Default select example" id="impact"
-                                    name="impact">
+                                <h5>Impact</h5>
+                                <select class="form-select mb-2" aria-label="Default select example" id="impact" name="impact">
                                     <option value="1" @if (old('1', $tickets->t_impact) == '1') selected @endif>High
                                     </option>
                                     <option value="2" @if (old('2', $tickets->t_impact) == '2') selected @endif>Medium
@@ -156,48 +148,42 @@
                                     </option>
                                 </select>
                             </div>
-
+                            <h5 style="padding-left:10%;padding-right:10%">Priority</h5>
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
-                                <input type="text" readonly value="{{ $tickets->t_priority }}"
-                                    class="form-control mb-2" id="priority" name="priority">
+                                <input type="text" readonly value="{{ $tickets->t_priority }}" class="form-control mb-2" id="priority" name="priority">
                             </div>
 
+                            <h5 style="padding-left: 10%; padding-top:10px;">Assign To:</h5>
+                            <div style="display: flex; padding-left:10%;padding-right:10%; justify-content: space-between;">
+                                <div style="width: 300px;">
+                                    <select class="form-select mb-2" aria-label="Default select example" id="assign_group">
+                                        <option selected value="All">All</option>
+                                        <option value="Infrastructure">Infrastructure</option>
+                                        <option value="Software">Software</option>
+                                    </select>
+                                    <br>
+                                </div>
 
-
-
-
-                            <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
-                                <select class="form-select mb-2" aria-label="Default select example"
-                                    id="assign_group">
-                                    <option selected="" value="All">All</option>
-                                    <option value="Infrastructure">Infrastructure</option>
-                                    <option value="Software">Software</option>
-
-                                </select>
-                                <br>
-                            </div>
-                            <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
-                                <select class="form-select mb-2" aria-label="Default select example" id="assign_to"
-                                    name="assign">
-                                    @if ($tickets->t_assignTo != 'Not Assigned')
-                                        <option selected="" disable="" value="{{ $tickets->t_assignedTo }}">
-                                            {{ $tickets->t_assignedTo }}</option>
-                                        @foreach ($staffs as $staff)
-                                            <option value="{{ $staff->u_name }}" class="{{ $staff->u_division }}">
-                                                {{ $staff->u_name }}</option>
-                                        @endforeach
-                                    @else
+                                <div style="width: 300px;">
+                                    <select class="form-select mb-2" aria-label="Default select example" id="assign_to" name="assign">
+                                        @if ($tickets->t_assignTo != 'Not Assigned')
+                                        <option selected disabled value="{{ $tickets->t_assignedTo }}">
+                                            {{ $tickets->t_assignedTo }}
+                                        </option>
+                                        @else
                                         <option selected value="Not Assigned">Not Assigned</option>
+                                        @endif
+
                                         @foreach ($staffs as $staff)
-                                            <option value="{{ $staff->u_name }}" class="{{ $staff->u_division }}">
-                                                {{ $staff->u_name }}</option>
+                                        <option value="{{ $staff->u_name }}" class="{{ $staff->u_division }}">
+                                            {{ $staff->u_name }}
+                                        </option>
                                         @endforeach
-                                    @endif
-                                </select>
+                                    </select>
+                                </div>
                             </div>
+
+
 
 
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
@@ -214,16 +200,30 @@
                         </div>
             </form>
         </div>
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+
 </div>
 
 {{-- resolution modal --}}
 
 
-<div class="modal fade" id="resolveUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <form method="POST" enctype="multipart/form-data"
-        action="{{ url('addRepairHistory/' . $tickets->t_ID . '/' . $tickets->t_title) }}">
+<div class="modal fade" id="resolveUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <form method="POST" enctype="multipart/form-data" action="{{ url('addRepairHistory/' . $tickets->t_ID . '/' . $tickets->t_title) }}">
 
         @csrf
         <div class="modal-dialog modal-dialog-centered">
@@ -234,10 +234,9 @@
                 </div>
 
                 <div class="modal-body">
-
+                    <h5>Enter Description:</h5>
                     <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-                        <input type="text" class="form-control mb-2" id="rdcode" name="rdcode"
-                            value="{{ $tickets->dev_code }}" hidden>
+                        <input type="text" class="form-control mb-2" id="rdcode" name="rdcode" value="{{ $tickets->dev_code }}" hidden>
                     </div>
 
                     <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
@@ -256,20 +255,17 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     @if ($tickets->t_category == 'INFRASTRUCTURE')
-                        <button type="submit" onclick="saveRepair()" class="btn btn-primary"
-                            style = "display:block">Send Resolution and
-                            Save to
-                            Repair
-                            History
-                        </button>
+                    <button type="submit" onclick="saveRepair()" class="btn btn-primary" style="display:block">Send Resolution and
+                        Save to
+                        Repair
+                        History
+                    </button>
 
-                        <button type="submit" onclick = "dontSaveRepair()" class="btn btn-primary"
-                            style = "display:block">Send Resolution
-                        </button>
+                    <button type="submit" onclick="dontSaveRepair()" class="btn btn-primary" style="display:block">Send Resolution
+                    </button>
                     @else
-                        <button type="submit" onclick = "dontSaveRepair()" class="btn btn-primary"
-                            style = "display:block">Send Resolution
-                        </button>
+                    <button type="submit" onclick="dontSaveRepair()" class="btn btn-primary" style="display:block">Send Resolution
+                    </button>
                     @endif
 
                 </div>

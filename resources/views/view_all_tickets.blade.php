@@ -1,6 +1,6 @@
 @include('header')
 <title>Ticket Center | RAMS Corner</title>
-<link rel="stylesheet" href="{{ asset('assets/css/ticketcenter.css') }}" type = "text/css">
+<link rel="stylesheet" href="{{ asset('assets/css/ticketcenter.css') }}" type="text/css">
 <!-- data tables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <!-- bootstrap link -->
@@ -10,216 +10,217 @@
 
 <body>
     @foreach ($user_loggedin as $userloggedin)
-        @include('sweetalert::alert')
+    @include('sweetalert::alert')
 
-        @include('sidebar_admin')
+    @include('sidebar_admin')
 
 
 
-        <div class="home-contents">
-            <div class="title mb-5">
-                <h1>Ticket Center</h1>
-                <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr">
-                    <select class="form-select" aria-label="Default select example"
-                        style="border-radius: 25px; border: none">
-                        <option selected disabled>View My Ticket</option>
-                        <option value="1">Recieved Tickets</option>
-                        <option value="2">Sent Tickets</option>
-                        <option value="3">Tagged Tickets</option>
-                    </select>
-
-                    <i class="bi bi-arrows-expand ms-5"></i>
-                </div>
-            </div>
-
-            <div class="dash-contents">
-                <div class="dash-container">
-                    <div class="tic-filters me-3">
-                        {{-- edited --}}
-                        <div class="head pt-4 ps-3 pe-3"style="color: #817e9d; font-size: 21px; font-weight: 700;">
-                            Ticket Filter
-                            <!-- EDIT reset button -->
-                            <i type="button" id="resetButton" class="bi bi-arrow-repeat"></i>
-                        </div>
-                        <hr>
-                        {{-- EDITED --}}
-                        <div class="container pt-2 ps-2 dropdiv mt-1">
-                            <!-- recency -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Recency
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Daily</option>
-                                            <option value="2">Weekly</option>
-                                            <option value="3">Monthly</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Catgeory -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Category
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Software</option>
-                                            <option value="2">Infrastructure</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Status -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Status
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Pending</option>
-                                            <option value="2">New</option>
-                                            <option value="3">Closed</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Agent -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Agent
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Vincent Nacor</option>
-                                            <option value="2">Ruth Morallos</option>
-                                            <option value="3">Patrick Cortez</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Level -->
-                            <div class="container pb-5">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Level
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">I</option>
-                                            <option value="2">II</option>
-                                            <option value="3">III</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ticket-lists">
-                        <div class="lists">
-                            <table id="example" class="hover" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Subject</th>
-                                        <th>Requested</th>
-                                        <th>Due</th>
-                                        <th><i class="bi bi-exclamation-circle"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tickets as $ticket)
-                                        <tr onclick="openDiv({{ $ticket->t_ID }})">
-                                            <td>INC{{ $ticket->t_ID }}</td>
-                                            <td>{{ $ticket->t_title }}</td>
-                                            <td>{{ $ticket->t_datetime }}</td>
-                                            <td>{{ $ticket->t_due }}</td>
-                                            <td>
-                                                @if ($ticket->breaches == true)
-                                                    <i class="bi-bi-circle-fill" style="color:red"></i>
-                                                @else
-                                                    <i class="bi bi-circle-fill" style="color:green"></i>
-                                                @endif
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-                            <script>
-                                $(document).ready(function() {
-                                    $('#example').DataTable();
-                                });
-                            </script>
-                        </div>
-                        {{-- <footer>
-                            <hr>
-                        </footer> --}}
-                    </div>
-                </div>
+    <div class="home-contents">
+        <div class="title mb-5">
+            <h1>Ticket Center</h1>
+            <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr">
+                <select class="form-select" aria-label="Default select example" style="border-radius: 25px; border: none">
+                    <option selected disabled>View My Ticket</option>
+                    <option value="1">Recieved Tickets</option>
+                    <option value="2">Sent Tickets</option>
+                    <option value="3">Tagged Tickets</option>
+                </select>
+                <!-- EDIT  sort button -->
+                <i id="sortButton" type="button" class="bi bi-arrows-expand ms-5"></i>
             </div>
         </div>
 
-        </section>
-        <!-- reset button script -->
-        <script>
-            document.getElementById('resetButton').addEventListener('click', function() {
-                // Reset the values of all select elements
-                resetSelect(document.getElementById('recencySelect'));
-                resetSelect(document.getElementById('categorySelect'));
-                resetSelect(document.getElementById('statusSelect'));
-                resetSelect(document.getElementById('agentSelect'));
-                resetSelect(document.getElementById('levelSelect'));
-            });
+        <div class="dash-contents">
+            <div class="dash-container">
+                <div class="tic-filters me-3">
+                    {{-- edited --}}
+                    <div class="head pt-4 ps-3 pe-3" style="color: #817e9d; font-size: 21px; font-weight: 700;">
+                        Ticket Filter
+                        <!-- EDIT reset button -->
+                        <i type="button" id="resetButton" class="bi bi-arrow-repeat"></i>
+                    </div>
+                    <hr>
+                    {{-- EDITED --}}
+                    <div class="container pt-2 ps-2 dropdiv mt-1">
+                        <!-- recency -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Recency
+                                </div>
+                                <div class="col">
+                                    <select id="recencySelect" class="form-select" aria-label="Default select example" style="border: none; color: eeeff1">
+                                        <option selected disabled>Select</option>
+                                        <option value="1">Daily</option>
+                                        <option value="2">Weekly</option>
+                                        <option value="3">Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Catgeory -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Category
+                                </div>
+                                <div class="col">
+                                    <select id="categorySelect" class="form-select" aria-label="Default select example" style="border: none; color: eeeff1">
+                                        <option selected disabled>Select</option>
+                                        <option value="1">Software</option>
+                                        <option value="2">Infrastructure</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Status -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Status
+                                </div>
+                                <div class="col">
+                                    <select id="statusSelect" class="form-select" aria-label="Default select example" style="border: none; color: eeeff1">
+                                        <option selected disabled>Select</option>
+                                        <option value="1">Pending</option>
+                                        <option value="2">New</option>
+                                        <option value="3">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Agent -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Agent
+                                </div>
+                                <div class="col">
+                                    <select id="agentSelect" class="form-select" aria-label="Default select example" style="border: none; color: eeeff1">
+                                        <option selected disabled>Select</option>
+                                        <option value="1">Vincent Nacor</option>
+                                        <option value="2">Ruth Morallos</option>
+                                        <option value="3">Patrick Cortez</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Level -->
+                        <div class="container pb-5">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Level
+                                </div>
+                                <div class="col">
+                                    <select id="levelSelect" class="form-select" aria-label="Default select example" style="border: none; color: eeeff1">
+                                        <option selected disabled>Select</option>
+                                        <option value="1">I</option>
+                                        <option value="2">II</option>
+                                        <option value="3">III</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- reset button script -->
+                        <script>
+                            document.getElementById('resetButton').addEventListener('click', function() {
+                                // Reset the values of all select elements
+                                resetSelect(document.getElementById('recencySelect'));
+                                resetSelect(document.getElementById('categorySelect'));
+                                resetSelect(document.getElementById('statusSelect'));
+                                resetSelect(document.getElementById('agentSelect'));
+                                resetSelect(document.getElementById('levelSelect'));
+                            });
 
-            function resetSelect(selectElement) {
-                // Set the first option as selected
-                selectElement.selectedIndex = 0;
-            }
-        </script>
-        <script>
-            function openDiv(divId) {
+                            function resetSelect(selectElement) {
+                                // Set the first option as selected
+                                selectElement.selectedIndex = 0;
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div class="ticket-lists">
+                    <div class="lists">
+                        <table id="example" class="hover" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Requested</th>
+                                    <th>Due</th>
+                                    <th><i class="bi bi-exclamation-circle"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($tickets as $ticket)
+                                <tr onclick="openDiv({{ $ticket->t_ID }})">
+                                    <td>INC{{ $ticket->t_ID }}</td>
+                                    <td>{{ $ticket->t_title }}</td>
+                                    <td>{{ $ticket->t_datetime }}</td>
+                                    <td>{{ $ticket->t_due }}</td>
+                                    <td>
+                                        @if ($ticket->breaches == true)
+                                        <i class="bi-bi-circle-fill" style="color:red"></i>
+                                        @else
+                                        <i class="bi bi-circle-fill" style="color:green"></i>
+                                        @endif
+                                    </td>
+
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                var table = $('#example').DataTable();
+
+                                // Add event listener for sorting button
+                                $('#sortButton').on('click', function() {
+                                    // Toggle between ascending and descending order on each click
+                                    table.order(table.order()[0][0], table.order()[0][1] === 'asc' ? 'desc' : 'asc').draw();
+                                });
+                            });
+                        </script>
+                    </div>
+                    {{-- <footer>
+                            <hr>
+                        </footer> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </section>
+
+    <script>
+        function openDiv(divId) {
 
 
-                var url = "{{ route('openTicket', '') }}" + "/" + divId;
+            var url = "{{ route('openTicket', '') }}" + "/" + divId;
 
-                window.location = url;
-            }
-        </script>
+            window.location = url;
+        }
+    </script>
 
 
-        <!-- sidebar button script -->
-        <script>
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".sidebarBtn");
+    <!-- sidebar button script -->
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
 
-            sidebarBtn.onclick = function() {
-                sidebar.classList.toggle("active");
-            }
-        </script>
-        <script>
-            function openDiv(divId) {
-                var url = "{{ route('openTicket', '') }}" + "/" + divId;
-                window.location = url;
-            }
-        </script>
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+    </script>
+    <script>
+        function openDiv(divId) {
+            var url = "{{ route('openTicket', '') }}" + "/" + divId;
+            window.location = url;
+        }
+    </script>
     @endforeach
     @include('footer')
 
@@ -256,78 +257,76 @@
                                         <option value='Not Assigned'>Not Assigned</option>
                                         @foreach ($allStaff as $staffs)
                                             <option value='{{ $staffs->u_name }}'>{{ $staffs->u_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                <th>Description<br><br></th>
-                                <th>Status
-                                    <select id="docTypeDrop2" class="form-select form-select-sm md-flex mx-auto w-50"
-                                        aria-label="Default select example" style="height:25px">
-                                        <option value='' selected>All</option>
-                                        <option value='New'>New</option>
-                                        <option value='Opened'>Opened</option>
-                                        <option value='Pending'>Pending</option>
-                                        <option value='Ongoing'>Ongoing</option>
-                                        <option value='Resolved'>Resolved</option>
-                                        <option value='Closed'>Closed</option>
-                                        <option value='Reopened'>Reopened</option>
-                                        <option value='Rejected'>Rejected</option>
-                                        <option value='Cancelled'>Cancelled</option>
+    @endforeach
+    </select>
+    </th>
+    <th>Description<br><br></th>
+    <th>Status
+        <select id="docTypeDrop2" class="form-select form-select-sm md-flex mx-auto w-50" aria-label="Default select example" style="height:25px">
+            <option value='' selected>All</option>
+            <option value='New'>New</option>
+            <option value='Opened'>Opened</option>
+            <option value='Pending'>Pending</option>
+            <option value='Ongoing'>Ongoing</option>
+            <option value='Resolved'>Resolved</option>
+            <option value='Closed'>Closed</option>
+            <option value='Reopened'>Reopened</option>
+            <option value='Rejected'>Rejected</option>
+            <option value='Cancelled'>Cancelled</option>
 
-                                    </select>
-                                </th>
-                                <th>Priority
-                                    <select id="docTypeDrop3" class="form-select form-select-sm md-flex mx-auto w-60"
-                                        aria-label="Default select example" style="height:25px">
-                                        <option value='' selected>All</option>
-                                        <option value='P0'>P0</option>
-                                        <option value='P1'>P1</option>
-                                        <option value='P2'>P2</option>
-                                        <option value='P3'>P3</option>
+        </select>
+    </th>
+    <th>Priority
+        <select id="docTypeDrop3" class="form-select form-select-sm md-flex mx-auto w-60" aria-label="Default select example" style="height:25px">
+            <option value='' selected>All</option>
+            <option value='P0'>P0</option>
+            <option value='P1'>P1</option>
+            <option value='P2'>P2</option>
+            <option value='P3'>P3</option>
 
 
-                                    </select>
-                                </th>
-                                <th data-orderable="true">Sent<br><br></th>
-                                <th data-orderable="true">Due<br><br></th>
+        </select>
+    </th>
+    <th data-orderable="true">Sent<br><br></th>
+    <th data-orderable="true">Due<br><br></th>
 
 
 
-                            </tr>
-                        </thead>
+    </tr>
+    </thead>
 
-                        <tbody>
-                            @foreach ($tickets as $ticket)
-                                <tr onclick="openDiv({{ $ticket->t_ID }})">
-                                    <td>
+    <tbody>
+        @foreach ($tickets as $ticket)
+        <tr onclick="openDiv({{ $ticket->t_ID }})">
+            <td>
 
-                                        @if ($ticket->breaches == true)
-                                            <i class="bi bi-circle-fill" style="color:red"></i>
-                                        @else
-                                            <i class="bi bi-circle-fill" style="color:green"></i>
-                                        @endif
-
-
-                                    </td>
-                                    <td>{{ $ticket->t_ID }}</td>
-                                    <td>{{ $ticket->t_category }}</td>
-                                    <td>{{ $ticket->t_assignedTo }}</td>
-                                    <td>{{ $ticket->t_title }}</td>
-                                    <td>{{ $ticket->t_status }}</td>
-                                    <td>P{{ $ticket->t_priority }}</td>
-                                    <td>{{ $ticket->t_datetime }}</td>
-                                    <td>{{ $ticket->t_due }}</td>
+                @if ($ticket->breaches == true)
+                <i class="bi bi-circle-fill" style="color:red"></i>
+                @else
+                <i class="bi bi-circle-fill" style="color:green"></i>
+                @endif
 
 
-                                </tr>
-                            @endforeach
-                        </tbody>
+            </td>
+            <td>{{ $ticket->t_ID }}</td>
+            <td>{{ $ticket->t_category }}</td>
+            <td>{{ $ticket->t_assignedTo }}</td>
+            <td>{{ $ticket->t_title }}</td>
+            <td>{{ $ticket->t_status }}</td>
+            <td>P{{ $ticket->t_priority }}</td>
+            <td>{{ $ticket->t_datetime }}</td>
+            <td>{{ $ticket->t_due }}</td>
 
 
-                </div>
-            </div>
+        </tr>
+        @endforeach
+    </tbody>
 
-        </div>
+
+    </div>
+    </div>
+
+    </div>
 
     </div>
 

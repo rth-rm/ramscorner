@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    @foreach ($user_loggedin as $userloggedin)
+    @foreach ($client as $userloggedin)
         @include('sweetalert::alert')
         @include('sidebar_client')
         <div class="home-contents">

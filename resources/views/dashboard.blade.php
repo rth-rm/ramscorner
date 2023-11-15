@@ -14,17 +14,12 @@
                     </div>
                     <div class="col">
                         <span class="card-subtitle mb-2 text-body-secondary text-end">
-                            <div class="dropstart pe-5">
-                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sort by:
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Daily</a></li>
-                                    <li><a class="dropdown-item" href="#">Weekly</a></li>
-                                    <li><a class="dropdown-item" href="#">Monthly</a></li>
-                                </ul>
-                            </div>
+                            <select class="form-select" aria-label="Default select example" style="width: 200px; margin-left: 150px;">
+                                <option selected disabled>Select</option>
+                                <option value="1">Daily</option>
+                                <option value="2">Weekly</option>
+                                <option value="3">Annually </option>
+                            </select>
                         </span>
                     </div>
                 </div>
@@ -85,13 +80,14 @@
                         <p>Let the users know about the most common issues and their solutions!</p>
                     </div>
                     <div style="font-size: 60px; margin-right: 10%;">
-                        <i class="bi bi-lightbulb"></i>
+                        <!-- <i class="bi bi-lightbulb"></i> -->
+                        <img src={{ asset('images/KBBTN.png') }} alt="" style="width: 90px; margin-left: 10px;">
                     </div>
                 </div>
             </a>
 
         </div>
-        {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             google.charts.load('current', {
                 'packages': ['corechart']
@@ -123,7 +119,7 @@
                 var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
             }
-        </script> --}}
+        </script> --}} -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             var ctx = document.getElementById('chart_div').getContext('2d');

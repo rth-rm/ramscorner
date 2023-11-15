@@ -2,7 +2,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <center class="profile">
-            <img src={{ asset('images/APCLogo.png') }} alt="">
+            <img src={{ asset('images/APCLOGO11.png') }} alt="">
             <!-- <p>Nacor Industries</p> -->
         </center>
     </div>
@@ -67,18 +67,9 @@
                       <button class="btn" type="button" style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket Chats</button> -->
                     <div class="d-grid gap-2 d-md-block m-3">
                         <button class="btn" type="button"
-                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">
-                            Ticket Updates
-                            @if ($notifCount > 0)
-                                <span class="badge">{{ $notifCount }}</span>
-                            @endif
-                        </button>
+                            style="border-radius: 25px; font-weight:700; color: #817E9D; ">Ticket Updates</button>
                         <button class="btn" type="button"
-                            style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats
-                            @if ($notifCount > 0)
-                                <span class="badge">{{ $notifChatCount }}</span>
-                            @endif
-                        </button>
+                            style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats</button>
                         <style>
                             button:focus {
                                 background-color: #E9E9E9;
@@ -111,12 +102,3 @@
             </div>
         </div>
     </nav>
-    <style>
-        .badge {
-            background-color: red;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 50%;
-            font-size: 12px;
-        }
-    </style>

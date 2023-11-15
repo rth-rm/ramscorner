@@ -30,9 +30,10 @@ class TicketController extends Controller
     //         $users = Reporter::wherenotIn('u_role', ['Client']);
     //         $this->notify(new NewTicketNotification($this));
     //     }
-//Ticket Creation
+    //Ticket Creation
 
-    public function createTicketPage(){
+    public function createTicketPage()
+    {
 
         $user_ID = Auth::user();
 
@@ -83,7 +84,6 @@ class TicketController extends Controller
                 "t_description" => $request->content,
                 "t_image" => $filename
             ]);
-
         } else {
             Ticket::create([
                 "u_ID" => $user_ID->u_ID,
@@ -212,7 +212,6 @@ class TicketController extends Controller
         } else {
             return redirect()->route('clientHome');
         }
-
     }
 
 
@@ -243,34 +242,24 @@ class TicketController extends Controller
 
         if ($request->urgency == 1 && $request->impact == 1) {
             $priority = 1;
-
         } else if ($request->urgency == 1 && $request->impact == 2) {
             $priority = 2;
-
         } else if ($request->urgency == 1 && $request->impact == 3) {
             $priority = 2;
-
         } else if ($request->urgency == 2 && $request->impact == 1) {
             $priority = 1;
-
         } else if ($request->urgency == 2 && $request->impact == 2) {
             $priority = 2;
-
         } else if ($request->urgency == 2 && $request->impact == 3) {
             $priority = 3;
-
         } else if ($request->urgency == 3 && $request->impact == 1) {
             $priority = 2;
-
         } else if ($request->urgency == 3 && $request->impact == 2) {
             $priority = 2;
-
         } else if ($request->urgency == 3 && $request->impact == 3) {
             $priority = 3;
-
         } else {
             $priority = 3;
-
         }
 
 
@@ -278,9 +267,6 @@ class TicketController extends Controller
 
         Ticket::create([
             "u_ID" => $user_ID->u_ID,
-            // "t_urgency"=>$request->urgency,
-            // "t_impact"=>$request->impact,
-            // "t_priority"=>$priority,
             "t_category" => strtoupper($request->category),
             "t_cc" => $request->cc,
             "t_title" => $request->title,
@@ -408,14 +394,12 @@ class TicketController extends Controller
         } else {
             return redirect()->route('clientHome');
         }
-
     }
 
     public function viewTicket()
     {
         $tickets = DB::select('select * from tickets');
         return redirect()->route('clientHome', ['tickets' => $tickets]);
-
     }
 
     //Updating Ticket
@@ -432,7 +416,7 @@ class TicketController extends Controller
 
 
 
-        if ($ticket->t_status == $request->status ) {
+        if ($ticket->t_status == $request->status) {
             Alert::warning('Status Change required!');
             return back();
         }
@@ -450,7 +434,6 @@ class TicketController extends Controller
 
 
         if ($request->assign == $ticket->t_assignedTo || $request->assign == "Not Assigned") {
-
         } else {
             $recipients = Reporter::where('u_name', $request->assign)->get()->first();
             Notification::create([
@@ -581,7 +564,6 @@ class TicketController extends Controller
             Alert::warning('Unathorized access!');
             return back();
         }
-
     }
 
 
@@ -625,8 +607,6 @@ class TicketController extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
@@ -654,8 +634,6 @@ class TicketController extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
@@ -679,8 +657,6 @@ class TicketController extends Controller
         ]);
         Alert::success("Escalated", "Ticket # {$tID} has been sent to the Administrator!");
         return back();
-
-
     }
 
 
@@ -718,11 +694,21 @@ class TicketController extends Controller
 
         // $tixCount = Ticket::where('t_cc', $users->u_name)->get()->count();
         $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $users->u_ID)
+            ->where('read_at', null)->get()->count();
+
 
         if ($users->u_role == "Admin" || $users->u_role == "Staff") {
-            return view('admin_tags', ['notif' => $notifCount, 'tixCount' => $tixCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "admin" => $user_info, 'display' => 'block']);
+            return view('admin_tags', [
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount, 'tixCount' => $tixCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "admin" => $user_info, 'display' => 'block'
+            ]);
         } else {
-            return view('client_tags', ['notif' => $notifCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "client" => $user_info, 'tixCount' => $tixCount, 'display' => 'block']);
+            return view('client_tags', [
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "client" => $user_info, 'tixCount' => $tixCount, 'display' => 'block'
+            ]);
         }
     }
 
@@ -755,17 +741,28 @@ class TicketController extends Controller
 
 
         $notifCount = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $users->u_ID)
+            ->where('read_at', null)->get()->count();
+
 
         if ($users->u_role == "Admin" || $users->u_role == "Staff") {
 
-            return view('admin_tags', ['notif' => $notifCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "admin" => $user_info, 'tixCount' => $tixCount, 'display' => 'block']);
+            return view('admin_tags', [
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "admin" => $user_info, 'tixCount' => $tixCount, 'display' => 'block'
+            ]);
         } else {
-            return view('client_tags', ['notif' => $notifCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "client" => $user_info, 'tixCount' => $tixCount, 'display' => 'block']);
+            return view('client_tags', [
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "client" => $user_info, 'tixCount' => $tixCount, 'display' => 'block'
+            ]);
         }
     }
 
 
-    public function addRepairHistory(Request $request, $tID, $problem){
+    public function addRepairHistory(Request $request, $tID, $problem)
+    {
         $users = Auth::user();
         if ($users == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
@@ -775,49 +772,41 @@ class TicketController extends Controller
         $user_info = Reporter::where('u_ID', $users->u_ID)->get();
 
 
-        if($request->rsave == "no"){
-        $ticket = Ticket::find($tID);
-        $ticket->t_status = 'RESOLVED';
-        $ticket->t_resolution = $request->rsteps;
-        $ticket->save();
-
-        StatusHistory::create([
-            "t_ID" => $tID,
-            "sh_Status" => 'RESOLVED',
-            "sh_AssignedTo" => $ticket->t_assignedTo,
-            "sh_doneBy" => $users->u_name
-
-        ]);
-
-
-        }else{
+        if ($request->rsave == "no") {
             $ticket = Ticket::find($tID);
-        $ticket->t_status = 'RESOLVED';
-        $ticket->t_resolution = $request->rsteps;
-        $ticket->save();
+            $ticket->t_status = 'RESOLVED';
+            $ticket->t_resolution = $request->rsteps;
+            $ticket->save();
 
-        StatusHistory::create([
-            "t_ID" => $tID,
-            "sh_Status" => 'RESOLVED',
-            "sh_AssignedTo" => $ticket->t_assignedTo,
-            "sh_doneBy" => $users->u_name
+            StatusHistory::create([
+                "t_ID" => $tID,
+                "sh_Status" => 'RESOLVED',
+                "sh_AssignedTo" => $ticket->t_assignedTo,
+                "sh_doneBy" => $users->u_name
 
-        ]);
-        RepairHistory::create([
+            ]);
+        } else {
+            $ticket = Ticket::find($tID);
+            $ticket->t_status = 'RESOLVED';
+            $ticket->t_resolution = $request->rsteps;
+            $ticket->save();
+
+            StatusHistory::create([
+                "t_ID" => $tID,
+                "sh_Status" => 'RESOLVED',
+                "sh_AssignedTo" => $ticket->t_assignedTo,
+                "sh_doneBy" => $users->u_name
+
+            ]);
+            RepairHistory::create([
                 "dcode" => $request->rdcode,
                 "rh_problem" => $problem,
                 "rh_solution" => $request->rtitle,
                 "d_submittedby" => $users->u_name,
-        ]);
+            ]);
         }
 
         Alert::success("Resolved", "Ticket # {$tID} has been resolved!");
         return back();
-
     }
-
-
-
-
-
 }

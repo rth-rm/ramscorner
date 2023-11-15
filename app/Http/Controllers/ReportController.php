@@ -84,9 +84,14 @@ class ReportController extends Controller
         $filters = [];
 
         $notifCount = Notification::where('user_id', $user->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user->u_ID)
+            ->where('read_at', null)->get()->count();
+
         if ($user->u_role == "Admin" || $user->u_role == "Staff") {
             return view('admin_reports', [
-                'notif' => $notifCount,
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount,
                 'monthly' => $monthly,
                 'admin' => $user_info,
                 'years' => $years,
@@ -97,12 +102,10 @@ class ReportController extends Controller
                 'records' => 0
 
             ]);
-
         } else {
             Alert::warning('WARNING', 'Unathorized access!');
             return back();
         }
-
     }
 
     public function generateReportbyFilter($reportdata, $request)
@@ -144,8 +147,15 @@ class ReportController extends Controller
 
 
         $notifCount = Notification::where('user_id', $user->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user->u_ID)
+            ->where('read_at', null)->get()->count();
+
         if ($user->u_role == "Admin" || $user->u_role == "Staff") {
             return view('admin_reports', [
+
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount,
                 'notif' => $notifCount,
                 'admin' => $user_info,
                 'years' => $years,
@@ -160,7 +170,6 @@ class ReportController extends Controller
             Alert::warning('WARNING', 'Unathorized access!');
             return back();
         }
-
     }
 
 
@@ -290,18 +299,7 @@ class ReportController extends Controller
 
                         return app()->call([$this, 'generateReportByFilter'], ['reportdata' => $reportData, 'request' => $request]);
                     }
-
                 }
-
-
-
-
-
-
-
-
-
-
             } elseif ($request->dateRange == "Week") {
 
                 $year = $request->weekYearDate;
@@ -311,7 +309,6 @@ class ReportController extends Controller
 
                     Alert::warning('Incomplete Argument', 'Select a Date Range/Date');
                     return redirect()->route('generateReport');
-
                 } else {
 
                     $startDate = Carbon::parse("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT))->startOfWeek();
@@ -419,23 +416,7 @@ class ReportController extends Controller
 
                         return app()->call([$this, 'generateReportByFilter'], ['reportdata' => $reportData, 'request' => $request]);
                     }
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
-
-
-
             } elseif ($request->dateRange == "Month") {
 
                 if ($request->monthDate == "" || $request->monthYearDate == "") {
@@ -550,9 +531,6 @@ class ReportController extends Controller
                         return app()->call([$this, 'generateReportByFilter'], ['reportdata' => $reportData, 'request' => $request]);
                     }
                 }
-
-
-
             } else {
                 if ($request->yearDate == "") {
 
@@ -660,8 +638,6 @@ class ReportController extends Controller
                         return app()->call([$this, 'generateReportByFilter'], ['reportdata' => $reportData, 'request' => $request]);
                     }
                 }
-
-
             }
         }
     }
@@ -758,7 +734,5 @@ class ReportController extends Controller
             });
 
         dd($tickets);
-
-
     }
 }

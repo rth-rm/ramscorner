@@ -20,8 +20,6 @@ class KB extends Controller
         if ($admin == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
 
         if ($admin->u_role == "Client") {
@@ -43,10 +41,14 @@ class KB extends Controller
         $rejected_count = $rejected->count();
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
-        // dd($kb_info);
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get()->count();
 
         return view('admin_KB', [
-            'notif' => $notifCount,
+
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount,
             'kb_info' => $kb_info,
             'user_loggedin' => $user_info,
             'app_count' => $approved_count,
@@ -76,8 +78,6 @@ class KB extends Controller
 
 
         return view('add_kb');
-
-
     }
 
     public function user_KB()
@@ -86,7 +86,6 @@ class KB extends Controller
         if ($client == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
         }
 
 
@@ -170,8 +169,6 @@ class KB extends Controller
 
 
         return redirect()->route('admin_KB');
-
-
     }
 
     public function adminkbView($id)
@@ -198,17 +195,21 @@ class KB extends Controller
             k_b_s::where('kb_ID', $kid)->update([
                 'kb_watch' => ($kb_info->kb_watch) + 1
             ]);
-
-
         }
 
 
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get()->count();
+
         return view(
             'adminkbView',
             [
-                'notif' => $notifCount,
+
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount,
                 'kb_info' => $kb_info,
                 'admin' => $user_info
             ]
@@ -253,14 +254,11 @@ class KB extends Controller
         if ($client == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
 
         if ($client->u_role != "Client") {
 
             return redirect()->route('adminHome');
-
         }
         $user_info = Reporter::where('u_ID', $client->u_ID)->get();
         $kb_info = k_b_s::where('kb_ID', $id)->get()->first();
@@ -268,11 +266,17 @@ class KB extends Controller
             k_b_s::where('kb_ID', $id)->update([
                 'kb_watch' => ($kb_info->kb_watch) + 1
             ]);
-
-
         }
         $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();
-        return view('userkbView', ['notif' => $notifCount, 'kb_info' => $kb_info, 'client' => $user_info]);
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $client->u_ID)
+            ->where('read_at', null)->get()->count();
+
+        return view('userkbView', [
+
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount, 'kb_info' => $kb_info, 'client' => $user_info
+        ]);
     }
 
     public function updateKB(Request $request)
@@ -281,8 +285,6 @@ class KB extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
 
         if ($user->u_role == "Client") {
@@ -323,7 +325,5 @@ class KB extends Controller
         Alert::success($message);
 
         return redirect()->route('admin_KB');
-
     }
-
 }

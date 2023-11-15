@@ -44,7 +44,6 @@ class NotificationController extends Controller
                     "notifs" => $notifs
                 ]
             );
-
         } else {
             return view(
                 'client_notifs',
@@ -56,10 +55,6 @@ class NotificationController extends Controller
                 ]
             );
         }
-
-
-
-
     }
 
     public function openTicketByNotif($nid)
@@ -68,8 +63,6 @@ class NotificationController extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
 
         $notif = Notification::where('nID', $nid)->get()->first();
@@ -86,9 +79,9 @@ class NotificationController extends Controller
 
 
         //     StatusHistory::create( [
-//         "t_ID"=>$tickets->t_ID,
-//         "sh_Status" => 'OPENED',
-//         "sh_doneBy" => $user->u_name
+        //         "t_ID"=>$tickets->t_ID,
+        //         "sh_Status" => 'OPENED',
+        //         "sh_doneBy" => $user->u_name
 
         //     ]);
 
@@ -97,17 +90,17 @@ class NotificationController extends Controller
 
 
         //     if($tickets->t_priority == 1){
-//         $dues = now()->addHours(4);
-//     }else if($tickets->t_priority == 2){
-//         $dues = now()->addHours(72);
-//     }else{
-//         $dues = now()->addHours(168);
-//     }
+        //         $dues = now()->addHours(4);
+        //     }else if($tickets->t_priority == 2){
+        //         $dues = now()->addHours(72);
+        //     }else{
+        //         $dues = now()->addHours(168);
+        //     }
 
         //     $tickets->t_status = 'OPENED';
-//     $tickets->t_due = $dues;
-//     $tickets->save();
-// }
+        //     $tickets->t_due = $dues;
+        //     $tickets->save();
+        // }
 
 
         $tickets->t_views = ($tickets->t_views) + 1;
@@ -127,9 +120,16 @@ class NotificationController extends Controller
         $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
 
+        $notifCount = Notification::where('user_id', $user->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user->u_ID)
+            ->where('read_at', null)->get()->count();
+        return view('admin_open_ticket', [
 
-        return view('admin_open_ticket', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff]);
 
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff
+        ]);
     }
 
 
@@ -144,8 +144,6 @@ class NotificationController extends Controller
         if ($client == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
 
 
@@ -167,18 +165,23 @@ class NotificationController extends Controller
             $notif->save();
         }
 
+        $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $client->u_ID)
+            ->where('read_at', null)->get()->count();
         $chats = TicketMessages::where('tix_id', $tickets->t_ID)->get();
         $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
         if ($client->u_role == "Admin" || $client->u_role == "Staff") {
-            return view('admin_personal_tickets', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff]);
-
-        } elseif ($client->u_role == "Staff") {
-            return view('staff_personal_tickets', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff]);
-
+            return view('admin_personal_tickets', [
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff
+            ]);
         } else {
-            return view('client_open_ticket', ['chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff]);
-
+            return view('client_open_ticket', [
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff
+            ]);
         }
     }
 }

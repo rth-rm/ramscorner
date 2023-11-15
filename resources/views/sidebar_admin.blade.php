@@ -60,7 +60,7 @@
                     data-bs-auto-close="outside"></i>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><span class="dropdown-item-text" style="font-weight: 700;">Notifications<span
-                                class="badge">{{ $notifCount + $notifChaatCount }}</span></li>
+                                class="badge">{{ $notifCount + $notifChatCount }}</span></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

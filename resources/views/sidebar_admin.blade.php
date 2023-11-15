@@ -87,7 +87,7 @@
                             }
                         </style>
                     </div>
-                    <div>
+                    <div id = "">
                         <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
                         </li>
                         <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>

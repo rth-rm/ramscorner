@@ -41,12 +41,29 @@ class ChatsController extends Controller
         ]);
         $message->save();
 
-        Notification::create([
-            "user_id"=>$uid,
-            "ticket_id" => $tid,
-            "n_message" => 'New message in Ticket#'.$tid
 
-        ]);
+        $doneby = Ticket::where('t_ID', $tid)->value('t_assignedTo');
+        $doneBy = Reporter::where('u_name',$doneby)->value('u_ID');
+        $recipients = Reporter::wherenotIn('u_role', ['Client'])->get();
+
+        if($doneby == null || $doneby == "Not Assigned"){
+             foreach ($recipients as $recipient) {
+            Notification::create([
+                "user_id" => $recipient->u_ID,
+                "ticket_id" => $tid,
+                "n_message" => 'New message in Ticket#'.$tid
+
+            ]);
+        }
+
+        }else{
+            Notification::create([
+            "user_id"=>$doneBy,
+            "ticket_id" => $tid,
+            "n_message" => 'New message in Ticket#'.$tid]);
+        }
+
+
 
         return redirect()->back();
     }

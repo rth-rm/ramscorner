@@ -74,7 +74,11 @@
                             @endif
                         </button>
                         <button class="btn" type="button"
-                            style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats</button>
+                            style="border-radius: 25px; font-weight:700; color: #817E9D;">Ticket Chats
+                            @if ($notifCount > 0)
+                                <span class="badge">{{ $notifChatCount }}</span>
+                            @endif
+                        </button>
                         <style>
                             button:focus {
                                 background-color: #E9E9E9;
@@ -110,14 +114,9 @@
     <style>
         .badge {
             background-color: red;
-            /* Set your preferred background color */
             color: white;
-            /* Set your preferred text color */
             padding: 5px 10px;
-            /* Adjust padding as needed */
             border-radius: 50%;
-            /* Make it circular */
             font-size: 12px;
-            /* Adjust font size as needed */
         }
     </style>

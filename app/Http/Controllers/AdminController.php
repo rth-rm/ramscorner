@@ -213,11 +213,15 @@ class AdminController extends Controller
         $ticketsssss = $ticketssss->where('breaches', true)->count();
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+                                    ->where('user_id', $admin->u_ID)
+                                    ->where('read_at', null)->get()->count();
 
         list($statusCounts, $softwareCounts, $hardwareCounts) = $this->dashboard();
 
         return view('admin_home', [
             "notifCount"=>$notifCount,
+            "notifChatCount"=>$notifChatCount,
             "statusmonth" => $statusCounts,
             "softwaremonth" => $softwareCounts,
             "hardwaremonth" => $hardwareCounts,

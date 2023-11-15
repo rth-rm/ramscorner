@@ -2,7 +2,16 @@
     <div class="dashboard-boxes"></div>
     <div class="title mb-5">
         <h1>Admin Dashboard</h1>
-        <i class="bi bi-calendar2  me-4"> October 01, 2023 - October 31, 2023</i>
+        <i class="bi bi-calendar2  me-4"><input class="ms-3" type="text" name="daterange" value="01/01/2023 - 01/15/2023" /></i>
+        <script>
+            $(function() {
+                $('input[name="daterange"]').daterangepicker({
+                    opens: 'left'
+                }, function(start, end, label) {
+                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                });
+            });
+        </script>
     </div>
 
     <div class="dash-contents">

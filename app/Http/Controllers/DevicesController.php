@@ -43,12 +43,19 @@ class DevicesController extends Controller
         $device_list = Devices::where('d_show', 1)->get();
 
 
+        $notifCount = Notification::where('user_id', $user_loggedin->u_ID)->where('read_at', null)->get()->count();
+        $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user_loggedin->u_ID)
+            ->where('read_at', null)->get()->count();
+
 
         return view('device_list', [
             "user_loggedin" => $user_info,
+
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount,
             "device_list" => $device_list
         ]);
-
     }
 
 
@@ -169,7 +176,6 @@ class DevicesController extends Controller
         $repair_history = RepairHistory::where('dcode', $dcode)->get();
 
         return ['device_detail' => $device_detail, 'repair_history' => $repair_history];
-
     }
 
     public function editDeviceDetail($dcode)
@@ -183,7 +189,6 @@ class DevicesController extends Controller
         }
 
         return view('edit_device', ['device_detail' => $device_detail, 'repair_history' => $repair_history]);
-
     }
 
     public function editDevices(Request $request)
@@ -224,8 +229,6 @@ class DevicesController extends Controller
 
 
         return redirect()->route('devices');
-
-
     }
 
     public function archiveDevice($dcode)
@@ -234,8 +237,6 @@ class DevicesController extends Controller
         if ($user == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
 
@@ -253,10 +254,5 @@ class DevicesController extends Controller
             // Device not found, handle accordingly (e.g., show an error message)
             return redirect()->back()->with('error', 'Device not found.');
         }
-
-
     }
-
-
-
 }

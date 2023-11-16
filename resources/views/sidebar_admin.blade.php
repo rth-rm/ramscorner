@@ -138,11 +138,11 @@
 
             // Toggle the visibility of the divs
             if (updating.style.display === 'none') {
-                updtaing.style.display = 'block';
+                updating.style.display = 'block';
                 chatting.style.display = 'none';
             } else {
                 updtaing.style.display = 'none';
-                chatting.style.display = 'none';
+                chatting.style.display = 'block';
             }
         }
     </script>

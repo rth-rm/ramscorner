@@ -80,11 +80,7 @@
                                     </script>
                                     <div class="card-footer text-body-secondary"
                                         style="display: flex; justify-content: end; background-color: #fff">
-                                        <a href = "{{ url('add_kb') }}">
-                                            <button type="button" class="btn btn-primary btn-lg"
-                                                style="border-radius: 25px; background-color:#6644a8;">Create KB
-                                                Article</button>
-                                        </a>
+
                                     </div>
                                 </div>
 

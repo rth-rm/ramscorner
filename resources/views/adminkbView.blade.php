@@ -38,8 +38,12 @@
                             </div>
                         </div>
                         <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
-                            <button type="button" class="btn btn-primary btn-lg me-5 m-3 "
-                                style="border-radius: 25px;">Create KB Article</button>
+
+                            <button type = "button"><i class="bi bi-check-circle-fill"></i></button>
+                            <button type = "button"><i class="bi bi-x-circle-fill"></i></button>
+                            <button type = "button"><i class="bi bi-pencil-fill"></i></button>
+
+
                         </div>
                     </div>
                 </div>

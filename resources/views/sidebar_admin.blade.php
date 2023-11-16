@@ -143,8 +143,6 @@
             } else {
                 updtaing.style.display = 'none';
                 chatting.style.display = 'none';
-            } else {
-                .style.display = 'block';
             }
         }
     </script>

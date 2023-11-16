@@ -140,7 +140,7 @@
             if (updating.style.display === 'none') {
                 updating.style.display = 'block';
                 chatting.style.display = 'none';
-            } else if (updating.style.display === 'none') {
+            } else if (chatting.style.display === 'none') {
                 updating.style.display = 'none';
                 chatting.style.display = 'block';
             } else {

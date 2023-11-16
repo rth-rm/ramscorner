@@ -78,6 +78,7 @@
                                 <div class="chat-message sender-message">
                                     {{ $chatsss->us_id }} | {{ $chatsss->m_content }}
                                 </div>
+                            @else
                                 <div class="chat-message received-message">
                                     {{ $chatsss->us_id }} | {{ $chatsss->m_content }}
                                 </div>

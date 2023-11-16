@@ -65,13 +65,14 @@
                         <hr class="dropdown-divider">
                     </li>
                     <button class="btn" type="button"
-                        style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;" id="updates">Ticket
+                        style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;"
+                        id="updates" onclick = "updates()"> Ticket
                         Updates
                         @if ($notifCount > 0)
                             <span class="badge">{{ $notifCount }}</span>
                         @endif
                     </button>
-                    <button class="btn" type="button"
+                    <button class="btn" type="button" onclick = "chats()"
                         style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket
                         Chats
                         @if ($notifCount > 0)
@@ -86,7 +87,13 @@
                             }
                         </style>
                     </div>
-                    <div id = "">
+                    <div id = "updating" style= "display: block">
+                        <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
+                        </li>
+                    </div>
+                    <div id = "chatting" style = "display: none">
                         <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
                         </li>
                         <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
@@ -126,3 +133,14 @@
             /* Adjust font size as needed */
         }
     </style>
+    <script>
+        function updates() {
+            document.getElementById("updating").display("block");
+            document.getElementById("chatting").display("none");
+        }
+
+        function chats() {
+            document.getElementById("updating").display("none");
+            document.getElementById("chatting").display("block");
+        }
+    </script>

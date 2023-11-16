@@ -74,7 +74,7 @@
                 <div class="items">
                     <div style="border-top: 50px solid #05E0E9;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ closed }}</span>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ $closed }}</span>
                     <h6>Closed Tickets</h6>
                 </div>
                 <div class="items">

@@ -1,5 +1,5 @@
 @include('header')
-<title>REPORTS</title>
+<title>Create a Ticket</title>
 <link rel="stylesheet" href="{{ asset('assets/css/create_ticket.css') }}" type = "text/css">
 </head>
 

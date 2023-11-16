@@ -89,7 +89,7 @@
                     </div>
                     <div id = "updating">
                         @foreach ($notify as $notifies)
-                            <li><a class="dropdown-item" href="{{ url(' openTicketByNotif' . $notify->ticket_id) }}">
+                            <li><a class="dropdown-item" href="{{ url(' openTicketByNotif' . $notifies->ticket_id) }}">
                                     {{ $notifies->n_message }} <i class="bi bi-alarm-fill"></i></a>
                             </li>
                         @endforeach

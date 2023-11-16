@@ -1,7 +1,7 @@
 @include('header')
 
 <title> KBID#{{ $kb_info->kb_ID }}</title>
-<link rel="stylesheet" href="{{ asset('assets/css/kb_clicked_admin.css') }}" type = "text/css">
+{{-- <link rel="stylesheet" href="{{ asset('assets/css/kb_clicked_admin.css') }}" type = "text/css"> --}}
 </head>
 
 <body style="background-color: rgb(255, 255, 255); ">

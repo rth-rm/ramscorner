@@ -2,13 +2,15 @@
     <div class="dashboard-boxes"></div>
     <div class="title mb-5">
         <h1>Admin Dashboards</h1>
-        <i class="bi bi-calendar2  me-4"><input class="ms-3" type="text" name="daterange" value="01/01/2023 - 01/15/2023" /></i>
+        <i class="bi bi-calendar2  me-4"><input class="ms-3" type="text" name="daterange"
+                value="01/01/2023 - 01/15/2023" /></i>
         <script>
             $(function() {
                 $('input[name="daterange"]').daterangepicker({
                     opens: 'left'
                 }, function(start, end, label) {
-                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end
+                        .format('YYYY-MM-DD'));
                 });
             });
         </script>
@@ -23,7 +25,8 @@
                     </div>
                     <div class="col">
                         <span class="card-subtitle mb-2 text-body-secondary text-end">
-                            <select class="form-select" aria-label="Default select example" style="width: 200px; margin-left: 150px;">
+                            <select class="form-select" aria-label="Default select example"
+                                style="width: 200px; margin-left: 150px;">
                                 <option selected disabled>Select</option>
                                 <option value="1">Daily</option>
                                 <option value="2">Weekly</option>
@@ -47,38 +50,38 @@
                 <div class="items">
                     <div style="border-top: 50px solid #75D481;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ $opened }}</span>
                     <h6>Opened Tickets</h6>
                 </div>
                 <div class="items">
                     <div style="border-top: 50px solid #6257E3;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ $all }}</span>
                     <h6>Total Tickets</h6>
                 </div>
                 <div class="items">
                     <div style="border-top: 50px solid #EEF8EB;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
-                    <h6>Opened Tickets</h6>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ $pending }}</span>
+                    <h6>Pending Tickets</h6>
                 </div>
                 <div class="items">
                     <div style="border-top: 50px solid #8F5D46;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
-                    <h6>Active Clients</h6>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ $resolved }}</span>
+                    <h6>Resolved Tickets</h6>
                 </div>
                 <div class="items">
                     <div style="border-top: 50px solid #05E0E9;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
-                    <h6>Opened Tickets</h6>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ closed }}</span>
+                    <h6>Closed Tickets</h6>
                 </div>
                 <div class="items">
                     <div style="border-top: 50px solid #E0DFD8;  border-radius: 25px;">
                     </div>
-                    <span style="font-size: 30px; font-weight: 500; color: #333;">69</span>
-                    <h6>Opened Tickets</h6>
+                    <span style="font-size: 30px; font-weight: 500; color: #333;">{{ $escalated }}</span>
+                    <h6>Escalated Tickets</h6>
                 </div>
 
             </div>
@@ -96,7 +99,7 @@
             </a>
 
         </div>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             var ctx = document.getElementById('chart_div').getContext('2d');

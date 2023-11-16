@@ -54,13 +54,14 @@
                         <hr class="dropdown-divider">
                     </li>
                     <button class="btn" type="button"
-                        style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;">Ticket
+                        style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;"
+                        id="updates" onclick = "updates()"> Ticket
                         Updates
                         @if ($notifCount > 0)
                             <span class="badge">{{ $notifCount }}</span>
                         @endif
                     </button>
-                    <button class="btn" type="button"
+                    <button class="btn" type="button" onclick = "updates()"
                         style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket
                         Chats
                         @if ($notifCount > 0)
@@ -75,11 +76,22 @@
                             }
                         </style>
                     </div>
-                    <div id = "">
-                        <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
-                        </li>
-                        <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
-                        </li>
+                    <div id = "updating">
+                        @foreach ($notify as $notifies)
+                            <li><a class="dropdown-item" href="{{ url(' openTicketByNotif' . $notifies->ticket_id) }}">
+                                    {{ $notifies->n_message }} <i class="bi bi-alarm-fill"></i></a>
+                            </li>
+                        @endforeach
+
+                    </div>
+                    <div id = "chatting" style = "display: none">
+
+                        @foreach ($notifyChat as $notifiesChat)
+                            <li><a class="dropdown-item"
+                                    href="{{ url(' openTicketByNotif' . $notifiesChat->ticket_id) }}">
+                                    {{ $notifiesChat->n_message }} <i class="bi bi-alarm-fill"></i></a>
+                            </li>
+                        @endforeach
                     </div>
 
                 </ul>

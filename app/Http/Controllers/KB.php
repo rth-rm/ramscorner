@@ -94,7 +94,7 @@ class KB extends Controller
             return redirect()->route('adminHome');
         }
         $user_info = Reporter::where('u_ID', $client->u_ID)->get();
-        $kb_info = k_b_s::where('kb_status', 1)
+        $kb_info = k_b_s::where('kb_status', "APPROVED")
             ->where('kb_view', 1)
             ->get();
         $notifCount = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get()->count();

@@ -44,9 +44,14 @@ class KB extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $admin->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get();
 
         return view('admin_KB', [
-
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
             "notifChatCount" => $notifChatCount,
             'kb_info' => $kb_info,
@@ -101,8 +106,15 @@ class KB extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $client->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $client->u_ID)
+            ->where('read_at', null)->get();
+
 
         return view('user_KB', [
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
             "notifChatCount" => $notifChatCount, 'kb_info' => $kb_info, 'client' => $user_info
         ]);
@@ -210,6 +222,11 @@ class KB extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $admin->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get();
+
 
         return view(
             'adminkbView',
@@ -218,12 +235,16 @@ class KB extends Controller
                 "notifCount" => $notifCount,
                 "notifChatCount" => $notifChatCount,
                 'kb_info' => $kb_info,
-                'admin' => $user_info
+                'admin' => $user_info,
+
+                "notify" => $notify,
+                "notifyChat" => $notifChat,
             ]
         );
     }
 
-    public function approveKB(){
+    public function approveKB()
+    {
 
 
 
@@ -285,9 +306,16 @@ class KB extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $client->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $client->u_ID)
+            ->where('read_at', null)->get();
+
 
         return view('userkbView', [
 
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
             "notifChatCount" => $notifChatCount, 'kb_info' => $kb_info, 'client' => $user_info
         ]);

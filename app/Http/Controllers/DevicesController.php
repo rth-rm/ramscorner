@@ -47,11 +47,17 @@ class DevicesController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $user_loggedin->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $user_loggedin->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user_loggedin->u_ID)
+            ->where('read_at', null)->get();
+
 
 
         return view('device_list', [
             "user_loggedin" => $user_info,
-
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
             "notifChatCount" => $notifChatCount,
             "device_list" => $device_list

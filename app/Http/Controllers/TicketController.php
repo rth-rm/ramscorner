@@ -697,10 +697,17 @@ class TicketController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $users->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $users->u_ID)
+            ->where('read_at', null)->get();
+
 
 
         if ($users->u_role == "Admin" || $users->u_role == "Staff") {
             return view('admin_tags', [
+                "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifCount" => $notifCount,
                 "notifChatCount" => $notifChatCount, 'tixCount' => $tixCount, 'sample' => $ticketss, 'ticket' => $tickets, "user" => $user_info, "admin" => $user_info, 'display' => 'block'
             ]);
@@ -744,11 +751,18 @@ class TicketController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $users->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $users->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $users->u_ID)
+            ->where('read_at', null)->get();
 
 
         if ($users->u_role == "Admin" || $users->u_role == "Staff") {
 
             return view('admin_tags', [
+
+                "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifCount" => $notifCount,
                 "notifChatCount" => $notifChatCount, 'ticket' => $ticket, 'sample' => $ticketss, "user" => $user_info, "admin" => $user_info, 'tixCount' => $tixCount, 'display' => 'block'
             ]);

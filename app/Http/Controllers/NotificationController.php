@@ -96,9 +96,15 @@ class NotificationController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $user->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $user->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user->u_ID)
+            ->where('read_at', null)->get();
+
         return view('admin_open_ticket', [
 
-
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
             "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff
         ]);
@@ -141,17 +147,24 @@ class NotificationController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $client->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $client->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $client->u_ID)
+            ->where('read_at', null)->get();
+
         $chats = TicketMessages::where('tix_id', $tickets->t_ID)->get();
         $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
         if ($client->u_role == "Admin" || $client->u_role == "Staff") {
             return view('admin_personal_tickets', [
-                "notifCount" => $notifCount,
+                "notifCount" => $notifCount,   "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff
             ]);
         } else {
             return view('client_open_ticket', [
-                "notifCount" => $notifCount,
+                "notifCount" => $notifCount,   "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff
             ]);
         }

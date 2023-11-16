@@ -87,9 +87,17 @@ class ReportController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $user->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $user->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user->u_ID)
+            ->where('read_at', null)->get();
+
 
         if ($user->u_role == "Admin" || $user->u_role == "Staff") {
             return view('admin_reports', [
+
+                "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifCount" => $notifCount,
                 "notifChatCount" => $notifChatCount,
                 'monthly' => $monthly,
@@ -150,10 +158,17 @@ class ReportController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $user->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $user->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $user->u_ID)
+            ->where('read_at', null)->get();
+
 
         if ($user->u_role == "Admin" || $user->u_role == "Staff") {
             return view('admin_reports', [
 
+                "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifCount" => $notifCount,
                 "notifChatCount" => $notifChatCount,
                 'notif' => $notifCount,

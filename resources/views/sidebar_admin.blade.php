@@ -65,7 +65,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <button class="btn" type="button"
-                        style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;">Ticket
+                        style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D; margin: 10px;" id="updates">Ticket
                         Updates
                         @if ($notifCount > 0)
                             <span class="badge">{{ $notifCount }}</span>

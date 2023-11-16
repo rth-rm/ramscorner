@@ -140,9 +140,11 @@
             if (updating.style.display === 'none') {
                 updating.style.display = 'block';
                 chatting.style.display = 'none';
-            } else {
+            } else if (updating.style.display === 'none') {
                 updtaing.style.display = 'none';
                 chatting.style.display = 'block';
+            } else {
+                updtaing.style.display = 'block';
             }
         }
     </script>

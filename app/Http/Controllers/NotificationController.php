@@ -75,34 +75,6 @@ class NotificationController extends Controller
 
 
 
-        //     if($tickets->t_status == "NEW"){
-
-
-        //     StatusHistory::create( [
-        //         "t_ID"=>$tickets->t_ID,
-        //         "sh_Status" => 'OPENED',
-        //         "sh_doneBy" => $user->u_name
-
-        //     ]);
-
-
-
-
-
-        //     if($tickets->t_priority == 1){
-        //         $dues = now()->addHours(4);
-        //     }else if($tickets->t_priority == 2){
-        //         $dues = now()->addHours(72);
-        //     }else{
-        //         $dues = now()->addHours(168);
-        //     }
-
-        //     $tickets->t_status = 'OPENED';
-        //     $tickets->t_due = $dues;
-        //     $tickets->save();
-        // }
-
-
         $tickets->t_views = ($tickets->t_views) + 1;
         $tickets->save();
 

@@ -34,19 +34,16 @@ class AdminController extends Controller
         if ($admin == null) {
             Alert::warning('Warning!!!', 'You are not authorized!');
             return redirect()->route('loginPage');
-
-
         }
 
 
         $thirtyMinutesAgo = Carbon::now()->subMinutes(30);
-            $newpastthirtymins = Ticket::where('t_status', "NEW")
-                        ->where('t_datetime', '>', $thirtyMinutesAgo)
-                        ->get()->count();
-            if($newpastthirtymins != 0){
-              Alert::toast($newpastthirtymins.' tickets are still unopened. Check them out!');
-
-            }
+        $newpastthirtymins = Ticket::where('t_status', "NEW")
+            ->where('t_datetime', '>', $thirtyMinutesAgo)
+            ->get()->count();
+        if ($newpastthirtymins != 0) {
+            Alert::toast($newpastthirtymins . ' tickets are still unopened. Check them out!');
+        }
 
         if ($admin->u_role == "Client") {
             Alert::warning('Warning!!!', 'Unauthorized Access!');
@@ -83,7 +80,6 @@ class AdminController extends Controller
                 $mostViewTix = $mostViewTixss->t_ID;
                 $views = $mostViewTixss->t_views;
             }
-
         } else {
             $mostViewTix = 0;
             $views = 0;
@@ -99,7 +95,7 @@ class AdminController extends Controller
         $escalated = $escalatedTickets;
         if (
             $mostViewKbs == 0 || $mostViewKB = DB::table('k_b_s')->orderBy('kb_watch', 'desc')
-                ->where('kb_status', "APPROVED")->get()->first()->kb_watch == 0
+            ->where('kb_status', "APPROVED")->get()->first()->kb_watch == 0
         ) {
             $mostViewKB = "--";
             $watch = 0;
@@ -216,13 +212,19 @@ class AdminController extends Controller
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
-                                    ->where('user_id', $admin->u_ID)
-                                    ->where('read_at', null)->get()->count();
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get();
 
 
         return view('admin_home', [
-            "notifCount"=>$notifCount,
-            "notifChatCount"=>$notifChatCount,
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount,
             "statusmonth" => $statusCounts,
             "softwaremonth" => $softwareCounts,
             "hardwaremonth" => $hardwareCounts,
@@ -256,7 +258,7 @@ class AdminController extends Controller
             'escalated' => $escalated,
             'overdue' => $ticketsssss
 
-        ], );
+        ],);
     }
 
 
@@ -373,10 +375,10 @@ class AdminController extends Controller
 
         $ticketsssss = $ticketssss->where('breaches', true)->count();
 
-         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
-                                    ->where('user_id', $admin->u_ID)
-                                    ->where('read_at', null)->get()->count();
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get()->count();
 
 
 
@@ -384,8 +386,8 @@ class AdminController extends Controller
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         return view('view_all_tickets', [
 
-            "notifCount"=>$notifCount,
-            "notifChatCount"=>$notifChatCount,
+            "notifCount" => $notifCount,
+            "notifChatCount" => $notifChatCount,
             "notif" => $notifCount,
             "tickets" => $alltickets,
             "users" => $allUsers,
@@ -394,7 +396,6 @@ class AdminController extends Controller
             'curDatetime' => $currentDateTime,
             'ticketsss' => $ticketssss
         ]);
-
     }
 
     public function openTicket($t_id)
@@ -449,16 +450,16 @@ class AdminController extends Controller
 
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
-                                    ->where('user_id', $admin->u_ID)
-                                    ->where('read_at', null)->get()->count();
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get()->count();
 
 
         return view(
             'admin_open_ticket',
             [
 
-            "notifCount"=>$notifCount,
-            "notifChatCount"=>$notifChatCount,
+                "notifCount" => $notifCount,
+                "notifChatCount" => $notifChatCount,
                 'device' => $device_detail,
                 'repair' => $repair_history,
                 'ticket_id' => $t_id,
@@ -472,11 +473,5 @@ class AdminController extends Controller
                 'staffs' => $staff
             ]
         );
-
     }
 }
-
-
-
-
-

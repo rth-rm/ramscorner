@@ -88,14 +88,21 @@
                         </style>
                     </div>
                     <div id = "updating">
-                        <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
-                        </li>
+                        @foreach ($notify as $notifies)
+                            <li><a class="dropdown-item" href="{{ url(' openTicketByNotif' . $notify->ticket_id) }}">
+                                    {{ $notifies->n_message }} <i class="bi bi-alarm-fill"></i></a>
+                            </li>
+                        @endforeach
 
                     </div>
                     <div id = "chatting" style = "display: none">
 
-                        <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
-                        </li>
+                        @foreach ($notifyChat as $notifiesChat)
+                            <li><a class="dropdown-item"
+                                    href="{{ url(' openTicketByNotif' . $notifiesChat->ticket_id) }}">
+                                    {{ $notifiesChat->n_message }} <i class="bi bi-alarm-fill"></i></a>
+                            </li>
+                        @endforeach
                     </div>
 
                 </ul>

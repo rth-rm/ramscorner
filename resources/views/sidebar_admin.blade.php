@@ -72,7 +72,7 @@
                             <span class="badge">{{ $notifCount }}</span>
                         @endif
                     </button>
-                    <button class="btn" type="button" onclick = "chats()"
+                    <button class="btn" type="button" onclick = "updates()"
                         style="border-radius: 25px; background-color: #F6F7FB; font-weight:700; color: #817E9D;  margin: 10px;">Ticket
                         Chats
                         @if ($notifCount > 0)
@@ -87,15 +87,13 @@
                             }
                         </style>
                     </div>
-                    <div id = "updating" style= "display: block">
+                    <div id = "updating">
                         <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
-                        </li>
+
                     </div>
                     <div id = "chatting" style = "display: none">
-                        <li><a class="dropdown-item" href="#">Notifications 1 <i class="bi bi-alarm-fill"></i></a>
-                        </li>
+
                         <li><a class="dropdown-item" href="#">Notifications 2 <i class="bi bi-alarm-fill"></i></a>
                         </li>
                     </div>
@@ -135,12 +133,18 @@
     </style>
     <script>
         function updates() {
-            document.getElementById("updating").display("block");
-            document.getElementById("chatting").display("none");
-        }
+            var updating = document.getElementById('updating');
+            var chatting = document.getElementById('chatting');
 
-        function chats() {
-            document.getElementById("updating").display("none");
-            document.getElementById("chatting").display("block");
+            // Toggle the visibility of the divs
+            if (updating.style.display === 'none') {
+                updtaing.style.display = 'block';
+                chatting.style.display = 'none';
+            } else {
+                updtaing.style.display = 'none';
+                chatting.style.display = 'none';
+            } else {
+                .style.display = 'block';
+            }
         }
     </script>

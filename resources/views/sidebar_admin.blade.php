@@ -141,10 +141,10 @@
                 updating.style.display = 'block';
                 chatting.style.display = 'none';
             } else if (updating.style.display === 'none') {
-                updtaing.style.display = 'none';
+                updating.style.display = 'none';
                 chatting.style.display = 'block';
             } else {
-                updtaing.style.display = 'block';
+                updating.style.display = 'block';
             }
         }
     </script>

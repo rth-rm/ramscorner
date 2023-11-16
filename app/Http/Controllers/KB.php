@@ -223,6 +223,13 @@ class KB extends Controller
         );
     }
 
+    public function approveKB(){
+
+
+
+        return redirect()->back();
+    }
+
     // public function staffkbView($id)
     // {
 

@@ -379,6 +379,11 @@ class AdminController extends Controller
         $notifChatCount = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
             ->where('user_id', $admin->u_ID)
             ->where('read_at', null)->get()->count();
+        $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get();
+
 
 
 
@@ -386,6 +391,8 @@ class AdminController extends Controller
         $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
         return view('view_all_tickets', [
 
+            "notify" => $notify,
+            "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
             "notifChatCount" => $notifChatCount,
             "notif" => $notifCount,
@@ -442,6 +449,12 @@ class AdminController extends Controller
         //     $notification->save();
         // }
 
+        $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
+        $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')
+            ->where('user_id', $admin->u_ID)
+            ->where('read_at', null)->get();
+
+
         $chats = TicketMessages::where('tix_id', $tickets->t_ID)->get();
         $chatss = TicketMessages::where('tix_id', $tickets->t_ID)->get()->count();
 
@@ -458,6 +471,8 @@ class AdminController extends Controller
             'admin_open_ticket',
             [
 
+                "notify" => $notify,
+                "notifyChat" => $notifChat,
                 "notifCount" => $notifCount,
                 "notifChatCount" => $notifChatCount,
                 'device' => $device_detail,

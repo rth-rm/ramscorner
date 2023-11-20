@@ -19,9 +19,8 @@
                                 <li style="margin: 10px 0; padding: 10px; border-left: 5px solid #6644A8;{{ $status_tracking == $last ? 'background-color: #CDB9D9; color: black' : '' }}">
                                     <h5 style="font-weight: 600; color: #6644a8">
                                         {{ $status_tracking->sh_Status }}
-                                    </h5>
-                                    <h5>{{ $status_tracking->sh_datetime }}</h5>
-                                    <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
+                                        <h5>{{ $status_tracking->sh_datetime }}</h5>
+                                        <h5>{{ $status_tracking->sh_AssignedTo }}</h5>
                                 </li>
                                 @endforeach
                             </ul>
@@ -36,12 +35,14 @@
                                 <h5>Assigned to: {{ $tickets->t_assignedTo }}</h5>
                             </div>
                             <div class="tic-id">
-                                @if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code != 'NONE')
+                                @if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code == DB::table('devices')->where('d_code', $tickets->dev_code)->value('d_code'))
+
                                 <h6>Hardware ID: {{ $tickets->dev_code }}</h6>
                                 <h6><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View
                                         Repair History</a></h6>
                                 @include('view_device_details')
                                 @else
+
                                 @endif
 
                             </div>
@@ -291,6 +292,7 @@
 
 
     }
+
 </script>
 <script>
     function saveRepair() {
@@ -302,6 +304,7 @@
         document.getElementsByName('rsave').value = "no";
         console.log(document.getElementsByName('rsave').value);
     }
+
 </script>
 <script>
     window.onload = function() {
@@ -315,19 +318,20 @@
             updateButton.style.display = 'none';
         }
     };
+
 </script>
 
 {{-- impact/urgency/priority script  --}}
 <script>
-    const urgency = document.getElementById("urgency"),
-        impact = document.getElementById("impact"),
-        priority = document.getElementById("priority");
+    const urgency = document.getElementById("urgency")
+        , impact = document.getElementById("impact")
+        , priority = document.getElementById("priority");
     urgency.addEventListener('change', updateInputValue);
     impact.addEventListener('change', updateInputValue);
 
     function updateInputValue() {
-        const urge = urgency.value,
-            imp = impact.value;
+        const urge = urgency.value
+            , imp = impact.value;
         if (urge == 1 && imp == 1) {
             priority.value = 1;
         } else if (urge == 1 && imp == 2) {
@@ -360,6 +364,7 @@
         }
 
     }
+
 </script>
 
 
@@ -382,6 +387,7 @@
 
 
     });
+
 </script>
 
 </div>

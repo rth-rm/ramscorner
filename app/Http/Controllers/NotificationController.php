@@ -106,7 +106,16 @@ class NotificationController extends Controller
             "notify" => $notify,
             "notifyChat" => $notifChat,
             "notifCount" => $notifCount,
-            "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'tickets' => $tickets, "admin" => $user_info, 'client' => $client, 'status' => $status, 'staffs' => $staff
+            "notifChatCount" => $notifChatCount,
+            'chats' => $chats,
+            'chatss' => $chatss,
+            'last' => $last,
+            'notif' => $notifCount,
+            'tickets' => $tickets,
+            "admin" => $user_info,
+            'client' => $client,
+            'status' => $status,
+            'staffs' => $staff
         ]);
     }
 
@@ -157,15 +166,37 @@ class NotificationController extends Controller
         $last = StatusHistory::where('t_id', $tickets->t_ID)->get()->last();
         if ($client->u_role == "Admin" || $client->u_role == "Staff") {
             return view('admin_personal_tickets', [
-                "notifCount" => $notifCount,   "notify" => $notify,
+                "notifCount" => $notifCount,
+                "notify" => $notify,
                 "notifyChat" => $notifChat,
-                "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff
+                "notifChatCount" => $notifChatCount,
+                'chats' => $chats,
+                'chatss' => $chatss,
+                'last' => $last,
+                'notif' => $notifCount,
+                'allUser' => $allUsers,
+                'tickets' => $tickets,
+                "client" => $user_info,
+                'userinfo' => $client,
+                'status' => $status,
+                'staffs' => $staff
             ]);
         } else {
             return view('client_open_ticket', [
-                "notifCount" => $notifCount,   "notify" => $notify,
+                "notifCount" => $notifCount,
+                "notify" => $notify,
                 "notifyChat" => $notifChat,
-                "notifChatCount" => $notifChatCount, 'chats' => $chats, 'chatss' => $chatss, 'last' => $last, 'notif' => $notifCount, 'allUser' => $allUsers, 'tickets' => $tickets, "client" => $user_info, 'userinfo' => $client, 'status' => $status, 'staffs' => $staff
+                "notifChatCount" => $notifChatCount,
+                'chats' => $chats,
+                'chatss' => $chatss,
+                'last' => $last,
+                'notif' => $notifCount,
+                'allUser' => $allUsers,
+                'tickets' => $tickets,
+                "client" => $user_info,
+                'userinfo' => $client,
+                'status' => $status,
+                'staffs' => $staff
             ]);
         }
     }

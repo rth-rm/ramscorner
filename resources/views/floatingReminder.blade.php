@@ -103,6 +103,7 @@
             .then(data => {
                 if (data.shouldRefresh) {
                     // Update the content of the floating panel with the new ticket information
+                    console.log(data.tix);
                     document.getElementById('panelContent').innerHTML = generateTicketHtml(data.tix);
                     playRefreshSound();
                 }

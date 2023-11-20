@@ -38,9 +38,11 @@
                     <div class="embed-responsive embed-responsive-16by9">
                         <div id="chart" style="width: 100%; height: 500px; padding:10px; background-color: #ffffff">
                             <canvas id="chart_div"></canvas>
-                            <canvas id="resolutionChart"></canvas>
+
 
                         </div>
+                        <canvas id="resolutionChart"></canvas>
+
                     </div>
                 </p>
 
@@ -257,8 +259,8 @@
                 return item.resolution_time;
             });
 
-            var ctx = document.getElementById('resolutionChart').getContext('2d');
-            var myChart = new Chart(ctx, {
+            var ctx1 = document.getElementById('resolutionChart').getContext('2d');
+            var myChart = new Chart(ctx1, {
                 type: 'bar'
                 , data: {
                     labels: labels

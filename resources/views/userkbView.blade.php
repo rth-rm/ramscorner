@@ -34,18 +34,12 @@
 
 
                             <h5 class="p-5"><strong>Problem<br> </strong>
-
-
                                 {{ $kb_info->kb_content }}
                             </h5>
                             <hr>
                             <h5 class="p-5"><strong>Resolution<br></strong>
-
-
                                 {{ $kb_info->kb_resolution }}
                             </h5>
-
-
                         </div>
                     </div>
 

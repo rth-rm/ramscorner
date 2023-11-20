@@ -39,9 +39,12 @@
                     </div>
                     <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
 
-                        <button type="button" style="color: green"><i class="bi bi-check-circle-fill"></i></button>
-                        <button type="button" style=" color: red"><i class="bi bi-x-circle-fill"></i></button>
-                        <button type="button" style=" color: lightblue "><i class="bi bi-pencil-fill"></i></button>
+                        <button type="button"><i style="color: green" class="bi bi-check-circle-fill"></i></button>
+
+                        <button type="button"><i style=" color: red" class="bi bi-x-circle-fill"></i></button>
+
+                        <button type="button"><i style=" color: lightblue " class="bi bi-pencil-fill"></i></button>
+
 
 
                     </div>

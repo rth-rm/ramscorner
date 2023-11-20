@@ -63,22 +63,22 @@
                                 @endif
                             </h5>
                         </div>
-                        {{-- @if($tickets->t_status == "RESOLVED")
+                        @if($tickets->t_status == "RESOLVED")
                         <div class="tic-description p-5">
 
-                            <span><button onclick = "close()" class="btn-lg me-3" type="button" style="background: transparent; color: #6644A8; border-radius: 25px;">
+                            <span><button onclick="close()" class="btn-lg me-3" type="button" style="background: transparent; color: #6644A8; border-radius: 25px;">
                                     Yes, close my ticket.
                                 </button>
                             </span>
                             <span>
                                 <button onclick="ongoing()" class="btn-lg me-3" type="button" style="background: transparent ; color: #6644A8; border-radius: 25px;">
-                                    Not Yet. 
+                                    Not Yet.
                                 </button>
 
                             </span>
 
                         </div>
-                        @endif --}}
+                        @endif
                         <script>
                             function close() {
 

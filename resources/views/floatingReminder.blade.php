@@ -83,7 +83,7 @@
 
     function checkAndRefresh() {
         // Make an Ajax request to your server to check if there are tickets that meet the criteria
-        fetch('/checkTickets')
+        fetch('checkTickets')
             .then(response => response.json())
             .then(data => {
                 if (data.shouldRefresh) {
@@ -101,13 +101,13 @@
         let html = '';
         tickets.forEach(tickets => {
             html += `
-<div class="ticket">
-    <li>
-        Ticket ID: ${ticket.t_ID}||
-        Status: ${ticket.t_status}
-    </li>
-</div>
-`;
+                    <div class="ticket">
+                        <li>
+                            Ticket ID: ${ticket.t_ID}||
+                            Status: ${ticket.t_status}
+                        </li>
+                    </div>
+                    `;
         });
         return html;
     }

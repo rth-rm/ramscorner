@@ -28,10 +28,8 @@ class TicketController extends Controller
     public function checkTickets()
     {
         $tickets = Ticket::where('t_status', 'NEW')
-            ->where('t_datetime', '<=', now()->subMinutes(5))
+            ->where('t_datetime', '<=', now()->subMinutes(1))
             ->get();
-
-
 
         $shouldRefresh = $tickets->isNotEmpty();
 

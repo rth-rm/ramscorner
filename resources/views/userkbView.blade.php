@@ -29,11 +29,15 @@
                         <i class="bi bi-exclamation-circle me-5"></i>
                         <span class="me-5">{{ $kb_info->kb_ID }}</span>
                         <div class="kb-details">
-                            <h3 class="mb-4">{{ $kb_info->kb_category }}</h3>
-                            <h3>Modified by: {{ $kb_info->kb_modify }}</h3>
-                            <h5 class="p-5">
+                            <h6 class="mb-4">Category: {{ $kb_info->kb_category }}</h6>
+                            <h6>Modified by: {{ $kb_info->kb_modify }}</h6>
+                            <h6 class="p-5">Problem
                                 {{ $kb_info->kb_content }}
-                            </h5>
+                            </h6>
+                            <h6 class="p-5">Resolution
+                                {{ $kb_info->kb_resolution }}
+                            </h6>
+
 
                         </div>
                     </div>

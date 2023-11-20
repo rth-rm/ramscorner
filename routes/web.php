@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/clientOpenTicket/{t_id}', [ClientController::class, 'clientOpenTicket'])->name('clientOpenTicket');
     Route::get('/viewHelp', [ClientController::class, 'viewHelp'])->name('viewHelp');
 
-    Route::get('/createTicketPage', [TicketController::class, 'createTicketPage'])->name ('createTicketPage');
+    Route::get('/createTicketPage', [TicketController::class, 'createTicketPage'])->name('createTicketPage');
 
 
     //Admin
@@ -121,6 +121,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //chatbox
     Route::get('/getmessages', [ChatsController::class, 'getmessages'])->name('getmessages');
     Route::post('/sendmessages/{tid}', [ChatsController::class, 'sendmessages'])->name('sendmessages');
+
+    Route::get('/checkTickets', [TicketController::class, 'checkTickets'])->name('checkTickets');
 
 });
 

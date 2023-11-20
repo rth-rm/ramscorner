@@ -29,14 +29,9 @@
 </style>
 
 <div class="floating-panel" id="panelContent">
-    <!-- Add the content of your floating panel here -->
-
 </div>
 
-<!-- Add your scripts and other body elements here -->
 
-
-<!-- Add this script after the floating panel in the body section -->
 <script>
     // Function to set a cookie
     function setCookie(name, value, days) {
@@ -49,7 +44,7 @@
         document.cookie = name + '=' + value + expires + '; path=/';
     }
 
-    // Function to get a cookie value
+
     function getCookie(name) {
         var nameEQ = name + '=';
         var ca = document.cookie.split(';');
@@ -61,13 +56,12 @@
         return null;
     }
 
-    // Function to hide the floating panel
+
     function hideFloatingPanel() {
         document.querySelector('.floating-panel').style.display = 'none';
         setCookie('panelClosed', 'true', 365); // Set a cookie to remember the closed state
     }
 
-    // Check if the panel should be hidden based on the cookie
     window.onload = function() {
         var panelClosed = getCookie('panelClosed');
         if (panelClosed === 'true') {
@@ -75,30 +69,28 @@
         }
     };
 
+
+
+
+
+
     function playRefreshSound() {
-        var audio = new Audio('sounds/notif.mp3'); // Replace with the path to your sound file
+        var audio = new Audio('sounds/notif.mp3');
         audio.play()
-
-
     }
-
 
     function generateTicketHtml(tickets) {
         let html = '';
-        tickets.forEach(ticket => {
+        tickets.forEach(tickets => {
             html += `
-  <div class="ticket">
-  
-        <li>
-            Ticket ID: ${ticket.t_ID}||
-            Status: ${ticket.t_status}
-        </li>
-  </div>
-  `;
+                <div class="ticket">
+                        <li>
+                            Ticket ID: ${ticket.t_ID}||
+                            Status: ${ticket.t_status}
+                        </li>
+                </div>
+                `;
         });
-
-        console.log("222222222222222222222222");
-
         return html;
     }
 

@@ -37,7 +37,7 @@
 
                         </div>
                         <div class="tic-description p-5">
-                            <h5><strong>Problem</strong>
+                            <h5><strong>Problem:<br></strong>
 
                                 {{ $tickets->t_description }}
                             </h5>
@@ -45,7 +45,7 @@
                         <hr>
                         @if($tickets->t_resolution != "Not Yet Resolved")
                         <div class="tic-description p-5">
-                            <h5><strong>Resolution</strong>
+                            <h5><strong>Resolution: <br></strong>
                                 {{ $tickets->t_resolution }}
                             </h5>
                         </div>

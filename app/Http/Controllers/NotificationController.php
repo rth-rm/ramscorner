@@ -67,7 +67,7 @@ class NotificationController extends Controller
 
 
 
-        $notif = Notification::where('nID', $nid)->get()->first();
+        $notif = Notification::where('nID', $nid)->get();
         dd($notif);
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
         $tickets = Ticket::where('t_ID', $notif->ticket_id)->get();

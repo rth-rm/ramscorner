@@ -74,7 +74,7 @@
                     </div>
                     <div id="updating">
                         @foreach ($notify as $notifies)
-                        <li><a class="dropdown-item" href="{{ url('clientOpenTicketByNotif/' . $notifies->ticket_id) }}">
+                        <li><a class="dropdown-item" href="{{ url('clientOpenTicketByNotif/' . $notifies->nID) }}">
                                 {{ $notifies->n_message }} <i class="bi bi-alarm-fill"></i></a>
                         </li>
                         @endforeach
@@ -83,7 +83,7 @@
                     <div id="chatting" style="display: none">
 
                         @foreach ($notifyChat as $notifiesChat)
-                        <li><a class="dropdown-item" href="{{ url('clientOpenTicketByNotif/' . $notifiesChat->ticket_id) }}">
+                        <li><a class="dropdown-item" href="{{ url('clientOpenTicketByNotif/' . $notifiesChat->nID) }}">
                                 {{ $notifiesChat->n_message }} <i class="bi bi-alarm-fill"></i></a>
                         </li>
                         @endforeach

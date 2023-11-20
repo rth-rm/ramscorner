@@ -104,8 +104,8 @@
                     <div class="ticket">
                    
                         <a href="{{ url('openTicket/${tickets.t_ID}') }}">
-                            <ul>
-                            <li style= "border-left: 5px solid #6644A8; color: black">
+                            
+                            <ul style= "border-left: 5px solid #6644A8; color: black">
                             Ticket ID: ${tickets.t_ID} - 
                             Status: ${tickets.t_status}
                             </ul>

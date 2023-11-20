@@ -168,7 +168,7 @@
                                 <div style="width: 300px;">
                                     <select class="form-select mb-2" aria-label="Default select example" id="assign_to" name="assign">
                                         @if ($tickets->t_assignTo != 'Not Assigned')
-                                        <option selected disabled value="{{ $tickets->t_assignedTo }}">
+                                        <option selected value="{{ $tickets->t_assignedTo }}">
                                             {{ $tickets->t_assignedTo }}
                                         </option>
                                         @else
@@ -183,17 +183,9 @@
                                     </select>
                                 </div>
                             </div>
-
-
-
-
                             <div class="row align-items-start" style="padding-left:10%;padding-right:10%">
-
                                 <textarea class="form-control mb-2" rows="5" id="message-text" name="message"></textarea>
                             </div>
-
-
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

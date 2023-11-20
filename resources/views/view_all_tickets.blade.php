@@ -10,226 +10,286 @@
 
 <body>
     @foreach ($user_loggedin as $userloggedin)
-        @include('sweetalert::alert')
+    @include('sweetalert::alert')
 
-        @include('sidebar_admin')
+    @include('sidebar_admin')
 
 
 
-        <div class="home-contents">
-            <div class="title mb-5">
-                <h1>Ticket Center</h1>
-                <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr .5fr">
-                    <a href="{{ url('createTicketPage') }}">
-                        <button type="button" class="btn btn-lg me-5 m-3 mt-1"
-                            style="border-radius: 25px; background-color:#6644A8; color: #ffffff;">Create
-                            Ticket</button>
-                    </a>
-                    <select class="form-select" aria-label="Default select example"
-                        style="border-radius: 25px; border: 2px solid #6644A8; color:#6644A8; font-weight: 700; height: 80%; width: 200px">
-                        <option selected disabled>View My Ticket</option>
-                        <option value="1">Recieved Tickets</option>
-                        <option value="2">Sent Tickets</option>
-                        <option value="3">Tagged Tickets</option>
-                    </select>
-                    <!-- EDIT  sort button -->
-                    <i id="sortButton" type="button" class="bi bi-arrows-expand ms-5"></i>
-                </div>
-            </div>
+    <div class="home-contents">
+        <div class="title mb-5">
+            <h1>Ticket Center</h1>
+            <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr .5fr">
+                <a href="">
+                    <button type="button" class="btn btn-lg me-5 m-3 mt-1" style="border-radius: 25px; background-color:#6644A8; color: #ffffff;">Create Ticket</button>
+                </a>
+                <select id="filterSelect" class="form-select" aria-label="Default select example" style="border-radius: 25px; border: 2px solid #6644A8; color:#6644A8; font-weight: 700; height: 80%; width: 200px">
+                    <option selected value="RecievedTickets">Recieved Tickets</option>
+                    <option value="TaggedTickets">Tagged Tickets</option>
+                    <option value="MyTickets">My Tickets</option>
+                </select>
 
-            <div class="dash-contents">
-                <div class="dash-container">
-                    <div class="tic-filters me-3">
-                        {{-- edited --}}
-                        <div class="head pt-4 ps-3 pe-3" style="color: #817e9d; font-size: 21px; font-weight: 700;">
-                            Ticket Filter
-                            <!-- EDIT reset button -->
-                            <i type="button" id="resetButton" class="bi bi-arrow-repeat"></i>
-                        </div>
-                        <hr>
-                        {{-- EDITED --}}
-                        <div class="container pt-2 ps-2 dropdiv mt-1">
-                            <!-- recency -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Recency
-                                    </div>
-                                    <div class="col">
-                                        <select id="recencySelect" class="form-select"
-                                            aria-label="Default select example" style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Daily</option>
-                                            <option value="2">Weekly</option>
-                                            <option value="3">Monthly</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Catgeory -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Category
-                                    </div>
-                                    <div class="col">
-                                        <select id="categorySelect" class="form-select"
-                                            aria-label="Default select example" style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Software</option>
-                                            <option value="2">Infrastructure</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Status -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Status
-                                    </div>
-                                    <div class="col">
-                                        <select id="statusSelect" class="form-select"
-                                            aria-label="Default select example" style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">Pending</option>
-                                            <option value="2">New</option>
-                                            <option value="3">Closed</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Agent -->
-                            <div class="container pb-1 mb-4">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Agent
-                                    </div>
-                                    <div class="col">
-                                        <select id="agentSelect" class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Level -->
-                            <div class="container pb-5">
-                                <div class="row">
-                                    <div class="col titlename">
-                                        Level
-                                    </div>
-                                    <div class="col">
-                                        <select id="levelSelect" class="form-select" aria-label="Default select example"
-                                            style="border: none; color: eeeff1">
-                                            <option selected disabled>Select</option>
-                                            <option value="1">I</option>
-                                            <option value="2">II</option>
-                                            <option value="3">III</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- reset button script -->
-                            <script>
-                                document.getElementById('resetButton').addEventListener('click', function() {
-                                    // Reset the values of all select elements
-                                    resetSelect(document.getElementById('recencySelect'));
-                                    resetSelect(document.getElementById('categorySelect'));
-                                    resetSelect(document.getElementById('statusSelect'));
-                                    resetSelect(document.getElementById('agentSelect'));
-                                    resetSelect(document.getElementById('levelSelect'));
-                                });
-
-                                function resetSelect(selectElement) {
-                                    // Set the first option as selected
-                                    selectElement.selectedIndex = 0;
-                                }
-                            </script>
-                        </div>
-                    </div>
-                    <div class="ticket-lists">
-                        <div class="lists">
-                            <table id="example" class="hover" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Subject</th>
-                                        <th>Requested</th>
-                                        <th>Due</th>
-                                        <th><i class="bi bi-exclamation-circle"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tickets as $ticket)
-                                        <tr onclick="openDiv({{ $ticket->t_ID }})">
-                                            <td>INC{{ $ticket->t_ID }}</td>
-                                            <td>{{ $ticket->t_title }}</td>
-                                            <td>{{ $ticket->t_datetime }}</td>
-                                            <td>{{ $ticket->t_due }}</td>
-                                            <td>
-                                                @if ($ticket->breaches == true)
-                                                    <i class="bi-bi-circle-fill" style="color:red"></i>
-                                                @else
-                                                    <i class="bi bi-circle-fill" style="color:green"></i>
-                                                @endif
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-                            <script>
-                                $(document).ready(function() {
-                                    var table = $('#example').DataTable();
-
-                                    // Add event listener for sorting button
-                                    $('#sortButton').on('click', function() {
-                                        // Toggle between ascending and descending order on each click
-                                        table.order(table.order()[0][0], table.order()[0][1] === 'asc' ? 'desc' : 'asc').draw();
-                                    });
-                                });
-                            </script>
-                        </div>
-                        {{-- <footer>
-                            <hr>
-                        </footer> --}}
-                    </div>
-                </div>
+                <!-- EDIT  sort button -->
+                <i id="sortButton" type="button" class="bi bi-arrows-expand ms-5"></i>
             </div>
         </div>
 
-        </section>
+        <div class="dash-contents">
+            <div class="dash-container">
+                <div class="tic-filters me-3">
+                    {{-- edited --}}
+                    <div class="head pt-4 ps-3 pe-3" style="color: #817e9d; font-size: 21px; font-weight: 700;">
+                        Ticket Filter
+                        <!-- EDIT reset button -->
+                        <i type="button" id="resetButton" class="bi bi-arrow-repeat"></i>
+                    </div>
+                    <hr>
+                    {{-- EDITED --}}
+                    <div class="container pt-2 ps-2 dropdiv mt-1">
+                        <!-- recency -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Recency
+                                </div>
+                                <div class="col">
+                                    <select id="recencySelect" class="form-select" aria-label="Default select example" style="border: block; color: eeeff1">
+                                        <option selected disabled>All</option>
+                                        <option value="Daily">Daily</option>
+                                        <option value="Weekly">Weekly</option>
+                                        <option value="Monthly">Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Catgeory -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Category
+                                </div>
+                                <div class="col">
+                                    <select id="categorySelect" class="form-select" aria-label="Default select example" style="border: block; color: eeeff1">
+                                        <option selected value="All">All</option>
+                                        <option value="Software">Software</option>
+                                        <option value="Infrastructure">Infrastructure</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Status -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Status
+                                </div>
+                                <div class="col">
+                                    <select id="statusSelect" class="form-select" aria-label="Default select example" style="border: block; color: eeeff1">
+                                        <option selected>All</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="New">New</option>
+                                        <option value="Closed">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Agent -->
+                        <div class="container pb-1 mb-4">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Agent
+                                </div>
+                                <div class="col">
+                                    <select id="agentSelect" class="form-select" aria-label="Default select example" style="border: block; color: eeeff1">
+                                        <option selected>All</option>
+                                        <option value="Jose Castillo">Jose Castillo</option>
+                                        <option value="Val Rodelas">Val Rodelas</option>
+                                        <option value="Lenard">Lenard</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Level -->
+                        <div class="container pb-5">
+                            <div class="row">
+                                <div class="col titlename">
+                                    Level
+                                </div>
+                                <div class="col">
+                                    <select id="levelSelect" class="form-select" aria-label="Default select example" style="border: block; color: eeeff1">
+                                        <option selected>All</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- reset button script -->
+                        <script>
+                            document.getElementById('resetButton').addEventListener('click', function() {
+                                // Reset the values of all select elements
+                                resetSelect(document.getElementById('recencySelect'));
+                                resetSelect(document.getElementById('categorySelect'));
+                                resetSelect(document.getElementById('statusSelect'));
+                                resetSelect(document.getElementById('agentSelect'));
+                                resetSelect(document.getElementById('levelSelect'));
+                            });
 
-        <script>
-            function openDiv(divId) {
+                            function resetSelect(selectElement) {
+                                // Set the first option as selected
+                                selectElement.selectedIndex = 0;
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div class="ticket-lists">
+                    <div class="lists">
+                        <table id="tickets" class="hover" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Requested</th>
+                                    <th>Due</th>
+                                    <th>Category</th>
+                                    <th style="display: none;">Status</th>
+                                    <th style="display: none;">Level</th>
+                                    <th style="display: none;">Assgined To</th>
+                                    <th>Date</th>
+                                    <th><i class="bi bi-exclamation-circle"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($tickets as $ticket)
+                                <tr onclick="openDiv({{ $ticket->t_ID }})">
+                                    <td>INC{{ $ticket->t_ID }}</td>
+                                    <td>{{ $ticket->t_title }}</td>
+                                    <td>{{ $ticket->t_datetime }}</td>
+                                    <td>{{ $ticket->t_due }}</td>
+                                    <td>{{ $ticket->t_category }}</td>
+                                    <td style="display: none;">{{ $ticket->t_status }}</td>
+                                    <td style="display: none;">{{ $ticket->t_priority }}</td>
+                                    <td style="display: none;">{{ $ticket->t_assignedTo }}</td>
+                                    <td>{{ $ticket->t_datetime }}</td>
+                                    <td>
+                                        @if ($ticket->breaches == true)
+                                        <i class="bi-bi-circle-fill" style="color:red"></i>
+                                        @else
+                                        <i class="bi bi-circle-fill" style="color:green"></i>
+                                        @endif
+                                    </td>
+
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                var table = $('#tickets').DataTable({
+                                    order: [
+                                        [2, 'asc']
+                                    ]
+                                });
+
+                                // Add event listener for sorting button
+                                $('#sortButton').on('click', function() {
+                                    table.order(table.order()[0][0], table.order()[0][1] === 'asc' ? 'desc' : 'asc').draw();
+                                });
+
+                                $('#recencySelect').on('click', function() {
+                                    if (this.value == "All") {
+                                        table.columns(4).search('').draw();
+                                    } else if (this.value == "Software") {
+                                        table.columns(4).search('SOFTWARE').draw();
+                                    } else if (this.value == "Infrastructure") {
+                                        table.columns(4).search('INFRASTRUCTURE').draw();
+                                    }
+                                });
+
+                                $('#categorySelect').on('click', function() {
+                                    if (this.value == "All") {
+                                        table.columns(4).search('').draw();
+                                    } else if (this.value == "Software") {
+                                        table.columns(4).search('SOFTWARE').draw();
+                                    } else if (this.value == "Infrastructure") {
+                                        table.columns(4).search('INFRASTRUCTURE').draw();
+                                    }
+                                });
+                                $('#statusSelect').on('click', function() {
+                                    if (this.value == "All") {
+                                        table.columns(5).search('').draw();
+                                    } else if (this.value == "Pending") {
+                                        table.columns(5).search('OPENED').draw();
+                                    } else if (this.value == "New") {
+                                        table.columns(5).search('NEW').draw();
+                                    } else if (this.value == "Closed") {
+                                        table.columns(5).search('REJECTED').draw();
+                                    }
+                                });
+                                $('#agentSelect').on('click', function() {
+                                    if (this.value == "All") {
+                                        table.columns(7).search('').draw();
+                                    } else if (this.value == "Jose Castillo") {
+                                        table.columns(7).search('Jose Castillo').draw();
+                                    } else if (this.value == "Val Rodelas") {
+                                        table.columns(7).search('Val Rodelas').draw();
+                                    }
+                                });
+                                $('#levelSelect').on('click', function() {
+                                    if (this.value == "All") {
+                                        table.columns(6).search('').draw();
+                                    } else if (this.value == "1") {
+                                        table.columns(6).search('1').draw();
+                                    } else if (this.value == "2") {
+                                        table.columns(6).search('2').draw();
+                                    } else if (this.value == "3") {
+                                        table.columns(6).search('3').draw();
+                                    }
+                                });
 
 
-                var url = "{{ route('openTicket', '') }}" + "/" + divId;
+                            });
+                        </script>
+                    </div>
+                    {{-- <footer>
+                            <hr>
+                        </footer> --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
-                window.location = url;
-            }
-        </script>
+    </section>
+
+    <script>
+        function openDiv(divId) {
 
 
-        <!-- sidebar button script -->
-        <script>
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".sidebarBtn");
+            var url = "{{ route('openTicket', '') }}" + "/" + divId;
 
-            sidebarBtn.onclick = function() {
-                sidebar.classList.toggle("active");
-            }
-        </script>
-        <script>
-            function openDiv(divId) {
-                var url = "{{ route('openTicket', '') }}" + "/" + divId;
-                window.location = url;
-            }
-        </script>
+            window.location = url;
+        }
+    </script>
+
+
+    <!-- sidebar button script -->
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+    </script>
+    <script>
+        function openDiv(divId) {
+            var url = "{{ route('openTicket', '') }}" + "/" + divId;
+            window.location = url;
+        }
+    </script>
     @endforeach
     @include('footer')
 

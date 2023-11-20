@@ -67,7 +67,7 @@ class NotificationController extends Controller
 
         $notif = Notification::where('nID', $nid)->get()->first();
         $user_info = Reporter::where('u_ID', $user->u_ID)->get();
-        $tickets = Ticket::where('t_id', $notif->ticket_id)->get()->first();
+        $tickets = Ticket::where('t_id', $notif->ticket_id)->get();
         $client = Reporter::where('u_ID', $tickets->u_ID)->get()->first();
         $status = StatusHistory::where('t_id', $tickets->t_ID)->get();
         $staff = Reporter::whereNotIn('u_role', ['Client'])->get();

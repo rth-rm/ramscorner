@@ -102,7 +102,7 @@
         ticket.forEach(tickets => {
             html += `
                     <div class="ticket">
-                        <a href = ${tickets.t_ID}><li>
+                        <a href = ${openTicket/tickets.t_ID}><li>
                             Ticket ID: ${tickets.t_ID}||
                             Status: ${tickets.t_status}
                         </li>

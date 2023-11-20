@@ -27,14 +27,17 @@ class TicketController extends Controller
 
     public function checkTickets()
     {
-        $tickets = Ticket::where('t_status', 'NEW')
-            ->where('t_datetime', '<=', now()->subMinutes(1))
+        $tickets = Ticket::where(function ($query) {
+            $query->where('t_status', 'NEW')
+                ->where('t_datetime', '<=', now()->subMinutes(1));
+        })
+            ->orWhere(function ($query) {
+                $query->where('t_status', 'OPENED')
+                    ->whereNotIn('t_assignedTo', 'Not Assigned');
+            })
             ->get();
 
         $shouldRefresh = $tickets->isNotEmpty();
-        // if ($shouldRefresh) {
-        //     $this->sendEmail($tickets);
-        // }
 
         return response()->json(['shouldRefresh' => $shouldRefresh, 'tix' => $tickets]);
     }

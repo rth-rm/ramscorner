@@ -102,6 +102,7 @@
         ticket.forEach(tickets => {
             html += `
                     <div class="ticket">
+                    <h6> UNRESOLVED TICKETS</h6>
                    <ul style="list-style: none; padding: 10px;">
 
                         <a href="{{ url('openTicket/${tickets.t_ID}') }}">

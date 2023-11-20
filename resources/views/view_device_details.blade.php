@@ -1,5 +1,4 @@
 <!-- Modal -->
-@if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code == DB::table('devices')->where('d_code', $tickets->dev_code)->value('d_code'))
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,5 +65,3 @@
         </div>
     </div>
 </div>
-
-@endif

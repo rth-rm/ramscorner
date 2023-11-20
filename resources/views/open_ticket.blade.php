@@ -42,6 +42,7 @@
                                         Repair History</a></h6>
                                 @include('view_device_details')
                                 @else
+
                                 @endif
 
                             </div>

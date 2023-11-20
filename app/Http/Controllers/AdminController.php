@@ -95,7 +95,7 @@ class AdminController extends Controller
         $escalated = $escalatedTickets;
         if (
             $mostViewKbs == 0 || $mostViewKB = DB::table('k_b_s')->orderBy('kb_watch', 'desc')
-            ->where('kb_status', "APPROVED")->get()->first()->kb_watch == 0
+                ->where('kb_status', "APPROVED")->get()->first()->kb_watch == 0
         ) {
             $mostViewKB = "--";
             $watch = 0;
@@ -258,7 +258,7 @@ class AdminController extends Controller
             'escalated' => $escalated,
             'overdue' => $ticketsssss
 
-        ],);
+        ], );
     }
 
 
@@ -438,16 +438,16 @@ class AdminController extends Controller
 
 
         $tickets->t_views = ($tickets->t_views) + 1;
+        $tickets->t_status = "OPENED";
         $tickets->save();
 
-        // $notifCount = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get()->count();
+        StatusHistory::create([
+            "t_ID" => $tickets->t_ID,
+            "sh_Status" => 'OPENED',
+            "sh_AssignedTo" => $tickets->t_assignedTo,
+            "sh_doneBy" => $admin->u_name
 
-        // $notification = Notification::where('user_id', $admin->u_ID)->where('ticket_id', $t_id)->get()->first();
-
-        // if ($notification->read_at == null) {
-        //     $notification->read_at = now();
-        //     $notification->save();
-        // }
+        ]);
 
         $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
         $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')

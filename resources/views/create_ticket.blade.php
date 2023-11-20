@@ -1,6 +1,6 @@
 @include('header')
 <title>Create a Ticket</title>
-<link rel="stylesheet" href="{{ asset('assets/css/create_ticket.css') }}" type = "text/css">
+<link rel="stylesheet" href="{{ asset('assets/css/create_ticket.css') }}" type="text/css">
 </head>
 
 <body>
@@ -9,32 +9,32 @@
         <form action="{{ url('/createTicket') }}" class="form" method="post" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="input-box">
-                <label for = "autocomplete">CC</label>
-                <input type="text" placeholder="Tag a Persona" maxlength="15" name = "cc" id = "autocomplete" />
+                <label for="autocomplete">CC</label>
+                <input type="text" placeholder="Tag a Persona" maxlength="15" name="cc" id="autocomplete" />
             </div>
 
             <div class="input-box">
-                <label for = "title">Ticket Title</label>
-                <input type="text" placeholder="Enter Title" required name = "title" id = "title" />
+                <label for="title">Ticket Title</label>
+                <input type="text" placeholder="Enter Title" required name="title" id="title" />
             </div>
 
             <div class="device-type">
                 <label>Device Type</label>
                 <div class="device-option">
                     <div class="device">
-                        <input type="radio" id="Infrastructure" name="category" />
+                        <input type="radio" value="INFRASTRUCTURE" id="Infrastructure" name="category" />
                         <label for="Infrastructure">Hardware</label>
                     </div>
                     <div class="device">
-                        <input type="radio" id="Software" name="category" />
+                        <input type="radio" value="INFRASTRUCTURE" id="Software" name="category" />
+
                         <label for="Software">Software</label>
                     </div>
                 </div>
             </div>
             <div class="input-box" id="device-id">
-                <label for = "device-id">Device ID</label>
-                <input type="text" placeholder="ITRO-DEV-ID" required maxlength="15"
-                    style="text-transform: uppercase; margin-bottom: 10px" name = "devcode" />
+                <label for="device-id">Device ID</label>
+                <input type="text" placeholder="ITRO-DEV-ID" required maxlength="15" style="text-transform: uppercase; margin-bottom: 10px" name="devcode" />
             </div>
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
@@ -59,25 +59,25 @@
                     hardwareRadio.addEventListener("change", showDeviceId);
                     softwareRadio.addEventListener("change", hideDeviceId);
                 });
+
             </script>
 
 
             <div class="Description" style=" margin-top: 16px;">
                 <label for="Description">Description</label>
-                <textarea id="Description1" name="content" placeholder="Enter Description"
-                    style="resize:vertical; width:100%; border-radius:25px; padding:.5rem; font-size:1rem; color: #817e9d; border: 1px solid  #ddd; height: 12vh; margin-top: 10px;"></textarea>
+                <textarea id="Description1" name="content" placeholder="Enter Description" style="resize:vertical; width:100%; border-radius:25px; padding:.5rem; font-size:1rem; color: #817e9d; border: 1px solid  #ddd; height: 12vh; margin-top: 10px;"></textarea>
             </div>
 
 
             <div class="upload" style="margin-top: 10px;">
                 <label>Upload File</label>
-                <input type="file" class="upload-box" accept="image/*" style="margin-top: 10px;" name = "profile" />
+                <input type="file" class="upload-box" accept="image/*" style="margin-top: 10px;" name="profile" />
 
             </div>
 
             <div class="buttons">
-                <button type = "reset" class="button cancel-btn">Cancel</button>
-                <button type = "submit" class="button add-btn">Submit</button>
+                <button type="reset" class="button cancel-btn">Cancel</button>
+                <button type="submit" class="button add-btn">Submit</button>
             </div>
 
         </form>
@@ -88,9 +88,9 @@
 
     <script>
         var autocompleteData = [
-            @foreach ($allUser as $users)
-                '{{ $users->u_name }}',
-            @endforeach
+            @foreach($allUser as $users)
+            '{{ $users->u_name }}'
+            , @endforeach
         ];
         var autocompleteInput = document.getElementById('autocomplete');
         var suggestionsList = document.createElement('ul');
@@ -149,5 +149,6 @@
                 suggestionsList.innerHTML = '';
             }
         });
+
     </script>
     @include('footer')

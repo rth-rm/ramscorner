@@ -66,22 +66,24 @@
                         {{-- @if($tickets->t_status == "RESOLVED")
                         <div class="tic-description p-5">
 
-                            <span><button class="btn-lg me-3" type="button" style="background: transparent; color: #6644A8; border-radius: 25px;">
-
-                                    Close my ticket
+                            <span><button onclick = "close()" class="btn-lg me-3" type="button" style="background: transparent; color: #6644A8; border-radius: 25px;">
+                                    Yes, close my ticket.
                                 </button>
                             </span>
                             <span>
-                                <button class="btn-lg me-3" type="button" style="background: transparent ; color: #6644A8; border-radius: 25px;">
-
-                                    Close my ticket
+                                <button onclick="ongoing()" class="btn-lg me-3" type="button" style="background: transparent ; color: #6644A8; border-radius: 25px;">
+                                    Not Yet. 
                                 </button>
 
                             </span>
 
                         </div>
                         @endif --}}
+                        <script>
+                            function close() {
 
+                            }
+                            <script>
 
                     </div>
                 </div>
@@ -163,25 +165,25 @@
                 modal.show();
             }
 
-        </script>
-        <script>
-            window.onload = function() {
+                        </script>
+                        <script>
+                            window.onload = function() {
 
-                var updateButton = document.getElementById("updateButton");
+                                var updateButton = document.getElementById("updateButton");
 
-                if (updateButton && (
-                        document.getElementById("status").value == "CANCELLED" ||
-                        document.getElementById("status").value == "REJECTED")) {
-                    updateButton.style.display = 'none';
-                }
+                                if (updateButton && (
+                                        document.getElementById("status").value == "CANCELLED" ||
+                                        document.getElementById("status").value == "REJECTED")) {
+                                    updateButton.style.display = 'none';
+                                }
 
-                if (document.getElementById("status").value == "CLOSED") {
-                    document.getElementById("reopened").removeAttribute('hidden');
-                    document.getElementById("cancelled").setAttribute('hidden', true);
-                }
-            };
+                                if (document.getElementById("status").value == "CLOSED") {
+                                    document.getElementById("reopened").removeAttribute('hidden');
+                                    document.getElementById("cancelled").setAttribute('hidden', true);
+                                }
+                            };
 
-        </script>
+                        </script>
 
-    </div>
-</div>
+                    </div>
+                </div>

@@ -531,8 +531,8 @@ class TicketController extends Controller
 
 
 
-        if ($request->assign == $ticket->t_assignedTo || $request->assign == "Not Assigned") {
-        } else {
+        if ($request->assign != $ticket->t_assignedTo || $request->assign != "Not Assigned") {
+
             $recipients = Reporter::where('u_name', $request->assign)->get()->first();
             Notification::create([
                 "user_id" => $recipients->u_ID,
@@ -551,6 +551,9 @@ class TicketController extends Controller
         $ticket->t_assignedTo = $request->assign;
         $ticket->update();
 
+
+
+
         StatusHistory::create([
             "t_ID" => $tID,
             "sh_Status" => $request->status,
@@ -568,9 +571,6 @@ class TicketController extends Controller
             "n_message" => 'Your ticket has been updated!'
 
         ]);
-
-
-
 
 
 

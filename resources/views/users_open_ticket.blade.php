@@ -63,6 +63,25 @@
                                 @endif
                             </h5>
                         </div>
+                        {{-- @if($tickets->t_status == "RESOLVED")
+                        <div class="tic-description p-5">
+
+                            <span><button class="btn-lg me-3" type="button" style="background: transparent; color: #6644A8; border-radius: 25px;">
+
+                                    Close my ticket
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn-lg me-3" type="button" style="background: transparent ; color: #6644A8; border-radius: 25px;">
+
+                                    Close my ticket
+                                </button>
+
+                            </span>
+
+                        </div>
+                        @endif --}}
+
 
                     </div>
                 </div>

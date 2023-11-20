@@ -1,30 +1,31 @@
 @include('header')
 
-<title>INC#{{ $ticket_id }} | Ram's Corner</title>
-<link rel="stylesheet" href="{{ asset('assets/css/opened_sent_ticket.css') }}" type = "text/css">
+<title>Ticket | Ram's Corner</title>
+<link rel="stylesheet" href="{{ asset('assets/css/opened_sent_ticket.css') }}" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <!-- bootstrap link -->
 </head>
 
 <body>
     @foreach ($admin as $userloggedin)
-        @include('sweetalert::alert')
+    @include('sweetalert::alert')
 
-        @include('sidebar_admin')
+    @include('sidebar_admin')
 
-        @include('open_ticket')
-        </section>
+    @include('open_ticket')
+    </section>
 
 
-        <!-- sidebar button script -->
-        <script>
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".sidebarBtn");
+    <!-- sidebar button script -->
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
 
-            sidebarBtn.onclick = function() {
-                sidebar.classList.toggle("active");
-            }
-        </script>
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+
+    </script>
     @endforeach
     <script type="text/javascript">
         function refreshPage() {
@@ -36,5 +37,6 @@
         }
 
         setTimeout(refreshPage, 1000); // Refresh after 5 seconds
+
     </script>
     @include('footer')

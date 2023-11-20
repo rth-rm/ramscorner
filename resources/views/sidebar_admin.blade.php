@@ -94,7 +94,7 @@
                     <div id="chatting" style="display: none">
 
                         @foreach ($notifyChat as $notifiesChat)
-                        <li><a class="dropdown-item" href="{{ url('openTicketByNotif/' . $notifiesChat->n_ID) }}">
+                        <li><a class="dropdown-item" href="{{ url('openTicketByNotif/' . $notifiesChat->nID) }}">
                                 {{ $notifiesChat->n_message }} <i class="bi bi-alarm-fill"></i></a>
                         </li>
                         @endforeach

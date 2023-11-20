@@ -441,13 +441,22 @@ class AdminController extends Controller
         $tickets->t_status = "OPENED";
         $tickets->save();
 
-        StatusHistory::create([
-            "t_ID" => $tickets->t_ID,
-            "sh_Status" => 'OPENED',
-            "sh_AssignedTo" => $tickets->t_assignedTo,
-            "sh_doneBy" => $admin->u_name
 
-        ]);
+        $exists = StatusHistory::where('t_id', $tickets->t_ID)
+            ->where('sh_Status', 'OPENED')->get()->exists();
+
+        if ($exists) {
+            return;
+        } else {
+            StatusHistory::create([
+                "t_ID" => $tickets->t_ID,
+                "sh_Status" => 'OPENED',
+                "sh_AssignedTo" => $tickets->t_assignedTo,
+                "sh_doneBy" => $admin->u_name
+
+            ]);
+        }
+
 
         $notify = Notification::where('user_id', $admin->u_ID)->where('read_at', null)->get();
         $notifChat = Notification::where('n_message', 'LIKE', '%' . 'New message' . '%')

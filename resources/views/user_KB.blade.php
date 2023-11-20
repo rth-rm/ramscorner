@@ -27,9 +27,8 @@
                     <div class="kb-btns">
                         <div class="d-grid gap-1 col-10 mx-auto m-1">
                             <button class="btn btn-lg" type="button">All</button>
-                            <button class="btn btn-lg" type="button">Approved</button>
-                            <button class="btn btn-lg" type="button">Rejected</button>
-                            <button class="btn btn-lg" type="button">Pending</button>
+                            <button class="btn btn-lg" type="button">Software</button>
+                            <button class="btn btn-lg" type="button">Infrastructure</button>
                         </div>
                     </div>
                 </div>

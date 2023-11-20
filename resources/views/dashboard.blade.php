@@ -2,8 +2,7 @@
     <div class="dashboard-boxes"></div>
     <div class="title mb-5">
         <h1>Admin Dashboards</h1>
-        <i class="bi bi-calendar2  me-4"><input class="ms-3" type="text" name="daterange"
-                value="01/01/2023 - 01/15/2023" /></i>
+        <i class="bi bi-calendar2  me-4"><input class="ms-3" type="text" name="daterange" value="01/01/2023 - 01/15/2023" /></i>
         <script>
             $(function() {
                 $('input[name="daterange"]').daterangepicker({
@@ -13,6 +12,7 @@
                         .format('YYYY-MM-DD'));
                 });
             });
+
         </script>
     </div>
 
@@ -25,8 +25,7 @@
                     </div>
                     <div class="col">
                         <span class="card-subtitle mb-2 text-body-secondary text-end">
-                            <select class="form-select" aria-label="Default select example"
-                                style="width: 200px; margin-left: 150px;">
+                            <select class="form-select" aria-label="Default select example" style="width: 200px; margin-left: 150px;">
                                 <option selected disabled>Select</option>
                                 <option value="1">Daily</option>
                                 <option value="2">Weekly</option>
@@ -36,11 +35,13 @@
                     </div>
                 </div>
                 <p class="card-text">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <div id="chart" style="width: 100%; height: 500px; padding:10px; background-color: #ffffff">
-                        <canvas id="chart_div"></canvas>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <div id="chart" style="width: 100%; height: 500px; padding:10px; background-color: #ffffff">
+                            <canvas id="chart_div"></canvas>
+                            <canvas id="resolutionChart"></canvas>
+
+                        </div>
                     </div>
-                </div>
                 </p>
 
             </div>
@@ -137,101 +138,155 @@
             });
 
             var chartData = {
-                labels: keys,
-                datasets: [{
-                        label: 'Opened',
-                        data: openedData,
-                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    },
-                    {
-                        label: 'Ongoing',
-                        data: ongoingData,
-                        backgroundColor: 'rgba(45, 99, 132, 0.7)',
-                    },
-                    {
-                        label: 'Pending',
-                        data: pendingData,
-                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    },
-                    {
-                        label: 'Resolved',
-                        data: resolvedData,
-                        backgroundColor: 'rgba(255, 206, 86, 0.7)',
-                    },
-                    {
-                        label: 'Closed',
-                        data: closedData,
-                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                    },
-                    {
-                        label: 'Software Tickets',
-                        data: softwareData,
-                        fill: true,
-                        borderColor: 'rgba(255, 206, 86, 1)',
-                        type: 'line',
-                        yAxis: 'y-axis-1',
-                        tension: 0.5,
-                    },
-                    {
-                        label: 'Hardware Tickets',
-                        data: hardwareData,
-                        fill: true,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        type: 'line',
-                        yAxis: 'y-axis-2',
-                        tension: 0.5,
-                    },
-                ],
-            };
+                labels: keys
+                , datasets: [{
+                        label: 'Opened'
+                        , data: openedData
+                        , backgroundColor: 'rgba(255, 99, 132, 0.7)'
+                    , }
+                    , {
+                        label: 'Ongoing'
+                        , data: ongoingData
+                        , backgroundColor: 'rgba(45, 99, 132, 0.7)'
+                    , }
+                    , {
+                        label: 'Pending'
+                        , data: pendingData
+                        , backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                    , }
+                    , {
+                        label: 'Resolved'
+                        , data: resolvedData
+                        , backgroundColor: 'rgba(255, 206, 86, 0.7)'
+                    , }
+                    , {
+                        label: 'Closed'
+                        , data: closedData
+                        , backgroundColor: 'rgba(75, 192, 192, 0.7)'
+                    , }
+                    , {
+                        label: 'Software Tickets'
+                        , data: softwareData
+                        , fill: true
+                        , borderColor: 'rgba(255, 206, 86, 1)'
+                        , type: 'line'
+                        , yAxis: 'y-axis-1'
+                        , tension: 0.5
+                    , }
+                    , {
+                        label: 'Hardware Tickets'
+                        , data: hardwareData
+                        , fill: true
+                        , borderColor: 'rgba(75, 192, 192, 1)'
+                        , type: 'line'
+                        , yAxis: 'y-axis-2'
+                        , tension: 0.5
+                    , }
+                , ]
+            , };
 
             var chartOptions = {
                 scales: {
                     x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true,
-                    },
-                    yAxes: [{
-                            id: 'y-axis-1',
-                            type: 'linear',
-                            position: 'left',
-                            grid: {
-                                display: false,
-                            },
-                        },
-                        {
-                            id: 'y-axis-2',
-                            type: 'linear',
-                            position: 'right',
-                            grid: {
-                                display: false,
-                            },
-                        },
-                    ],
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
+                        stacked: true
+                    , }
+                    , y: {
+                        stacked: true
+                    , }
+                    , yAxes: [{
+                            id: 'y-axis-1'
+                            , type: 'linear'
+                            , position: 'left'
+                            , grid: {
+                                display: false
+                            , }
+                        , }
+                        , {
+                            id: 'y-axis-2'
+                            , type: 'linear'
+                            , position: 'right'
+                            , grid: {
+                                display: false
+                            , }
+                        , }
+                    , ]
+                , }
+                , tooltips: {
+                    mode: 'index'
+                    , intersect: false
+                    , callbacks: {
                         label: function(tooltipItem, data) {
                             var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
                             var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 
                             return datasetLabel + ': ' + value;
-                        },
-                    },
-                },
+                        }
+                    , }
+                , },
                 // Other chart options here
             };
 
             document.addEventListener('DOMContentLoaded', function() {
                 var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: chartData,
-                    options: chartOptions,
-                });
+                    type: 'bar'
+                    , data: chartData
+                    , options: chartOptions
+                , });
             });
+
         </script>
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            var data = @json($data);
+
+            var labels = data.map(function(item) {
+                return item.ticket_id;
+            });
+
+            var resolutionTimes = data.map(function(item) {
+                return item.resolution_time;
+            });
+
+            var ctx = document.getElementById('resolutionChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar'
+                , data: {
+                    labels: labels
+                    , datasets: [{
+                        label: 'Resolution Time (minutes)'
+                        , data: resolutionTimes
+                        , backgroundColor: 'rgba(75, 192, 192, 0.2)'
+                        , borderColor: 'rgba(75, 192, 192, 1)'
+                        , borderWidth: 1
+                    }]
+                }
+                , options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        </script>
+
+
+
+
+
+
+
+
     </div>
 </div>

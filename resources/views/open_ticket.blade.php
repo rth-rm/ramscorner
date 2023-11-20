@@ -35,7 +35,8 @@
                                 <h5>Assigned to: {{ $tickets->t_assignedTo }}</h5>
                             </div>
                             <div class="tic-id">
-                                @if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code = DB::table('devices')->where('d_code', $tickets->dev_code)->first();)
+                                @if ($tickets->t_category == 'INFRASTRUCTURE' && $tickets->dev_code == DB::table('devices')->where('d_code', $tickets->dev_code)->value('d_code'))
+
                                 <h6>Hardware ID: {{ $tickets->dev_code }}</h6>
                                 <h6><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View
                                         Repair History</a></h6>

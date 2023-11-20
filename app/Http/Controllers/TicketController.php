@@ -33,7 +33,7 @@ class TicketController extends Controller
         })
             ->orWhere(function ($query) {
                 $query->where('t_status', 'OPENED')
-                    ->whereNotIn('t_assignedTo', 'Not Assigned');
+                    ->whereNotIn('t_assignedTo', ['Not Assigned']);
             })
             ->get();
 

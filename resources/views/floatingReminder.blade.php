@@ -109,7 +109,7 @@
                             Ticket ID: ${tickets.t_ID} <br>
 
                             Status: ${tickets.t_status}<br>
-                            Assigned?: No <br>
+                            Not Assigned <br>
 
 
                             </li>

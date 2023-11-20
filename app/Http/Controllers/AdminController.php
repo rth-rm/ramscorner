@@ -247,55 +247,55 @@ class AdminController extends Controller
 
 
 
-        $ticketDatas = StatusHistory::select(
-            't_ID',
-            DB::raw('MIN(sh_datetime) AS new_status_time'),
-            DB::raw('MAX(sh_datetime) AS resolved_status_time')
-        )
-            ->where('sh_Status', 'NEW')
-            ->orWhere('sh_Status', 'RESOLVED')
-            ->groupBy('t_ID')
-            ->get();
+        // $ticketDatas = StatusHistory::select(
+        //     't_ID',
+        //     DB::raw('MIN(sh_datetime) AS new_status_time'),
+        //     DB::raw('MAX(sh_datetime) AS resolved_status_time')
+        // )
+        //     ->where('sh_Status', 'NEW')
+        //     ->orWhere('sh_Status', 'RESOLVED')
+        //     ->groupBy('t_ID')
+        //     ->get();
 
-        $resolutionTimes = [];
+        // $resolutionTimes = [];
 
-        foreach ($ticketData as $record) {
-            $newStatusTime = strtotime($record->new_status_time);
-            $resolvedStatusTime = strtotime($record->resolved_status_time);
+        // foreach ($ticketData as $record) {
+        //     $newStatusTime = strtotime($record->new_status_time);
+        //     $resolvedStatusTime = strtotime($record->resolved_status_time);
 
-            $resolutionTimeInSeconds = $resolvedStatusTime - $newStatusTime;
-            $resolutionTimeInMinutes = round($resolutionTimeInSeconds / 60, 2);
+        //     $resolutionTimeInSeconds = $resolvedStatusTime - $newStatusTime;
+        //     $resolutionTimeInMinutes = round($resolutionTimeInSeconds / 60, 2);
 
-            $resolutionTimes[] = $resolutionTimeInMinutes;
-        }
+        //     $resolutionTimes[] = $resolutionTimeInMinutes;
+        // }
 
-        $averageResolutionTime = count($resolutionTimes) > 0 ? array_sum($resolutionTimes) / count($resolutionTimes) : 0;
+        // $averageResolutionTime = count($resolutionTimes) > 0 ? array_sum($resolutionTimes) / count($resolutionTimes) : 0;
 
-        // Calculate average first response time
-        $ticketDatass = StatusHistory::select(
-            't_ID',
-            DB::raw('MIN(sh_datetime) AS new_status_time'),
-            DB::raw('MAX(sh_datetime) AS opened_status_time')
-        )
-            ->where('sh_Status', 'NEW')
-            ->orWhere('sh_Status', 'OPENED')
-            ->groupBy('t_ID')
-            ->get();
+        // // Calculate average first response time
+        // $ticketDatass = StatusHistory::select(
+        //     't_ID',
+        //     DB::raw('MIN(sh_datetime) AS new_status_time'),
+        //     DB::raw('MAX(sh_datetime) AS opened_status_time')
+        // )
+        //     ->where('sh_Status', 'NEW')
+        //     ->orWhere('sh_Status', 'OPENED')
+        //     ->groupBy('t_ID')
+        //     ->get();
 
-        $openedTimes = [];
+        // $openedTimes = [];
 
-        foreach ($ticketDatass as $records) {
-            $newStatusTime = strtotime($records->new_status_time);
-            $openedStatusTime = strtotime($records->opened_status_time);
+        // foreach ($ticketDatass as $records) {
+        //     $newStatusTime = strtotime($records->new_status_time);
+        //     $openedStatusTime = strtotime($records->opened_status_time);
 
-            $openedTimeInSeconds = $openedStatusTime - $newStatusTime;
-            $openedTimeInMinutes = round($openedTimeInSeconds / 60, 2);
-            $openedTimes[] = $openedTimeInMinutes;
-        }
+        //     $openedTimeInSeconds = $openedStatusTime - $newStatusTime;
+        //     $openedTimeInMinutes = round($openedTimeInSeconds / 60, 2);
+        //     $openedTimes[] = $openedTimeInMinutes;
+        // }
 
-        $averageFirstResponseTime = count($openedTimes) > 0 ? array_sum($openedTimes) / count($openedTimes) : 0;
+        // $averageFirstResponseTime = count($openedTimes) > 0 ? array_sum($openedTimes) / count($openedTimes) : 0;
 
-        dd($averageResolutionTime, $averageFirstResponseTime);
+        // dd($averageResolutionTime, $averageFirstResponseTime);
 
 
 

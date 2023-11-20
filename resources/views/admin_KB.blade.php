@@ -93,6 +93,7 @@
             </div>
         </div>
     </div>
+    @include('floatingReminder')
 
     </section>
 
@@ -116,7 +117,7 @@
         }
 
     </script>
-    @include('floatingReminder')
+
 
     <!-- kb category btn color change script -->
     @endforeach

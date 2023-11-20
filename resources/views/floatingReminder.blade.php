@@ -79,36 +79,37 @@
         audio.play()
     }
 
-    function generateTicketHtml(ticket) {
-        let html = '';
-        tickets.forEach(tickets => {
-            html += `
-                <div class="ticket">
-                        <li>
-                            Ticket ID: ${ticket.t_ID}||
-                            Status: ${ticket.t_status}
-                        </li>
-                </div>
-                `;
-        });
-        return html;
-    }
 
-    // Function to check and refresh ticket information
+
     function checkAndRefresh() {
         // Make an Ajax request to your server to check if there are tickets that meet the criteria
-
         fetch('/checkTickets')
             .then(response => response.json())
             .then(data => {
                 if (data.shouldRefresh) {
                     // Update the content of the floating panel with the new ticket information
-                    console.log(data.tix);
                     document.getElementById('panelContent').innerHTML = generateTicketHtml(data.tix);
+
+                    // Play the refresh sound
                     playRefreshSound();
                 }
             })
+            .catch(error => console.error('Error:', error));
+    }
 
+    function generateTicketHtml(ticket) {
+        let html = '';
+        tickets.forEach(tickets => {
+            html += `
+<div class="ticket">
+    <li>
+        Ticket ID: ${ticket.t_ID}||
+        Status: ${ticket.t_status}
+    </li>
+</div>
+`;
+        });
+        return html;
     }
 
     // Refresh the panel content every 10 minutes (600,000 milliseconds)

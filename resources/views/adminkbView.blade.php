@@ -45,11 +45,15 @@
                     </div>
                     <div class="card-footer text-body-secondary" style="display: flex; justify-content: end;">
 
-                        <button><i style="color: green" class="bi bi-check-circle-fill"></i></button>
+                        <button><i style="border-radius:25px;background-color: green; color: green" class="bi bi-check-circle-fill"></i></button>
 
-                        <button><i style=" color: red" class="bi bi-x-circle-fill"></i></button>
 
-                        <button><i style=" color: lightblue " class="bi bi-pencil-fill"></i></button>
+                        <button><i style=" border-radius:25px;background-color: red; color: red" class="bi bi-x-circle-fill"></i></button>
+
+
+
+                        <button><i style="border-radius:25px; background-color: lightblue; color: lightblue " class="bi bi-pencil-fill"></i></button>
+
                     </div>
                 </div>
             </div>

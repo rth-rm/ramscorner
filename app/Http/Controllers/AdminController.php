@@ -220,6 +220,27 @@ class AdminController extends Controller
             ->where('read_at', null)->get();
 
 
+
+        $longestResolutionTime = StatusHistory::select(
+            't_ID',
+            DB::raw('MIN(sh_datetime) AS new_status_time'),
+            DB::raw('MAX(sh_datetime) AS resolved_status_time')
+        )
+            ->where('sh_Status', 'NEW')
+            ->orWhere('status', 'RESOLVED')
+            ->groupBy('t_ID')
+            ->get();
+
+        foreach ($longestResolutionTime as $record) {
+            $newStatusTime = strtotime($record->new_status_time);
+            $resolvedStatusTime = strtotime($record->resolved_status_time);
+
+            $resolutionTimeInSeconds = round(($resolvedStatusTime - $newStatusTime) / 60, 2);
+
+            // Now you have the resolution time in seconds for each ticket
+        }
+
+
         return view('admin_home', [
             "notify" => $notify,
             "notifyChat" => $notifChat,

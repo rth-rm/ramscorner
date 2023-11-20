@@ -530,6 +530,7 @@ class TicketController extends Controller
         }
 
 
+        dd($request->assign);
 
         if ($request->assign != $ticket->t_assignedTo || $request->assign != "Not Assigned") {
 

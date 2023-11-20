@@ -44,9 +44,6 @@
                         <button type="button"><i style=" color: red" class="bi bi-x-circle-fill"></i></button>
 
                         <button type="button"><i style=" color: lightblue " class="bi bi-pencil-fill"></i></button>
-
-
-
                     </div>
                 </div>
             </div>

@@ -103,8 +103,8 @@
             html += `
                     <div class="ticket">
                         <li>
-                            Ticket ID: ${ticket.t_ID}||
-                            Status: ${ticket.t_status}
+                            Ticket ID: ${tickets.t_ID}||
+                            Status: ${tickets.t_status}
                         </li>
                     </div>
                     `;

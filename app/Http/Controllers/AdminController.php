@@ -445,9 +445,8 @@ class AdminController extends Controller
         $exists = StatusHistory::where('t_id', $tickets->t_ID)
             ->where('sh_Status', 'OPENED')->exists();
 
-        if ($exists) {
-            return;
-        } else {
+        if (!$exists) {
+
             StatusHistory::create([
                 "t_ID" => $tickets->t_ID,
                 "sh_Status" => 'OPENED',

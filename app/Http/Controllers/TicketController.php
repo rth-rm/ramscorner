@@ -122,7 +122,7 @@ class TicketController extends Controller
                 return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
             }
         }
-        return response()->json(['sent' => 'sent']);
+
 
     }
 

@@ -443,7 +443,7 @@ class AdminController extends Controller
 
 
         $exists = StatusHistory::where('t_id', $tickets->t_ID)
-            ->where('sh_Status', 'OPENED')->get()->exist();
+            ->where('sh_Status', 'OPENED')->exists();
 
         if ($exists) {
             return;

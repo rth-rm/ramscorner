@@ -99,7 +99,7 @@
 
     function generateTicketHtml(ticket) {
         let html = '';
-        tickets.forEach(tickets => {
+        ticket.forEach(tickets => {
             html += `
                     <div class="ticket">
                         <li>

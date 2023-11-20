@@ -20,7 +20,7 @@
         <div class="title mb-5">
             <h1>Ticket Center</h1>
             <div style="color: #9a9ca1; display: grid; grid-template-columns: 1fr .5fr .5fr">
-                <a href="">
+                <a href="{{ url('createTicketPage') }}">
                     <button type="button" class="btn btn-lg me-5 m-3 mt-1" style="border-radius: 25px; background-color:#6644A8; color: #ffffff;">Create Ticket</button>
                 </a>
                 <select id="filterSelect" class="form-select" aria-label="Default select example" style="border-radius: 25px; border: 2px solid #6644A8; color:#6644A8; font-weight: 700; height: 80%; width: 200px">
@@ -140,6 +140,7 @@
                                 // Set the first option as selected
                                 selectElement.selectedIndex = 0;
                             }
+
                         </script>
                     </div>
                 </div>
@@ -252,6 +253,7 @@
 
 
                             });
+
                         </script>
                     </div>
                     {{-- <footer>
@@ -272,6 +274,7 @@
 
             window.location = url;
         }
+
     </script>
 
 
@@ -283,12 +286,14 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
     </script>
     <script>
         function openDiv(divId) {
             var url = "{{ route('openTicket', '') }}" + "/" + divId;
             window.location = url;
         }
+
     </script>
     @endforeach
     @include('footer')
@@ -458,6 +463,7 @@
                 }
             });
         });
+
     </script>
 
     <script>
@@ -468,6 +474,7 @@
 
             window.location = url;
         }
+
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

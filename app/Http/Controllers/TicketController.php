@@ -32,9 +32,9 @@ class TicketController extends Controller
             ->get();
 
         $shouldRefresh = $tickets->isNotEmpty();
-        if ($shouldRefresh) {
-            $this->sendEmail($tickets);
-        }
+        // if ($shouldRefresh) {
+        //     $this->sendEmail($tickets);
+        // }
 
         return response()->json(['shouldRefresh' => $shouldRefresh, 'tix' => $tickets]);
     }

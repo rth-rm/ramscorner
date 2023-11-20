@@ -220,28 +220,34 @@ class AdminController extends Controller
             ->where('read_at', null)->get();
 
 
+        $longestResolutionTime = StatusHistory::select(
+            't_ID',
+            DB::raw('MIN(sh_datetime) AS new_status_time'),
+            DB::raw('MAX(sh_datetime) AS resolved_status_time')
+        )
+            ->where('sh_Status', 'NEW')
+            ->orWhere('sh_Status', 'RESOLVED')
+            ->groupBy('t_ID')
+            ->get();
 
-        // $longestResolutionTime = StatusHistory::select(
-        //     't_ID',
-        //     DB::raw('MIN(sh_datetime) AS new_status_time'),
-        //     DB::raw('MAX(sh_datetime) AS resolved_status_time')
-        // )
-        //     ->where('sh_Status', 'NEW')
-        //     ->orWhere('status', 'RESOLVED')
-        //     ->groupBy('t_ID')
-        //     ->get();
+        $data = [];
 
-        // foreach ($longestResolutionTime as $record) {
-        //     $newStatusTime = strtotime($record->new_status_time);
-        //     $resolvedStatusTime = strtotime($record->resolved_status_time);
+        foreach ($longestResolutionTime as $record) {
+            $newStatusTime = strtotime($record->new_status_time);
+            $resolvedStatusTime = strtotime($record->resolved_status_time);
 
-        //     $resolutionTimeInSeconds = round(($resolvedStatusTime - $newStatusTime) / 60, 2);
+            $resolutionTimeInSeconds = $resolvedStatusTime - $newStatusTime;
+            $resolutionTimeInMinutes = round($resolutionTimeInSeconds / 60, 2);
 
-        //     // Now you have the resolution time in seconds for each ticket
-        // }
-
+            $data[] = [
+                'ticket_id' => $record->ticket_id,
+                'resolution_time' => $resolutionTimeInMinutes,
+            ];
+        }
 
         return view('admin_home', [
+            "resolution_times",
+            $data,
             "notify" => $notify,
             "notifyChat" => $notifChat,
             "notifCount" => $notifCount,

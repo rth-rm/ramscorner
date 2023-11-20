@@ -104,6 +104,7 @@
                                 // Set the first option as selected
                                 selectElement.selectedIndex = 0;
                             }
+
                         </script>
                     </div>
                 </div>
@@ -117,6 +118,7 @@
                                     <th>Type</th>
                                     <th>Assignment</th>
                                     <th>Date Modified</th>
+                                    <th>Modified By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -129,6 +131,9 @@
                                     <td>Floor {{ \Illuminate\Support\Str::before($devices->d_assignment, '-') }}
                                     </td>
                                     <td>{{ $devices->updated_at }}</td>
+                                    <td>{{ $devices->d_submittedby }}</td>
+
+
                                     <td>
                                         <span data-toggle="tooltip" data-placement="left" title="Edit" onclick="editDevice(this)">
                                             <i style="background-color: #C8C4F5; color: white; font-size: 80%; border: 5px solid #C8C4F5;border-radius:100%" class="bi bi-pencil-fill">
@@ -233,6 +238,7 @@
                             }
                         });
                     });
+
                 </script>
 
                 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -241,6 +247,7 @@
                     $(document).ready(function() {
                         $('#devicestable').DataTable();
                     });
+
                 </script>
             </div>
 
@@ -257,6 +264,7 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
     </script>
 
     <script>
@@ -298,6 +306,7 @@
         function closeModal() {
             $("#myModal").modal('hide');
         }
+
     </script>
     @endforeach
     {{-- @include('footer') --}}
